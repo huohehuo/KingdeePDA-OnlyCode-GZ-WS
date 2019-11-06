@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@android:drawable/edit_text">
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:hint="扫描或者输入物料或条码"
+                android:textSize="18sp"
+                android:layout_weight="3"
+                android:background="@drawable/et_phone_number_bg"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/clear"/>
+            <Button
+                android:id="@+id/check"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="物料查询"
+                android:background="@drawable/btn_login"/>
+
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@android:drawable/edit_text">
+            <EditText
+                android:id="@+id/etStorage"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:hint="仓库搜索"
+                android:textSize="18sp"
+                android:layout_weight="3"
+                android:background="@drawable/et_phone_number_bg"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_clear2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/clear"/>
+            <Button
+                android:id="@+id/check_storage"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="仓库查询"
+                android:background="@drawable/btn_login"/>
+
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="38dp">
+                <TextView
+                    android:id="@+id/tv_storage_num"
+                    android:layout_gravity="center_vertical"
+                    android:text="商品数量"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btn_check_by"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_login"
+                    android:text="库存查询"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="库存明细"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+            <!--<com.jude.easyrecyclerview.EasyRecyclerView
+                android:id="@+id/ry_storage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:recyclerClipToPadding="true"
+                app:recyclerPaddingTop="8dp"
+                app:scrollbarStyle="insideOverlay"
+                app:scrollbars="none" />-->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#aad1d1d1" />
+
+                    <include
+                        android:id="@+id/ry_top_a"
+                        layout="@layout/item_storage_check_top" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#aad1d1d1" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/ry_storage_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbarStyle="insideInset"
+                        android:orientation="vertical"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_all"
+            android:text="汇总："
+            android:layout_width="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_height="wrap_content"
+            android:background="#7cdcdbdb"
+            />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

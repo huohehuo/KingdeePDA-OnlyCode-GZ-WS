@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fangzuo.assist.Activity.P2.CheckLogShowActivity">
+
+    <include layout="@layout/top_bar"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ry_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    <!--<HorizontalScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<include-->
+                <!--android:id="@+id/ry_top_a"-->
+                <!--layout="@layout/item_search_top" />-->
+
+            <!--<include layout="@layout/line_heng"/>-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/ry_search"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager" />-->
+
+        <!--</LinearLayout>-->
+    <!--</HorizontalScrollView>-->
+
+
+</LinearLayout>

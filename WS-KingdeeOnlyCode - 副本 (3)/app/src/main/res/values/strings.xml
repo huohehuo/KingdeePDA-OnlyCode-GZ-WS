@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">扫描助手</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wgrkxt">外购入库下推</string>
+    <string name="storage">仓库</string>
+    <string name="wavehouse">仓位</string>
+    <string name="name">名称</string>
+    <string name="unit">单位</string>
+    <string name="pihao">批号</string>
+    <string name="num">数量</string>
+    <string name="add">添加</string>
+    <string name="push">回单</string>
+    <string name="review">查看</string>
+    <string name="bring_storage">是否带出默认仓库</string>
+    <string name="auto_add">自动添加</string>
+    <string name="date">日期:</string>
+    <string name="purchase_method">采购方式:</string>
+    <string name="jh_adress">交货地点:</string>
+    <string name="manager">主管:</string>
+    <string name="hbdxtcprk">汇报单下推产品入库</string>
+    <string name="hebing">合并</string>
+    <string name="db">调拨</string>
+    <string name="out_storage">调出仓库</string>
+    <string name="out_wavehouse">调出仓位</string>
+    <string name="in_storage">调入仓库</string>
+    <string name="in_wavehouse">调入仓位</string>
+    <string name="product_code">物料编码</string>
+    <string name="product_name">物料名称</string>
+    <string name="out_store">调出库存</string>
+    <string name="in_store">调入库存</string>
+    <string name="model">规格型号</string>
+    <string name="finish_order">完单</string>
+    <string name="department">部门:</string>
+    <string name="employee">业务员:</string>
+    <string name="sign_person">验收:</string>
+    <string name="capture_person">保管:</string>
+    <string name="fhtzd_xt_dbd">发货通知单下推调拨单</string>
+    <string name="store">库存</string>
+    <string name="beizhu">备注</string>
+
+
+    <string name="spEmployee_po">spEmployee_po</string>
+    <string name="spManager_po">spManager_po</string>
+
+    <string name="spCapturePerson_PPIS">spCapturePerson_PPIS</string>
+    <string name="spManager_PPIS">spManager_PPIS</string>
+    <string name="spEmployee_PPIS">spEmployee_PPIS</string>
+    <string name="spcapture_PPIS">spcapture_PPIS</string>
+    <string name="spCapturePerson_DB">spCapturePerson_DB</string>
+    <string name="spSignPerson_DB">spSignPerson_DB</string>
+    <string name="spCaptureperson_SN">spCaptureperson_SN</string>
+    <string name="spSend_SN">spSend_SN</string>
+    <string name="spManager_SN">spManager_SN</string>
+
+
+    <string name="FBarCode">条码:</string>
+    <string name="FDatePrint">打印日期:</string>
+    <string name="FNumber">商品代码:</string>
+    <string name="FName">商品名称:</string>
+    <string name="Model">规格:</string>
+    <string name="FQty">包装数量:</string>
+    <string name="FQtyOut">出库数量:</string>
+    <string name="FQtyLast">剩余数量:</string>
+    <string name="Unit">单位:</string>
+    <string name="storage2">所属仓库:</string>
+    <string name="wavehouse2">所属仓位:</string>
+    <string name="FIsInStore">入库状态:</string>
+    <string name="inStoreBillNo">入库单号:</string>
+    <string name="FIsOutStore">出库状态:</string>
+    <string name="outStoreBillNo">出库单号:</string>
+    <string name="inStoreType">入库类型:</string>
+    <string name="outStoreype">出库类型:</string>
+    <string name="FPrintType">打印类型:</string>
+    <string name="printBillno">订单号:</string>
+    <string name="FBatchNo">批次:</string>
+    <string name="FKFDate">生产日期:</string>
+    <string name="FKFPeriod">保质期:</string>
+    <string name="FRemark">备注1:</string>
+    <string name="FRemark2">备注2:</string>
+    <string name="FRemark3">备注3:</string>
+    <string name="FRemark4">备注4:</string>
+
+
+</resources>

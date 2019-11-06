@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fangzuo.assist.Activity.ChangePriceActivity">
+    <include layout="@layout/top_bar"/>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@android:drawable/edit_text">
+        <EditText
+            android:id="@+id/etCode"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:hint="输入物料名称或条码"
+            android:textSize="15sp"
+            android:layout_weight="3"
+            android:background="@drawable/et_phone_number_bg"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/clear"/>
+        <Button
+            android:id="@+id/check"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="物料查询"
+            android:background="@drawable/btn_login"/>
+
+    </LinearLayout>
+    <include layout="@layout/line_heng"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@android:drawable/edit_text">
+        <EditText
+            android:id="@+id/etStorage"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:hint="仓库搜索"
+            android:textSize="15sp"
+            android:layout_weight="3"
+            android:background="@drawable/et_phone_number_bg"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_clear2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/clear"/>
+        <Button
+            android:id="@+id/check_storage"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="仓库查询"
+            android:background="@drawable/btn_login"/>
+
+    </LinearLayout>
+    <include layout="@layout/line_heng"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@android:drawable/edit_text">
+        <TextView
+            android:text="价格："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/et_price"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:hint="输入价格"
+            android:textSize="18sp"
+            android:layout_weight="3"
+            android:inputType="numberDecimal"
+            android:background="@drawable/et_phone_number_bg"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textColor="@color/white"
+        android:text="执行"
+        android:background="@drawable/btn_login"/>
+</LinearLayout>

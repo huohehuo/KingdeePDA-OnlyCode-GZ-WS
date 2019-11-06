@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ly_scan"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:zxing_framing_rect_height="180dp"
+        app:zxing_framing_rect_width="180dp"
+        app:zxing_preview_scaling_strategy="centerCrop"
+        app:zxing_scanner_layout="@layout/custom_barcode_scanner"
+        app:zxing_use_texture_view="true"/>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_pic"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="#2daaaaaa"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:text="远距" />
+</RelativeLayout>

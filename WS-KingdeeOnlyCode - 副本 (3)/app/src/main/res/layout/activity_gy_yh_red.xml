@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/mDrawer"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/top_bar" />
+
+        <ListView
+            android:id="@+id/lv_pushsub"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_margin="4dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <EditText
+                android:id="@+id/ed_code"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/bg_edittext_selector"
+                android:hint="搜索物流单号"
+                android:singleLine="true"
+                android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_check"
+                android:text="查看"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <com.fangzuo.assist.widget.TextViewTitle
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:TextView_Title_one="物料名称"
+            app:TextView_Title_size="12sp"
+            app:TextView_Title_two="物料代码" />
+        <!--app:TextView_Title_justone="true"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatTextView
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="18dp"
+                android:id="@+id/tv_name"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="match_parent"
+                android:text=""
+                android:background="@drawable/tv_bg"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <!--<TextView-->
+            <!--android:id="@+id/tv_name"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="6"-->
+            <!--android:background="@drawable/tv_bg"-->
+            <!--android:gravity="center"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="15sp" />-->
+            <android.support.v7.widget.AppCompatTextView
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="18dp"
+                android:id="@+id/tv_number"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="match_parent"
+                android:text=""
+                android:background="@drawable/tv_bg"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <!--<TextView-->
+            <!--android:id="@+id/tv_number"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="6"-->
+            <!--android:background="@drawable/tv_bg"-->
+            <!--android:gravity="center"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20sp" />-->
+        </LinearLayout>
+        <com.fangzuo.assist.widget.TextViewTitle
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:TextView_Title_one="规格型号"
+            app:TextView_Title_size="12sp"
+            app:TextView_Title_two="数量" />
+        <!--app:TextView_Title_justone="true"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_model"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tv_bg"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/ed_num"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/bg_edittext_selector"
+                android:inputType="numberDecimal"
+                android:hint="扫码带出数量"
+                android:singleLine="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+
+
+        <!--btn-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_check"
+                android:text="添加"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+            <include layout="@layout/line_shu"/>
+            <Button
+                android:id="@+id/btn_backorder"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_check"
+                android:text="退货"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+            <include layout="@layout/line_shu"/>
+            <Button
+                android:id="@+id/btn_checkorder"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_check"
+                android:text="查看"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--抽屉布局-->
+    <ScrollView
+        android:layout_width="250dp"
+        android:tag="LEFT"
+        android:layout_gravity ="right"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="250dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <CheckBox
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_isStorage"
+                android:text="是否带出默认仓库"
+                android:textSize="15sp"
+                android:textColor="@android:color/holo_red_light"/>
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_isAuto"
+                android:text="自动添加"
+                android:textSize="15sp"
+                android:textColor="@android:color/holo_red_light"/>
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="日期:"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_date"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="19sp"-->
+            <!--/>-->
+
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="结算日期:"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_date_pay"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="19sp"-->
+            <!--/>-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="销售范围:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:id="@+id/sp_sale_scope"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="销售方式:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:id="@+id/sp_saleMethod"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="源单类型:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/sp_yuandan"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="交货方式:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:id="@+id/sp_sendMethod"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="结算方式:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:id="@+id/sp_payMethod"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="交货地点:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<Spinner-->
+            <!--android:id="@+id/sp_sendplace"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+            <!--<include layout="@layout/line_heng"/>-->
+            <!--<TextView-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="收件人及电话地址:"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_phone_address"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="主管:"-->
+            <!--android:textColor="@android:color/black"/>-->
+
+            <!--<RelativeLayout-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<com.fangzuo.assist.widget.SpinnerPeople-->
+            <!--android:id="@+id/sp_manager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="保管:"-->
+            <!--android:textColor="@android:color/black"/>-->
+
+            <!--<RelativeLayout-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<com.fangzuo.assist.widget.SpinnerPeople-->
+            <!--android:id="@+id/sp_capture"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+            <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="发货:"-->
+            <!--android:textColor="@android:color/black"/>-->
+
+            <!--<RelativeLayout-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<com.fangzuo.assist.widget.SpinnerPeople-->
+            <!--android:id="@+id/sp_sendman"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+            <!--</RelativeLayout>-->
+            <!--<LinearLayout-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:weightSum="9"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1.5"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="摘要:"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textColor="@android:color/black"/>-->
+
+            <!--<EditText-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="7.5"-->
+            <!--android:id="@+id/ed_zhaiyao"-->
+            <!--android:layout_height="wrap_content" />-->
+
+
+            <!--</LinearLayout>-->
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.DrawerLayout>
+

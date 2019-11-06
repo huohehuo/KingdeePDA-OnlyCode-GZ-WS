@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@192.168.0.156">
+  <database-model serializer="dbm" rdbms="MSSQL" format-version="4.7">
+    <root id="1">
+      <ServerType>standalone</ServerType>
+    </root>
+    <database id="2" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+    </database>
+    <database id="4" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+    </database>
+    <database id="5" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+    </database>
+    <database id="6" parent="1" name="AcctCtl_KEE">
+      <ObjectId>5</ObjectId>
+    </database>
+    <database id="7" parent="1" name="PatchFileServer">
+      <ObjectId>6</ObjectId>
+    </database>
+    <database id="8" parent="1" name="AcctCtl">
+      <ObjectId>7</ObjectId>
+    </database>
+    <database id="9" parent="1" name="KIS_Sample">
+      <ObjectId>8</ObjectId>
+    </database>
+    <database id="10" parent="1" name="AcctCommerce">
+      <ObjectId>9</ObjectId>
+    </database>
+    <database id="11" parent="1" name="AIS20170823033649">
+      <ObjectId>10</ObjectId>
+    </database>
+    <database id="12" parent="1" name="AIS20171030100606">
+      <ObjectId>11</ObjectId>
+    </database>
+    <database id="13" parent="1" name="AIS20171111051522">
+      <ObjectId>12</ObjectId>
+    </database>
+    <database id="14" parent="1" name="AIS20171114110544">
+      <ObjectId>13</ObjectId>
+    </database>
+    <database id="15" parent="1" name="AIS20180205053050">
+      <ObjectId>14</ObjectId>
+    </database>
+    <database id="16" parent="1" name="AIS20180228114537">
+      <ObjectId>15</ObjectId>
+      <Visible>1</Visible>
+    </database>
+    <schema id="17" parent="2" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2018-02-28.19:34:55.603</IntrospectionTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="18" parent="2" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="19" parent="2" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="20" parent="2" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <schema id="21" parent="2" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="22" parent="2" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="23" parent="2" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="24" parent="2" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="25" parent="2" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="26" parent="2" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="27" parent="2" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="28" parent="2" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="29" parent="2" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <table id="30" parent="17" name="MSreplication_options">
+      <ObjectId>1163151189</ObjectId>
+      <CreatedTimestamp>2010-04-03.01:41:15.183</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.963</ModifiedTimestamp>
+    </table>
+    <table id="31" parent="17" name="spt_fallback_db">
+      <ObjectId>117575457</ObjectId>
+      <CreatedTimestamp>2003-04-08.17:18:01.557</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.927</ModifiedTimestamp>
+    </table>
+    <table id="32" parent="17" name="spt_fallback_dev">
+      <ObjectId>133575514</ObjectId>
+      <CreatedTimestamp>2003-04-08.17:18:02.870</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.933</ModifiedTimestamp>
+    </table>
+    <table id="33" parent="17" name="spt_fallback_usg">
+      <ObjectId>149575571</ObjectId>
+      <CreatedTimestamp>2003-04-08.17:18:04.180</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.940</ModifiedTimestamp>
+    </table>
+    <table id="34" parent="17" name="spt_monitor">
+      <ObjectId>1115151018</ObjectId>
+      <CreatedTimestamp>2010-04-03.01:34:57.717</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.950</ModifiedTimestamp>
+    </table>
+    <table id="35" parent="17" name="spt_values">
+      <ObjectId>1131151075</ObjectId>
+      <CreatedTimestamp>2010-04-03.01:34:58.017</CreatedTimestamp>
+      <ModifiedTimestamp>2015-08-28.00:20:48.613</ModifiedTimestamp>
+    </table>
+    <table id="36" parent="17" name="t_kdaccount_gl">
+      <ObjectId>1211151360</ObjectId>
+      <CreatedTimestamp>2015-08-29.00:22:44.660</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-23.17:48:41.130</ModifiedTimestamp>
+    </table>
+    <routine id="37" parent="17" name="sp_MScleanupmergepublisher">
+      <ObjectId>1195151303</ObjectId>
+      <CreatedTimestamp>2010-04-03.01:41:15.887</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.980</ModifiedTimestamp>
+      <RoutineKind>procedure</RoutineKind>
+      <RoutineType>proc</RoutineType>
+    </routine>
+    <routine id="38" parent="17" name="sp_MSrepl_startup">
+      <ObjectId>1179151246</ObjectId>
+      <CreatedTimestamp>2010-04-03.01:41:15.497</CreatedTimestamp>
+      <ModifiedTimestamp>2010-04-03.01:41:24.973</ModifiedTimestamp>
+      <RoutineKind>procedure</RoutineKind>
+      <RoutineType>proc</RoutineType>
+    </routine>
+    <column id="39" parent="30" name="optname">
+      <Position>1</Position>
+      <DataType>sysname|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="30" name="value">
+      <Position>2</Position>
+      <DataType>bit|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="30" name="major_version">
+      <Position>3</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="30" name="minor_version">
+      <Position>4</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="30" name="revision">
+      <Position>5</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="30" name="install_failures">
+      <Position>6</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="31" name="xserver_name">
+      <Position>1</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="31" name="xdttm_ins">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="31" name="xdttm_last_ins_upd">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="31" name="xfallback_dbid">
+      <Position>4</Position>
+      <DataType>smallint|0</DataType>
+    </column>
+    <column id="49" parent="31" name="name">
+      <Position>5</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="31" name="dbid">
+      <Position>6</Position>
+      <DataType>smallint|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="31" name="status">
+      <Position>7</Position>
+      <DataType>smallint|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="31" name="version">
+      <Position>8</Position>
+      <DataType>smallint|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="32" name="xserver_name">
+      <Position>1</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="32" name="xdttm_ins">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="32" name="xdttm_last_ins_upd">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="32" name="xfallback_low">
+      <Position>4</Position>
+      <DataType>int|0</DataType>
+    </column>
+    <column id="57" parent="32" name="xfallback_drive">
+      <Position>5</Position>
+      <DataType>char(2)|0</DataType>
+    </column>
+    <column id="58" parent="32" name="low">
+      <Position>6</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="32" name="high">
+      <Position>7</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="32" name="status">
+      <Position>8</Position>
+      <DataType>smallint|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="32" name="name">
+      <Position>9</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="32" name="phyname">
+      <Position>10</Position>
+      <DataType>varchar(127)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="33" name="xserver_name">
+      <Position>1</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="33" name="xdttm_ins">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="33" name="xdttm_last_ins_upd">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="33" name="xfallback_vstart">
+      <Position>4</Position>
+      <DataType>int|0</DataType>
+    </column>
+    <column id="67" parent="33" name="dbid">
+      <Position>5</Position>
+      <DataType>smallint|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="68" parent="33" name="segmap">
+      <Position>6</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="33" name="lstart">
+      <Position>7</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="33" name="sizepg">
+      <Position>8</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="33" name="vstart">
+      <Position>9</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="34" name="lastrun">
+      <Position>1</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="73" parent="34" name="cpu_busy">
+      <Position>2</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="74" parent="34" name="io_busy">
+      <Position>3</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="34" name="idle">
+      <Position>4</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="34" name="pack_received">
+      <Position>5</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="34" name="pack_sent">
+      <Position>6</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="34" name="connections">
+      <Position>7</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="34" name="pack_errors">
+      <Position>8</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="80" parent="34" name="total_read">
+      <Position>9</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="81" parent="34" name="total_write">
+      <Position>10</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="82" parent="34" name="total_errors">
+      <Position>11</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="83" parent="35" name="name">
+      <Position>1</Position>
+      <DataType>nvarchar(35)|0</DataType>
+    </column>
+    <column id="84" parent="35" name="number">
+      <Position>2</Position>
+      <DataType>int|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="35" name="type">
+      <Position>3</Position>
+      <DataType>nchar(3)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="35" name="low">
+      <Position>4</Position>
+      <DataType>int|0</DataType>
+    </column>
+    <column id="87" parent="35" name="high">
+      <Position>5</Position>
+      <DataType>int|0</DataType>
+    </column>
+    <column id="88" parent="35" name="status">
+      <Position>6</Position>
+      <DefaultExpression>0</DefaultExpression>
+      <DataType>int|0</DataType>
+    </column>
+    <index id="89" parent="35" name="spt_valuesclust">
+      <Position>1</Position>
+      <ColNames>name
+number
+type</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <index id="90" parent="35" name="ix2_spt_values_nu_nc">
+      <Position>2</Position>
+      <ColNames>number
+type</ColNames>
+    </index>
+    <column id="91" parent="36" name="cid">
+      <Position>1</Position>
+      <DataType>smallint|0</DataType>
+    </column>
+    <column id="92" parent="36" name="cacc_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="93" parent="36" name="cdbname">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="94" parent="36" name="DBuildDate">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="95" parent="36" name="DDuplicateDate">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="96" parent="36" name="cDBVersion">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="97" parent="36" name="FIndustryType">
+      <Position>7</Position>
+      <DataType>int|0</DataType>
+    </column>
+  </database-model>
+</dataSource>
