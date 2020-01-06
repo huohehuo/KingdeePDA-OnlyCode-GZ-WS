@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wgrkxt"
+                    android:text="采购订单下推"
                     android:textColor="@color/white"
                     android:layout_centerInParent="true"
                     android:textSize="20sp"/>
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Spinner
+                <com.fangzuo.assist.widget.SpinnerStorage4Type
                     android:id="@+id/sp_storage"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -193,11 +193,21 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <Spinner
+                    android:visibility="gone"
                     android:id="@+id/sp_batchNo"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1" />
-
+                <EditText
+                    android:id="@+id/ed_pihao"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/edit_text"
+                    android:gravity="center"
+                    android:imeOptions="actionNone"
+                    android:singleLine="true" />
                 <EditText
                     android:id="@+id/ed_num"
                     android:layout_width="0dp"
@@ -341,6 +351,7 @@
             </RelativeLayout>
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/jh_adress"
@@ -348,6 +359,7 @@
                 android:textSize="18sp" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

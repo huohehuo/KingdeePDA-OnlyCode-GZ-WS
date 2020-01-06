@@ -67,6 +67,17 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
         public final static Property FApiClient = new Property(40, String.class, "FApiClient", false, "FAPI_CLIENT");
         public final static Property FApiSendNo = new Property(41, String.class, "FApiSendNo", false, "FAPI_SEND_NO");
         public final static Property FApiPTNo = new Property(42, String.class, "FApiPTNo", false, "FAPI_PTNO");
+        public final static Property FMan1 = new Property(43, String.class, "FMan1", false, "FMAN1");
+        public final static Property FMan2 = new Property(44, String.class, "FMan2", false, "FMAN2");
+        public final static Property FMan3 = new Property(45, String.class, "FMan3", false, "FMAN3");
+        public final static Property FCheckTypeID = new Property(46, String.class, "FCheckTypeID", false, "FCHECK_TYPE_ID");
+        public final static Property FCheckTypeName = new Property(47, String.class, "FCheckTypeName", false, "FCHECK_TYPE_NAME");
+        public final static Property FCheckResultID = new Property(48, String.class, "FCheckResultID", false, "FCHECK_RESULT_ID");
+        public final static Property FCheckResultName = new Property(49, String.class, "FCheckResultName", false, "FCHECK_RESULT_NAME");
+        public final static Property FCheckNum = new Property(50, String.class, "FCheckNum", false, "FCHECK_NUM");
+        public final static Property FCheckBrokenNum = new Property(51, String.class, "FCheckBrokenNum", false, "FCHECK_BROKEN_NUM");
+        public final static Property FCheckPassNum = new Property(52, String.class, "FCheckPassNum", false, "FCHECK_PASS_NUM");
+        public final static Property Tag = new Property(53, int.class, "tag", false, "TAG");
     }
 
 
@@ -124,7 +135,18 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
                 "\"IS_ASSEMBLE\" TEXT," + // 39: IsAssemble
                 "\"FAPI_CLIENT\" TEXT," + // 40: FApiClient
                 "\"FAPI_SEND_NO\" TEXT," + // 41: FApiSendNo
-                "\"FAPI_PTNO\" TEXT);"); // 42: FApiPTNo
+                "\"FAPI_PTNO\" TEXT," + // 42: FApiPTNo
+                "\"FMAN1\" TEXT," + // 43: FMan1
+                "\"FMAN2\" TEXT," + // 44: FMan2
+                "\"FMAN3\" TEXT," + // 45: FMan3
+                "\"FCHECK_TYPE_ID\" TEXT," + // 46: FCheckTypeID
+                "\"FCHECK_TYPE_NAME\" TEXT," + // 47: FCheckTypeName
+                "\"FCHECK_RESULT_ID\" TEXT," + // 48: FCheckResultID
+                "\"FCHECK_RESULT_NAME\" TEXT," + // 49: FCheckResultName
+                "\"FCHECK_NUM\" TEXT," + // 50: FCheckNum
+                "\"FCHECK_BROKEN_NUM\" TEXT," + // 51: FCheckBrokenNum
+                "\"FCHECK_PASS_NUM\" TEXT," + // 52: FCheckPassNum
+                "\"TAG\" INTEGER NOT NULL );"); // 53: tag
     }
 
     /** Drops the underlying database table. */
@@ -339,6 +361,57 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
         if (FApiPTNo != null) {
             stmt.bindString(43, FApiPTNo);
         }
+ 
+        String FMan1 = entity.getFMan1();
+        if (FMan1 != null) {
+            stmt.bindString(44, FMan1);
+        }
+ 
+        String FMan2 = entity.getFMan2();
+        if (FMan2 != null) {
+            stmt.bindString(45, FMan2);
+        }
+ 
+        String FMan3 = entity.getFMan3();
+        if (FMan3 != null) {
+            stmt.bindString(46, FMan3);
+        }
+ 
+        String FCheckTypeID = entity.getFCheckTypeID();
+        if (FCheckTypeID != null) {
+            stmt.bindString(47, FCheckTypeID);
+        }
+ 
+        String FCheckTypeName = entity.getFCheckTypeName();
+        if (FCheckTypeName != null) {
+            stmt.bindString(48, FCheckTypeName);
+        }
+ 
+        String FCheckResultID = entity.getFCheckResultID();
+        if (FCheckResultID != null) {
+            stmt.bindString(49, FCheckResultID);
+        }
+ 
+        String FCheckResultName = entity.getFCheckResultName();
+        if (FCheckResultName != null) {
+            stmt.bindString(50, FCheckResultName);
+        }
+ 
+        String FCheckNum = entity.getFCheckNum();
+        if (FCheckNum != null) {
+            stmt.bindString(51, FCheckNum);
+        }
+ 
+        String FCheckBrokenNum = entity.getFCheckBrokenNum();
+        if (FCheckBrokenNum != null) {
+            stmt.bindString(52, FCheckBrokenNum);
+        }
+ 
+        String FCheckPassNum = entity.getFCheckPassNum();
+        if (FCheckPassNum != null) {
+            stmt.bindString(53, FCheckPassNum);
+        }
+        stmt.bindLong(54, entity.getTag());
     }
 
     @Override
@@ -547,6 +620,57 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
         if (FApiPTNo != null) {
             stmt.bindString(43, FApiPTNo);
         }
+ 
+        String FMan1 = entity.getFMan1();
+        if (FMan1 != null) {
+            stmt.bindString(44, FMan1);
+        }
+ 
+        String FMan2 = entity.getFMan2();
+        if (FMan2 != null) {
+            stmt.bindString(45, FMan2);
+        }
+ 
+        String FMan3 = entity.getFMan3();
+        if (FMan3 != null) {
+            stmt.bindString(46, FMan3);
+        }
+ 
+        String FCheckTypeID = entity.getFCheckTypeID();
+        if (FCheckTypeID != null) {
+            stmt.bindString(47, FCheckTypeID);
+        }
+ 
+        String FCheckTypeName = entity.getFCheckTypeName();
+        if (FCheckTypeName != null) {
+            stmt.bindString(48, FCheckTypeName);
+        }
+ 
+        String FCheckResultID = entity.getFCheckResultID();
+        if (FCheckResultID != null) {
+            stmt.bindString(49, FCheckResultID);
+        }
+ 
+        String FCheckResultName = entity.getFCheckResultName();
+        if (FCheckResultName != null) {
+            stmt.bindString(50, FCheckResultName);
+        }
+ 
+        String FCheckNum = entity.getFCheckNum();
+        if (FCheckNum != null) {
+            stmt.bindString(51, FCheckNum);
+        }
+ 
+        String FCheckBrokenNum = entity.getFCheckBrokenNum();
+        if (FCheckBrokenNum != null) {
+            stmt.bindString(52, FCheckBrokenNum);
+        }
+ 
+        String FCheckPassNum = entity.getFCheckPassNum();
+        if (FCheckPassNum != null) {
+            stmt.bindString(53, FCheckPassNum);
+        }
+        stmt.bindLong(54, entity.getTag());
     }
 
     @Override
@@ -599,7 +723,18 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
             cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39), // IsAssemble
             cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40), // FApiClient
             cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41), // FApiSendNo
-            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42) // FApiPTNo
+            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42), // FApiPTNo
+            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43), // FMan1
+            cursor.isNull(offset + 44) ? null : cursor.getString(offset + 44), // FMan2
+            cursor.isNull(offset + 45) ? null : cursor.getString(offset + 45), // FMan3
+            cursor.isNull(offset + 46) ? null : cursor.getString(offset + 46), // FCheckTypeID
+            cursor.isNull(offset + 47) ? null : cursor.getString(offset + 47), // FCheckTypeName
+            cursor.isNull(offset + 48) ? null : cursor.getString(offset + 48), // FCheckResultID
+            cursor.isNull(offset + 49) ? null : cursor.getString(offset + 49), // FCheckResultName
+            cursor.isNull(offset + 50) ? null : cursor.getString(offset + 50), // FCheckNum
+            cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51), // FCheckBrokenNum
+            cursor.isNull(offset + 52) ? null : cursor.getString(offset + 52), // FCheckPassNum
+            cursor.getInt(offset + 53) // tag
         );
         return entity;
     }
@@ -649,6 +784,17 @@ public class T_DetailDao extends AbstractDao<T_Detail, String> {
         entity.setFApiClient(cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40));
         entity.setFApiSendNo(cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41));
         entity.setFApiPTNo(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
+        entity.setFMan1(cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43));
+        entity.setFMan2(cursor.isNull(offset + 44) ? null : cursor.getString(offset + 44));
+        entity.setFMan3(cursor.isNull(offset + 45) ? null : cursor.getString(offset + 45));
+        entity.setFCheckTypeID(cursor.isNull(offset + 46) ? null : cursor.getString(offset + 46));
+        entity.setFCheckTypeName(cursor.isNull(offset + 47) ? null : cursor.getString(offset + 47));
+        entity.setFCheckResultID(cursor.isNull(offset + 48) ? null : cursor.getString(offset + 48));
+        entity.setFCheckResultName(cursor.isNull(offset + 49) ? null : cursor.getString(offset + 49));
+        entity.setFCheckNum(cursor.isNull(offset + 50) ? null : cursor.getString(offset + 50));
+        entity.setFCheckBrokenNum(cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51));
+        entity.setFCheckPassNum(cursor.isNull(offset + 52) ? null : cursor.getString(offset + 52));
+        entity.setTag(cursor.getInt(offset + 53));
      }
     
     @Override

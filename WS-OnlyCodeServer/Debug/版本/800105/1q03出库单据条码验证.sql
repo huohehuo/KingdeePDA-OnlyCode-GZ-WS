@@ -93,6 +93,7 @@ end
     FKFPeriod int,
     FKFDate varchar(12),
     FBillNo   varchar(255),--单据编号
+    FAssembleBillNo varchar(128),--箱码
     FExplanation varchar(255),--说明
 )
 if exists(select 1 from t_PDAAssemble where FBillNo=@FBarCode)

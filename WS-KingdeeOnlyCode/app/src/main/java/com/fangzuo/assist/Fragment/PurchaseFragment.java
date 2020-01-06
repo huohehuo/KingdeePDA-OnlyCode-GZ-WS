@@ -23,6 +23,7 @@ import com.fangzuo.assist.Activity.PackageActivity;
 import com.fangzuo.assist.Activity.ProductInStorageRedActivity;
 import com.fangzuo.assist.Activity.PushDownPagerActivity;
 import com.fangzuo.assist.Activity.StorageCheckActivity;
+import com.fangzuo.assist.Activity.UnBoxActivity;
 import com.fangzuo.assist.Adapter.GridViewAdapter;
 import com.fangzuo.assist.Beans.SettingList;
 import com.fangzuo.assist.Utils.Config;
@@ -74,6 +75,7 @@ public class PurchaseFragment extends BaseFragment {
         String[] aa = getPermit.split("\\-"); // 这样才能得到正确的结果
         ada = new GridViewAdapter(mContext, GetSettingList.getPurchaseList(aa));
         gv.setAdapter(ada);
+
         ada.notifyDataSetChanged();
     }
 
@@ -130,6 +132,9 @@ public class PurchaseFragment extends BaseFragment {
                         break;
                     case "18"://调价单
                         startNewActivity(ChangePriceActivity.class, null);
+                        break;
+                    case "31"://调价单
+                        startNewActivity(UnBoxActivity.class, null);
                         break;
                 }
             }

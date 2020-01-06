@@ -155,6 +155,7 @@ public class DataService extends IntentService {
         session.getYuandanTypeDao().deleteAll();
         session.getSendOrderListBeanDao().deleteAll();
         session.getGProductDao().deleteAll();
+        session.getPrintHistoryDao().deleteAll();
     }
 
     /**

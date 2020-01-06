@@ -23,11 +23,11 @@ declare @FBillNo varchar(128),
           @FIsOutStore varchar(20)--出库状态
 set @FBillNo='OK'
  
-  
+     if not exists(select 1 from a_DetailsTable where FBarCode=@FBarCode)
+       begin
      insert into a_DetailsTable(FPDAID,FOrderID,FBarCode,FItemID,FStockID,FStockPlaceID, FBatchNo,  FKFPeriod,  FKFDate,  FQty)
         select top 1  @FPDAID,@FOrderID, FBarCode, FItemID,FStockID, FStockPlaceID,  FBatchNo,  FKFPeriod,  FKFDate,  FQty from t_PDABarCodeSign where FBarCode=@FBarCode
- 
- 
+     end
  create table #Tmp11111 --创建临时表#Tmp
 (
     FBillNo   varchar(255), 

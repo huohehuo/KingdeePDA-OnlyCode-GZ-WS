@@ -54,65 +54,67 @@ public class T_main {
     public String MakerId;
     public String DataInput;
     public String DataPush;
-    @Generated(hash = 1861202486)
-    public T_main(long orderId, String FIndex, String orderDate, String saleRangeId,
-            String saleRange, String saleWayId, String saleWay,
-            String sourceOrderTypeId, String sourceOrderType, String FDeliveryType,
-            String FDeliveryTypeId, String FPaymentTypeId, String FPaymentType,
-            String FPaymentDate, String FDeliveryAddress, String FDepartmentId,
-            String FDepartment, String FSalesManId, String FSalesMan,
-            String FDirectorId, String FDirector, String FPurchaseUnitId,
-            String FPurchaseUnit, String FRemark, String FIdentity,
-            String FBusinessId, String FMaker, String FMakerId, String FBusiness,
-            String FSendOutId, String FSendOut, String FCustodyId, String FCustody,
-            String FRedBlue, String FAcountID, String FAcount, String Rem,
-            String supplier, String supplierId, int activity, String IMIE,
-            String MakerId, String DataInput, String DataPush) {
-        this.orderId = orderId;
-        this.FIndex = FIndex;
-        this.orderDate = orderDate;
-        this.saleRangeId = saleRangeId;
-        this.saleRange = saleRange;
-        this.saleWayId = saleWayId;
-        this.saleWay = saleWay;
-        this.sourceOrderTypeId = sourceOrderTypeId;
-        this.sourceOrderType = sourceOrderType;
-        this.FDeliveryType = FDeliveryType;
-        this.FDeliveryTypeId = FDeliveryTypeId;
-        this.FPaymentTypeId = FPaymentTypeId;
-        this.FPaymentType = FPaymentType;
-        this.FPaymentDate = FPaymentDate;
-        this.FDeliveryAddress = FDeliveryAddress;
-        this.FDepartmentId = FDepartmentId;
-        this.FDepartment = FDepartment;
-        this.FSalesManId = FSalesManId;
-        this.FSalesMan = FSalesMan;
-        this.FDirectorId = FDirectorId;
-        this.FDirector = FDirector;
-        this.FPurchaseUnitId = FPurchaseUnitId;
-        this.FPurchaseUnit = FPurchaseUnit;
-        this.FRemark = FRemark;
-        this.FIdentity = FIdentity;
-        this.FBusinessId = FBusinessId;
-        this.FMaker = FMaker;
-        this.FMakerId = FMakerId;
-        this.FBusiness = FBusiness;
-        this.FSendOutId = FSendOutId;
-        this.FSendOut = FSendOut;
-        this.FCustodyId = FCustodyId;
-        this.FCustody = FCustody;
-        this.FRedBlue = FRedBlue;
-        this.FAcountID = FAcountID;
-        this.FAcount = FAcount;
-        this.Rem = Rem;
-        this.supplier = supplier;
-        this.supplierId = supplierId;
-        this.activity = activity;
-        this.IMIE = IMIE;
-        this.MakerId = MakerId;
-        this.DataInput = DataInput;
-        this.DataPush = DataPush;
-    }
+    public int tag;
+@Generated(hash = 922945371)
+public T_main(long orderId, String FIndex, String orderDate, String saleRangeId,
+        String saleRange, String saleWayId, String saleWay,
+        String sourceOrderTypeId, String sourceOrderType, String FDeliveryType,
+        String FDeliveryTypeId, String FPaymentTypeId, String FPaymentType,
+        String FPaymentDate, String FDeliveryAddress, String FDepartmentId,
+        String FDepartment, String FSalesManId, String FSalesMan,
+        String FDirectorId, String FDirector, String FPurchaseUnitId,
+        String FPurchaseUnit, String FRemark, String FIdentity,
+        String FBusinessId, String FMaker, String FMakerId, String FBusiness,
+        String FSendOutId, String FSendOut, String FCustodyId, String FCustody,
+        String FRedBlue, String FAcountID, String FAcount, String Rem,
+        String supplier, String supplierId, int activity, String IMIE,
+        String MakerId, String DataInput, String DataPush, int tag) {
+    this.orderId = orderId;
+    this.FIndex = FIndex;
+    this.orderDate = orderDate;
+    this.saleRangeId = saleRangeId;
+    this.saleRange = saleRange;
+    this.saleWayId = saleWayId;
+    this.saleWay = saleWay;
+    this.sourceOrderTypeId = sourceOrderTypeId;
+    this.sourceOrderType = sourceOrderType;
+    this.FDeliveryType = FDeliveryType;
+    this.FDeliveryTypeId = FDeliveryTypeId;
+    this.FPaymentTypeId = FPaymentTypeId;
+    this.FPaymentType = FPaymentType;
+    this.FPaymentDate = FPaymentDate;
+    this.FDeliveryAddress = FDeliveryAddress;
+    this.FDepartmentId = FDepartmentId;
+    this.FDepartment = FDepartment;
+    this.FSalesManId = FSalesManId;
+    this.FSalesMan = FSalesMan;
+    this.FDirectorId = FDirectorId;
+    this.FDirector = FDirector;
+    this.FPurchaseUnitId = FPurchaseUnitId;
+    this.FPurchaseUnit = FPurchaseUnit;
+    this.FRemark = FRemark;
+    this.FIdentity = FIdentity;
+    this.FBusinessId = FBusinessId;
+    this.FMaker = FMaker;
+    this.FMakerId = FMakerId;
+    this.FBusiness = FBusiness;
+    this.FSendOutId = FSendOutId;
+    this.FSendOut = FSendOut;
+    this.FCustodyId = FCustodyId;
+    this.FCustody = FCustody;
+    this.FRedBlue = FRedBlue;
+    this.FAcountID = FAcountID;
+    this.FAcount = FAcount;
+    this.Rem = Rem;
+    this.supplier = supplier;
+    this.supplierId = supplierId;
+    this.activity = activity;
+    this.IMIE = IMIE;
+    this.MakerId = MakerId;
+    this.DataInput = DataInput;
+    this.DataPush = DataPush;
+    this.tag = tag;
+}
     @Generated(hash = 884209494)
     public T_main() {
     }
@@ -380,6 +382,11 @@ public class T_main {
     public void setDataPush(String DataPush) {
         this.DataPush = DataPush;
     }
-
+    public int getTag() {
+        return this.tag;
+    }
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
 
 }

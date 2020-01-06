@@ -22,6 +22,7 @@ import android.widget.ListView;
 import com.fangzuo.assist.ABase.BaseFragment;
 import com.fangzuo.assist.Activity.CommonActivity;
 import com.fangzuo.assist.Activity.IpPortActivity;
+import com.fangzuo.assist.Activity.PrintOutTestActivity;
 import com.fangzuo.assist.Activity.SettingActivity;
 import com.fangzuo.assist.Activity.TestActivity;
 import com.fangzuo.assist.Adapter.SettingListAdapter;
@@ -123,6 +124,9 @@ public class SettingFragment extends BaseFragment {
                         break;
                     case 6:
                         CommonActivity.start(mContext);
+                        break;
+                    case 7:
+                        startActivity(new Intent(mContext, PrintOutTestActivity.class));
                         break;
 
                 }

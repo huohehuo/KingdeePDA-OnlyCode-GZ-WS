@@ -45,7 +45,7 @@ public class CheckLogSearch1 extends HttpServlet {
                 conn = JDBCUtil.getConn(getDataBaseUrl.getUrl(request.getParameter("sqlip"), request.getParameter("sqlport"), request.getParameter("sqlname")), request.getParameter("sqlpass"), request.getParameter("sqluser"));
                 CheckLogSearchBean searchBean = gson.fromJson(parameter, CheckLogSearchBean.class);
                 if (searchBean.FBarCode != null && !searchBean.FBarCode.equals("")) {
-                        condition += " and  t2.FBillNo = " + searchBean.FBarCode;
+                        condition += " and  t2.FBillNo = '" + searchBean.FBarCode+"'";
                 }
                 if (searchBean.FClientID != null && !searchBean.FClientID.equals("")) {
                     condition += " and t_100.FID = '" + searchBean.FClientID+"'";

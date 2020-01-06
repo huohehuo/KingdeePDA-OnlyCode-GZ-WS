@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
  *              单据信息
  */
 @Entity
-public class PushDownMain {
+    public class PushDownMain {
     @Id(autoincrement = true)
     public Long id;
     public String FBillNo;

@@ -100,9 +100,8 @@ public class TableActivity extends BaseActivity implements TableAdapter.InnerCli
             for (int i = 0; i < list.size(); i++) {
                 isCheck.add(false);
             }
-
         }
-        Lg.e("列表数据："+list.toString());
+        Lg.e("列表数据：",list);
         tableAdapter = new TableAdapter(mContext,list, isCheck);
         lvResult.setAdapter(tableAdapter);
         tableAdapter.setInnerListener(this);
@@ -134,7 +133,7 @@ public class TableActivity extends BaseActivity implements TableAdapter.InnerCli
         if(list1.size()>0){
             for(int i = 0;i<list1.size();i++){
                 List<T_Detail> details = t_detailDao.queryBuilder().where(T_DetailDao.Properties.FOrderId.eq(list1.get(i).orderId)).build().list();
-                if(details.size()==0||details==null){
+                if(details==null||details.size()==0){
                     t_mainDao.deleteInTx(list1.get(i));
                 }
             }
@@ -199,7 +198,7 @@ public class TableActivity extends BaseActivity implements TableAdapter.InnerCli
                             @Override
                             public void onNext(CommonResponse commonResponse) {
                                 t_detailDao.deleteInTx(list);
-                                t_mainDao.deleteInTx(list1);
+//                                t_mainDao.deleteInTx(list1);
                                 Toast.showText(mContext, "删除成功");
                                 initList();
 //                                adapter.notifyDataSetChanged();
@@ -299,11 +298,11 @@ public class TableActivity extends BaseActivity implements TableAdapter.InnerCli
                                             T_DetailDao.Properties.FIndex.eq(list.get(j).FIndex)
                                     ).build().unique();
                                     t_detailList.add(t_detail);
-                                    final T_main t_main = t_mainDao.queryBuilder().where(
-                                            T_mainDao.Properties.FIndex.eq(list.get(j).FIndex)
-                                    ).build().unique();
-                                    t_mainsList.add(t_main);
-                                    Log.e(TAG, "获取到T_Detail:" + t_detail.toString());
+//                                    final T_main t_main = t_mainDao.queryBuilder().where(
+//                                            T_mainDao.Properties.FIndex.eq(list.get(j).FIndex)
+//                                    ).build().unique();
+//                                    t_mainsList.add(t_main);
+//                                    Log.e(TAG, "获取到T_Detail:" + t_detail.toString());
                                 }
                             }
                             String detail ="";
@@ -345,7 +344,7 @@ public class TableActivity extends BaseActivity implements TableAdapter.InnerCli
                                 @Override
                                 public void onNext(CommonResponse commonResponse) {
                                     t_detailDao.deleteInTx(t_detailList);
-                                    if (null!=t_mainsList)t_mainDao.deleteInTx(t_mainsList);
+//                                    if (null!=t_mainsList)t_mainDao.deleteInTx(t_mainsList);
                                     Toast.showText(mContext, "删除成功");
                                     initList();
                                     tableAdapter.notifyDataSetChanged();

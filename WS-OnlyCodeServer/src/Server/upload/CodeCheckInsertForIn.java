@@ -4,6 +4,7 @@ import Bean.CodeCheckBean;
 import Bean.DownloadReturnBean;
 import Utils.CommonJson;
 import Utils.JDBCUtil;
+import Utils.Lg;
 import Utils.getDataBaseUrl;
 import com.google.gson.Gson;
 
@@ -81,7 +82,7 @@ public class CodeCheckInsertForIn extends HttpServlet {
 					}
 
 				downloadReturnBean.codeCheckBackDataBeans = list;
-				System.out.println(list.toString());
+				Lg.e("返回",list);
 				response.getWriter().write(CommonJson.getCommonJson(true,gson.toJson(downloadReturnBean)));
 //				response.getWriter().write(CommonJson.getCommonJson(true, ""));
 			} catch (ClassNotFoundException | SQLException e) {

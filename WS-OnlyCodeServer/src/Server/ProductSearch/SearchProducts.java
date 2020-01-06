@@ -1,7 +1,6 @@
 package Server.ProductSearch;
 
 import Bean.DownloadReturnBean;
-import Bean.ProductReturnBean;
 import Utils.CommonJson;
 import Utils.JDBCUtil;
 import Utils.getDataBaseUrl;
@@ -70,15 +69,16 @@ public class SearchProducts extends HttpServlet {
                         }
                         container.add(productBean);
                     }
-                    if(container.size()>0){
+//                    if(container.size()>0){
                         downloadReturnBean.products = container;
                         response.getWriter().write(CommonJson.getCommonJson(true,gson.toJson(downloadReturnBean)));
-                    }else{
-                        response.getWriter().write(CommonJson.getCommonJson(false,"未查询到数据"));
-                    }
+//                    }else{
+//                        response.getWriter().write(CommonJson.getCommonJson(false,gson.toJson(downloadReturnBean)));
+//                    }
 
                 }else{
-                    response.getWriter().write(CommonJson.getCommonJson(false,"未查询到数据"));
+                    response.getWriter().write(CommonJson.getCommonJson(false,gson.toJson(downloadReturnBean)));
+//                    response.getWriter().write(CommonJson.getCommonJson(false,"未查询到数据"));
                 }
 
 

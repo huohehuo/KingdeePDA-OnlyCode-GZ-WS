@@ -54,7 +54,20 @@ public class T_Detail {
     public String FApiClient;
     public String FApiSendNo;
     public String FApiPTNo;
-    @Generated(hash = 1004988400)
+
+    public String FMan1;
+    public String FMan2;
+    public String FMan3;
+    public String FCheckTypeID;
+    public String FCheckTypeName;
+    public String FCheckResultID;
+    public String FCheckResultName;
+    public String FCheckNum;
+    public String FCheckBrokenNum;
+    public String FCheckPassNum;
+    public int tag;
+
+    @Generated(hash = 1163340953)
     public T_Detail(long FOrderId, String FIndex, String FBarcode,
             String FStorageId, String FStorage, String FProductCode,
             String FRedBlue, String FProductId, String FProductName,
@@ -67,7 +80,10 @@ public class T_Detail {
             double unitrate, int activity, String model, String IMIE,
             String MakerId, String DataInput, String DataPush, String FKFDate,
             String FKFPeriod, String IsAssemble, String FApiClient,
-            String FApiSendNo, String FApiPTNo) {
+            String FApiSendNo, String FApiPTNo, String FMan1, String FMan2,
+            String FMan3, String FCheckTypeID, String FCheckTypeName,
+            String FCheckResultID, String FCheckResultName, String FCheckNum,
+            String FCheckBrokenNum, String FCheckPassNum, int tag) {
         this.FOrderId = FOrderId;
         this.FIndex = FIndex;
         this.FBarcode = FBarcode;
@@ -111,6 +127,17 @@ public class T_Detail {
         this.FApiClient = FApiClient;
         this.FApiSendNo = FApiSendNo;
         this.FApiPTNo = FApiPTNo;
+        this.FMan1 = FMan1;
+        this.FMan2 = FMan2;
+        this.FMan3 = FMan3;
+        this.FCheckTypeID = FCheckTypeID;
+        this.FCheckTypeName = FCheckTypeName;
+        this.FCheckResultID = FCheckResultID;
+        this.FCheckResultName = FCheckResultName;
+        this.FCheckNum = FCheckNum;
+        this.FCheckBrokenNum = FCheckBrokenNum;
+        this.FCheckPassNum = FCheckPassNum;
+        this.tag = tag;
     }
 
     @Generated(hash = 594111564)
@@ -503,4 +530,93 @@ public class T_Detail {
     public void setFApiPTNo(String FApiPTNo) {
         this.FApiPTNo = FApiPTNo;
     }
+
+    public String getFMan1() {
+        return this.FMan1;
+    }
+
+    public void setFMan1(String FMan1) {
+        this.FMan1 = FMan1;
+    }
+
+    public String getFMan2() {
+        return this.FMan2;
+    }
+
+    public void setFMan2(String FMan2) {
+        this.FMan2 = FMan2;
+    }
+
+    public String getFMan3() {
+        return this.FMan3;
+    }
+
+    public void setFMan3(String FMan3) {
+        this.FMan3 = FMan3;
+    }
+
+    public String getFCheckTypeID() {
+        return this.FCheckTypeID;
+    }
+
+    public void setFCheckTypeID(String FCheckTypeID) {
+        this.FCheckTypeID = FCheckTypeID;
+    }
+
+    public String getFCheckResultID() {
+        return this.FCheckResultID;
+    }
+
+    public void setFCheckResultID(String FCheckResultID) {
+        this.FCheckResultID = FCheckResultID;
+    }
+
+    public String getFCheckNum() {
+        return this.FCheckNum;
+    }
+
+    public void setFCheckNum(String FCheckNum) {
+        this.FCheckNum = FCheckNum;
+    }
+
+    public String getFCheckBrokenNum() {
+        return this.FCheckBrokenNum;
+    }
+
+    public void setFCheckBrokenNum(String FCheckBrokenNum) {
+        this.FCheckBrokenNum = FCheckBrokenNum;
+    }
+
+    public String getFCheckPassNum() {
+        return this.FCheckPassNum;
+    }
+
+    public void setFCheckPassNum(String FCheckPassNum) {
+        this.FCheckPassNum = FCheckPassNum;
+    }
+
+    public String getFCheckTypeName() {
+        return this.FCheckTypeName;
+    }
+
+    public void setFCheckTypeName(String FCheckTypeName) {
+        this.FCheckTypeName = FCheckTypeName;
+    }
+
+    public String getFCheckResultName() {
+        return this.FCheckResultName;
+    }
+
+    public void setFCheckResultName(String FCheckResultName) {
+        this.FCheckResultName = FCheckResultName;
+    }
+
+    public int getTag() {
+        return this.tag;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
+
 }

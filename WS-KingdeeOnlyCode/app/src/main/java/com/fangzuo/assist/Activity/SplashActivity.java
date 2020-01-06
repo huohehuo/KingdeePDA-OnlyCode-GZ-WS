@@ -418,6 +418,8 @@ public class SplashActivity extends AppCompatActivity  implements EasyPermission
     private void getPermisssion() {
         String[] perm = {
                 Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if (!EasyPermissions.hasPermissions(mContext, perm)) {

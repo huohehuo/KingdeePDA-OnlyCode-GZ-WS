@@ -40,34 +40,9 @@ public class GetSettingList {
         s5.tv = "网络测试";
         items.add(s5);
         items.add(new SettingList(R.mipmap.test,"通用设置"));
+        items.add(new SettingList("1",R.mipmap.chuku,"打印机蓝牙配置"));
+
         return items;
-
-
-    }
-    public static ArrayList<SettingList> getPurchaseList4P2(String[] ary) {
-        ArrayList<SettingList> items = new ArrayList<>();
-        ArrayList<SettingList> backItems = new ArrayList<>();
-
-        items.add(new SettingList("1",R.mipmap.chuku,"扫描查询"));
-        items.add(new SettingList("2",R.mipmap.chuku,"销售出库"));
-        items.add(new SettingList("3",R.mipmap.chuku,"销售出库红字"));
-        items.add(new SettingList("4",R.mipmap.diaobo,"查询条码记录"));
-        items.add(new SettingList("5",R.mipmap.pandian,"盘点单"));
-        items.add(new SettingList("6",R.mipmap.pandian,"库存查询"));
-        items.add(new SettingList("7",R.mipmap.pandian,"销售出库分类汇总"));
-
-        for (int i=0; i<items.size();i++){
-//            Log.e("test","定位ary:"+ary[i]);
-//            Log.e("test","定位items:"+items.get(i).tag);
-            //根据ary的值，遍历list符合的item并添加
-            for (int j=0;j<ary.length;j++){
-                if (TextUtils.equals(items.get(i).tag,ary[j])){
-                    Lg.e("加入单据",items.get(i));
-                    backItems.add(items.get(i));
-                }
-            }
-        }
-        return backItems;
 
 
     }
@@ -111,7 +86,8 @@ public class GetSettingList {
                 }
             }
         }
-        backItems.add(new SettingList("18",R.mipmap.pandian,"调价单"));
+//        backItems.add(new SettingList("18",R.mipmap.pandian,"调价单"));
+        backItems.add(new SettingList("31",R.mipmap.pandian,"拆箱单"));
 
         return backItems;
 
@@ -161,33 +137,65 @@ public class GetSettingList {
 
     }
 
+    //原材料
     public static ArrayList<SettingList> getStorageList() {
         ArrayList<SettingList> items = new ArrayList<>();
-        SettingList s = new SettingList();
-        s.ImageResourse = R.mipmap.pandian;
-        s.tv = "盘点";
-        items.add(s);
-        SettingList s1 = new SettingList();
-        s1.ImageResourse = R.mipmap.diaobo;
-        s1.tv = "调拨";
-        items.add(s1);
-        SettingList s2 = new SettingList();
-        s2.ImageResourse = R.mipmap.ruku;
-        s2.tv = "其他入库";
-        items.add(s2);
-        SettingList s3 = new SettingList();
-        s3.ImageResourse = R.mipmap.chuku;
-        s3.tv = "其他出库";
-        items.add(s3);
-        SettingList s4 = new SettingList();
-        s4.ImageResourse = R.mipmap.chuku;
-        s4.tv = "库存查询";
-        items.add(s4);
-        SettingList s5 = new SettingList();
-        s5.ImageResourse = R.mipmap.chuku;
-        s5.tv = "条码状态查询";
-        items.add(s5);
+        //最终返回的选项
+        ArrayList<SettingList> backItems = new ArrayList<>();
+        items.add(new SettingList("20",R.mipmap.ruku,"采购订单下推收料通知单"));
+        items.add(new SettingList("21",R.mipmap.pandian,"收料通知下推外购入库"));
+        items.add(new SettingList("22",R.mipmap.pandian,"其他入库"));
+        items.add(new SettingList("23",R.mipmap.pandian,"其他出库"));
+        items.add(new SettingList("24",R.mipmap.pandian,"生产任务单下推产品入库"));
+        items.add(new SettingList("25",R.mipmap.pandian,"委外订单下推委外入库"));
+
+        items.add(new SettingList("26",R.mipmap.pandian,"委外订单下推委外出库"));
+        items.add(new SettingList("27",R.mipmap.pandian,"生产任务单下推生产领料"));
+        items.add(new SettingList("28",R.mipmap.pandian,"收料通知单下推来料检验单"));
+        items.add(new SettingList("30",R.mipmap.pandian,"委外订单下推收料通知单"));
+        items.add(new SettingList("29",R.mipmap.pandian,"库存查询"));
+
+//        for (int i=0; i<items.size();i++){
+////            Log.e("test","定位ary:"+ary[i]);
+////            Log.e("test","定位items:"+items.get(i).tag);
+//            //根据ary的值，遍历list符合的item并添加
+//            for (int j=0;j<ary.length;j++){
+//                if (TextUtils.equals(items.get(i).tag,ary[j])){
+//                    Lg.e("加入单据",items.get(i));
+//                    backItems.add(items.get(i));
+//                }
+//            }
+//        }
         return items;
+
+
+
+
+//        SettingList s = new SettingList();
+//        s.ImageResourse = R.mipmap.pandian;
+//        s.tv = "盘点";
+//        items.add(s);
+//        SettingList s1 = new SettingList();
+//        s1.ImageResourse = R.mipmap.diaobo;
+//        s1.tv = "调拨";
+//        items.add(s1);
+//        SettingList s2 = new SettingList();
+//        s2.ImageResourse = R.mipmap.ruku;
+//        s2.tv = "其他入库";
+//        items.add(s2);
+//        SettingList s3 = new SettingList();
+//        s3.ImageResourse = R.mipmap.chuku;
+//        s3.tv = "其他出库";
+//        items.add(s3);
+//        SettingList s4 = new SettingList();
+//        s4.ImageResourse = R.mipmap.chuku;
+//        s4.tv = "库存查询";
+//        items.add(s4);
+//        SettingList s5 = new SettingList();
+//        s5.ImageResourse = R.mipmap.chuku;
+//        s5.tv = "条码状态查询";
+//        items.add(s5);
+//        return items;
 
 
     }
@@ -260,4 +268,32 @@ public class GetSettingList {
     }
 
 
+    //二期单据
+    public static ArrayList<SettingList> getPurchaseList4P2(String[] ary) {
+        ArrayList<SettingList> items = new ArrayList<>();
+        ArrayList<SettingList> backItems = new ArrayList<>();
+
+        items.add(new SettingList("1",R.mipmap.chuku,"扫描查询"));
+        items.add(new SettingList("2",R.mipmap.chuku,"销售出库"));
+        items.add(new SettingList("3",R.mipmap.chuku,"销售出库红字"));
+        items.add(new SettingList("4",R.mipmap.diaobo,"查询条码记录"));
+        items.add(new SettingList("5",R.mipmap.pandian,"盘点单"));
+        items.add(new SettingList("6",R.mipmap.pandian,"库存查询"));
+        items.add(new SettingList("7",R.mipmap.pandian,"销售出库分类汇总"));
+
+        for (int i=0; i<items.size();i++){
+//            Log.e("test","定位ary:"+ary[i]);
+//            Log.e("test","定位items:"+items.get(i).tag);
+            //根据ary的值，遍历list符合的item并添加
+            for (int j=0;j<ary.length;j++){
+                if (TextUtils.equals(items.get(i).tag,ary[j])){
+                    Lg.e("加入单据",items.get(i));
+                    backItems.add(items.get(i));
+                }
+            }
+        }
+        return backItems;
+
+
+    }
 }

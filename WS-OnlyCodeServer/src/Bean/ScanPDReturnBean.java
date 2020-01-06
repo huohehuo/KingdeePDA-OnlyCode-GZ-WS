@@ -36,6 +36,7 @@ public class ScanPDReturnBean {
         public String FProductType;
         public String FDCStockName;
         public String FDCSPName;
+        public int tag;
     }
 
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+     >
+    <CheckBox
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/cb_ischeck"/>
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_toRightOf="@id/cb_ischeck"
+           android:layout_width="match_parent"
+           android:layout_centerInParent="true"
+           android:layout_height="wrap_content">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item1"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item2"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item3"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item4"
+               android:textColor="@color/black"
+               android:textSize="18sp"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item5"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item6"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tv_item7"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               />
+
+
+           <LinearLayout
+               android:layout_alignParentBottom="true"
+               android:layout_marginBottom="5dp"
+               android:layout_marginRight="5dp"
+               android:layout_alignParentRight="true"
+               android:layout_width="150dp"
+               android:orientation="horizontal"
+               android:layout_height="wrap_content">
+               <Button
+                   android:text="删除"
+                   android:id="@+id/delete"
+                   android:textColor="@color/white"
+                   android:background="@drawable/btn_red"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:visibility="gone"
+                   android:layout_marginRight="5dp"
+                   android:layout_height="30dp"
+                   />
+
+                <Button
+                    android:visibility="gone"
+                    android:text="修改"
+                    android:textColor="@color/white"
+                    android:id="@+id/fix"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_login"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp" />
+
+           </LinearLayout>
+
+
+
+
+       </LinearLayout>
+
+</RelativeLayout>

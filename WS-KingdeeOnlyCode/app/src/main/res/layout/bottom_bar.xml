@@ -31,7 +31,7 @@
                 android:id="@+id/tv_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="采购"
+                android:text="成品"
                 android:textColor="@color/fragment_text" />
         </LinearLayout>
 
@@ -58,7 +58,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/bottom_btn_storage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -76,7 +75,7 @@
                 android:id="@+id/tv_storage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="仓存"
+                android:text="原材料"
                 android:textColor="@color/fragment_text" />
         </LinearLayout>
 

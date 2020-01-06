@@ -46,6 +46,8 @@ public class MathUtil {
     //解决 1.1+1.0=2.09999999的情况
     //double相加
     public static double sum(String d1,String d2){
+        if ("".equals(d1))d1="0";
+        if ("".equals(d2))d2="0";
         BigDecimal bd1 = new BigDecimal(d1);
         BigDecimal bd2 = new BigDecimal(d2);
         return bd1.add(bd2).doubleValue();

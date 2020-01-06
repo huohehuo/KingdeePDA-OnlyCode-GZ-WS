@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
+import com.fangzuo.assist.Activity.Crash.App;
 import com.fangzuo.assist.Adapter.SearchAdapter;
 import com.fangzuo.assist.Adapter.SearchClientAdapter;
 import com.fangzuo.assist.Adapter.SearchDbTypeAdapter;
@@ -22,6 +23,7 @@ import com.fangzuo.assist.Adapter.SearchSupplierAdapter;
 import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.Beans.DownloadReturnBean;
 import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
+import com.fangzuo.assist.Beans.SearchBean;
 import com.fangzuo.assist.Dao.Client;
 import com.fangzuo.assist.Dao.DbType;
 import com.fangzuo.assist.Dao.Employee;
@@ -30,6 +32,7 @@ import com.fangzuo.assist.Dao.Product;
 import com.fangzuo.assist.Dao.Storage;
 import com.fangzuo.assist.Dao.Suppliers;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.BasicShareUtil;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
@@ -79,6 +82,7 @@ public class SearchDataActivity extends BaseActivity {
     private List<Employee> employeeList;
     private List<Product> itemAll;
     private int where;
+    private int storageType;
     private List<Suppliers> itemAllSupplier;
     private List<Suppliers> suppliersList;
     private List<DbType> dbTypeList;
@@ -100,6 +104,7 @@ public class SearchDataActivity extends BaseActivity {
             searchString = intent.getStringExtra("search");
             backBus = intent.getStringExtra("backBus");
             where = intent.getIntExtra("where",0);
+            storageType = intent.getIntExtra("storageType",0);
 //            fidcontainer = intent.getStringArrayListExtra("fid");
 //            Lg.e("Intent:"+fidcontainer.toString());
         }
@@ -175,10 +180,13 @@ public class SearchDataActivity extends BaseActivity {
             model.setText("编号");
             name.setText("名称");
             if (BasicShareUtil.getInstance(mContext).getIsOL()) {
-                Asynchttp.post(mContext, getBaseUrl() + WebApi.SearchStorage, searchString, new Asynchttp.Response() {
+                SearchBean bean = new SearchBean();
+                bean.val1 = searchString;bean.FStorageType=""+storageType;
+                App.getRService().doIOAction(WebApi.SearchStorage, gson.toJson(bean), new MySubscribe<CommonResponse>() {
                     @Override
-                    public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
-                        DownloadReturnBean dBean = new Gson().fromJson(cBean.returnJson, DownloadReturnBean.class);
+                    public void onNext(CommonResponse commonResponse) {
+                        super.onNext(commonResponse);if (!commonResponse.state)return;
+                        DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
                         storageList = dBean.storage;
                         if (storageList.size() > 0) {
                             SearchStorageAdapter ada1 = new SearchStorageAdapter(mContext, storageList);
@@ -192,8 +200,9 @@ public class SearchDataActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onFailed(String Msg, AsyncHttpClient client) {
-                        Toast.showText(mContext, Msg);
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        Toast.showText(mContext, e.getMessage());
                     }
                 });
             }
@@ -543,12 +552,21 @@ public class SearchDataActivity extends BaseActivity {
     protected void OnReceive(String code) {
 
     }
-
     public static void start(Context context, String search, int where, String backBus) {
         Intent starter = new Intent(context, SearchDataActivity.class);
         starter.putExtra("search", search);
         starter.putExtra("where", where);
         starter.putExtra("backBus", backBus);
+        starter.putExtra("storageType", 0);
+//        starter.putStringArrayListExtra("fid", fid);
+        context.startActivity(starter);
+    }
+    public static void start(Context context, String search, int where, String backBus,int storageType) {
+        Intent starter = new Intent(context, SearchDataActivity.class);
+        starter.putExtra("search", search);
+        starter.putExtra("where", where);
+        starter.putExtra("backBus", backBus);
+        starter.putExtra("storageType", storageType);
 //        starter.putStringArrayListExtra("fid", fid);
         context.startActivity(starter);
     }

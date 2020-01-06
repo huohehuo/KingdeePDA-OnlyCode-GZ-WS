@@ -578,7 +578,8 @@ public class DBActivity extends BaseActivity {
         LoadingUtil.showDialog(mContext,"正在查找...");
         //查询条码唯一表
         CodeCheckBean bean = new CodeCheckBean(barcode);
-        DataModel.codeCheckForOut(gson.toJson(bean));
+        DataModel.codeCheck("CodeCheckForOut4DB",gson.toJson(bean));
+//        DataModel.codeCheckForOut(gson.toJson(bean));
     }
 
 
@@ -621,7 +622,7 @@ public class DBActivity extends BaseActivity {
                 startNewActivityForResult(ProductSearchActivity.class, R.anim.activity_open, 0, Info.SEARCHFORRESULT, bt);
                 break;
             case R.id.btn_add:
-                AddorderBefore();
+                getOutstorageNum(product,true);
                 break;
             case R.id.btn_finishorder:
                 finishOrder();
@@ -894,7 +895,7 @@ public class DBActivity extends BaseActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    AddorderBefore();
+                    getOutstorageNum(product,true);
                 }
             }, 150);
         } else {
@@ -967,7 +968,13 @@ public class DBActivity extends BaseActivity {
 
     }
 
-    private void getOutstorageNum(Product product) {
+    private boolean autoAdd = false;
+    private void getOutstorageNum(Product product,boolean auto) {
+        autoAdd = auto;
+        getOutstorageNum(product);
+    }
+
+        private void getOutstorageNum(Product product) {
         if (product == null) {
             return;
         }
@@ -996,11 +1003,20 @@ public class DBActivity extends BaseActivity {
                         qty = Double.parseDouble(cBean.returnJson);
                         Log.e("QTY", qty + "   " + unitrate);
                         tvNumoutStore.setText((qty / unitrate) + "");
+                        if (autoAdd){
+                            AddorderBefore();
+                        }
+                        autoAdd = false;
                     }
 
                     @Override
                     public void onFailed(String Msg, AsyncHttpClient client) {
+                        qty = 0.0;
                         tvNumoutStore.setText("0");
+                        if (autoAdd){
+                            AddorderBefore();
+                        }
+                        autoAdd = false;
                     }
                 });
             } else {
@@ -1020,9 +1036,18 @@ public class DBActivity extends BaseActivity {
                     } else {
                         tvNuminStore.setText((0.0) + "");
                     }
+                    if (autoAdd){
+                        AddorderBefore();
+                    }
+                    autoAdd = false;
 
                 } else {
+                    qty = 0.0;
                     tvNumoutStore.setText("0");
+                    if (autoAdd){
+                        AddorderBefore();
+                    }
+                    autoAdd = false;
                 }
 
             }
@@ -1139,6 +1164,11 @@ public class DBActivity extends BaseActivity {
         }
 
         if (!headDone){
+            if (LocDataUtil.checkHasBarcode(mContext,barcode)){
+                Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
+                lockScan(0);
+                return;
+            }
             //插入条码唯一临时表
             CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",instorageId==null?"":instorageId,inwavehouseID == null ? "0" : inwavehouseID,BasicShareUtil.getInstance(mContext).getIMIE());
             DataModel.codeInsertForIn(gson.toJson(bean));
@@ -1148,15 +1178,6 @@ public class DBActivity extends BaseActivity {
 
     }
     private void Addorder() {
-        if (!"".equals(barcode)){
-            List<T_Detail> list = t_detailDao.queryBuilder().where(
-                    T_DetailDao.Properties.FBarcode.eq(barcode)
-            ).build().list();
-            if (list.size()>0){
-                lockScan(0);
-                return;
-            }
-        }
 
         String discount = "0";
         if (inwavehouseID == null) {

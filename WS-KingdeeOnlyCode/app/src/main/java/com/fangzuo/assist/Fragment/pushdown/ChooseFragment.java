@@ -31,9 +31,12 @@ import com.fangzuo.assist.Activity.FHTZDDBActivity;
 import com.fangzuo.assist.Activity.HBDPDCPRKActivity;
 import com.fangzuo.assist.Activity.InCheckGoodsActivity;
 import com.fangzuo.assist.Activity.OutCheckGoodsActivity;
+import com.fangzuo.assist.Activity.OutsourcingOrdersIS2Activity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersISActivity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersOSActivity;
 import com.fangzuo.assist.Activity.PdBackMsg2SaleOutRedActivity;
+import com.fangzuo.assist.Activity.PdShouLiao2LLCheckActivity;
+import com.fangzuo.assist.Activity.ProducePushInStore2Activity;
 import com.fangzuo.assist.Activity.ProducePushInStoreActivity;
 import com.fangzuo.assist.Activity.ProductInCheckGoodsActivity;
 import com.fangzuo.assist.Activity.ProductSearchActivity;
@@ -42,8 +45,10 @@ import com.fangzuo.assist.Activity.PushDownPOActivity;
 import com.fangzuo.assist.Activity.PushDownPagerActivity;
 import com.fangzuo.assist.Activity.PushDownSNActivity;
 import com.fangzuo.assist.Activity.SCRWDPDSCHBDActivity;
+import com.fangzuo.assist.Activity.Shengchanrenwudanxiatuilingliao2Activity;
 import com.fangzuo.assist.Activity.ShengchanrenwudanxiatuilingliaoActivity;
 import com.fangzuo.assist.Activity.ShouLiaoTongZhiActivity;
+import com.fangzuo.assist.Activity.WwOrder2SLTZActivity;
 import com.fangzuo.assist.Activity.XSDDPDFLTZDActivity;
 import com.fangzuo.assist.Adapter.ClientSpAdapter;
 import com.fangzuo.assist.Adapter.PushDownListAdapter;
@@ -290,8 +295,14 @@ private int searchType;
                 case 9://生产任务单下推产品入库
                     intent = new Intent(mContext, ProducePushInStoreActivity.class);
                     break;
+                case 25://生产任务单下推产品入库（原材料）
+                    intent = new Intent(mContext, ProducePushInStore2Activity.class);
+                    break;
                 case 13://生产任务单下推生产领料
                     intent = new Intent(mContext, ShengchanrenwudanxiatuilingliaoActivity.class);
+                    break;
+                case 27://生产任务单下推生产领料（先进先出原材料）
+                    intent = new Intent(mContext, Shengchanrenwudanxiatuilingliao2Activity.class);
                     break;
 //                case 2://采购订单下推外购入库
 //                    intent = new Intent(mContext, PushDownPOActivity.class);
@@ -299,11 +310,14 @@ private int searchType;
                 case 3://发货通知下推销售出库
                     intent = new Intent(mContext, PushDownSNActivity.class);
                     break;
-//                case 4://收料通知下推外购入库
-//                    intent = new Intent(mContext, ShouLiaoTongZhiActivity.class);
-//                    break;
+                case 4://收料通知下推外购入库
+                    intent = new Intent(mContext, ShouLiaoTongZhiActivity.class);
+                    break;
                 case 11://委外订单下推委外入库
                     intent = new Intent(mContext, OutsourcingOrdersISActivity.class);
+                    break;
+                case 26://委外订单下推委外入库（原材料）
+                    intent = new Intent(mContext, OutsourcingOrdersIS2Activity.class);
                     break;
                 case 23://退货通知单下推销售出库红字
                     intent = new Intent(mContext, PdBackMsg2SaleOutRedActivity.class);
@@ -314,12 +328,15 @@ private int searchType;
 //                case 25://产品入库单验货
 //                    intent = new Intent(mContext, ProductInCheckGoodsActivity.class);
 //                    break;
-//                case 12://委外订单下推委外出库
-//                    intent = new Intent(mContext, OutsourcingOrdersOSActivity.class);
-//                    break;
-//                case 14://采购订单下推收料通知单
-//                    intent = new Intent(mContext, CGDDPDSLTZDActivity.class);
-//                    break;
+                case 12://委外订单下推委外出库（先进先出）
+                    intent = new Intent(mContext, OutsourcingOrdersOSActivity.class);
+                    break;
+                case 14://采购订单下推收料通知单
+                    intent = new Intent(mContext, CGDDPDSLTZDActivity.class);
+                    break;
+                case 30://委外订单下推收料通知单
+                    intent = new Intent(mContext, WwOrder2SLTZActivity.class);
+                    break;
 //                case 15://销售订单下推发料通知单
 //                    intent = new Intent(mContext, XSDDPDFLTZDActivity.class);
 //                    break;
@@ -328,6 +345,9 @@ private int searchType;
 //                    break;
                 case 18://汇报单下推产品入库
                     intent = new Intent(mContext, HBDPDCPRKActivity.class);
+                    break;
+                case 28://收料通知单下推来料检验单
+                    intent = new Intent(mContext, PdShouLiao2LLCheckActivity.class);
                     break;
 //                case 7://销售出库单验货
 //                    intent = new Intent(mContext, OutCheckGoodsActivity.class);
@@ -380,7 +400,7 @@ private int searchType;
 
     private void initList() {
         isCheck.clear();
-        container.clear();
+        container = new ArrayList<>();
         downloadIDs.clear();
 
         //根据 tag 查找相应的单据
@@ -527,12 +547,14 @@ private int searchType;
         pushDownSubsAll = new ArrayList<>();
         for (int i = 0; i < downloadIDs.size(); i++) {
             list = t_detailDao.queryBuilder().where(
+                    T_DetailDao.Properties.Tag.eq(tag),
                     T_DetailDao.Properties.FInterID.eq(downloadIDs.get(i).FInterID)
             ).build().list();
             if (list.size()>0){
                 detailsAll.addAll(list);
             }
             list_main = t_mainDao.queryBuilder().where(
+                    T_mainDao.Properties.Tag.eq(tag),
                     T_mainDao.Properties.FDeliveryType.eq(downloadIDs.get(i).FInterID)
             ).build().list();
             if (list_main.size()>0){
@@ -540,6 +562,7 @@ private int searchType;
             }
 
             pushDownSubs = pushDownSubDao.queryBuilder().where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
                     PushDownSubDao.Properties.FInterID.eq(downloadIDs.get(i).FInterID)
             ).build().list();
             if (pushDownSubs.size()>0){
@@ -641,7 +664,7 @@ private int searchType;
 //        } else {
 //            Toast.showText(mContext, "未查询到数据");
 //        }
-        container.clear();
+        container = new ArrayList<>();
         isCheck.clear();
         String con="";
 //        pushDownListAdapter.notifyDataSetChanged();

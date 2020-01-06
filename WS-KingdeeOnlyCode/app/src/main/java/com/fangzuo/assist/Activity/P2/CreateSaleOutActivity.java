@@ -20,6 +20,7 @@ import com.fangzuo.assist.Beans.CodeCheckBackDataBean;
 import com.fangzuo.assist.Beans.CodeCheckBean;
 import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
+import com.fangzuo.assist.Beans.PostBean;
 import com.fangzuo.assist.Beans.PurchaseInStoreUploadBean;
 import com.fangzuo.assist.Dao.T_Detail;
 import com.fangzuo.assist.Dao.T_main;
@@ -330,6 +331,8 @@ public class CreateSaleOutActivity extends BaseActivity {
         pBean.list = data;
 
         LoadingUtil.showDialog(mContext, "正在回单...");
+//        PostBean postBean = new PostBean(gson.toJson(pBean));
+//        App.getRService().doIOAction4Post(WebApi.CreateSOUpload, postBean, new MySubscribe<CommonResponse>() {
         App.getRService().doIOAction(WebApi.CreateSOUpload, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
             @Override
             public void onNext(CommonResponse commonResponse) {

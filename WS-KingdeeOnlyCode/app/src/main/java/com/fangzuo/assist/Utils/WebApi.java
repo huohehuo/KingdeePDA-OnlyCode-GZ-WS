@@ -33,10 +33,12 @@ public class WebApi {
     public static final String PUSHDOWNDLLIST = "PushDownloadList";
     public static final String PUSHDOWNSOUPLOAD = "PushDownSOUpload";
     public static final String PUSHDOWNSLUPLOAD = "PushDownSLUpload";
+    public static final String PdShouLiao2LLCheckActivityUpload = "PdShouLiao2LLCheckActivityUpload";
     public static final String PUSHDOWNPOUPLOAD = "PushDownPOUpload";
     public static final String SCRWDPDCPRKUpload = "SCRWDPDCPRKUpload";
     public static final String HBDPDCPRKUpload = "HBDPDCPRKUpload";
     public static final String CGDDPDSLTZDUpload = "CGDDPDSLTZDUpload";
+    public static final String WwOrder2SLTZActivityUpload = "WwOrder2SLTZActivityUpload";
     public static final String PUSHDOWNSNUPLOAD = "PushDownSNUpload";
     public static final String PdBackMsg2SaleOutUpload = "PdBackMsg2SaleOutUpload";
     public static final String SEARCHPRODUCTS = "SearchProducts";
@@ -54,6 +56,7 @@ public class WebApi {
 
     public static final String SearchDbType = "SearchDbType";
     public static final String SearchStorage = "SearchStorage";
+    public static final String ResultSearchLike = "ResultSearchLike";
     public static final String SUPPLIERSEARCHLIKE = "SupplerSearchLike";
     public static final String CLIENTSEARCHLIKE = "ClientSearchLike";
     public static final String SEARCHJHSEARCHLIKE = "jhSearchLike";
@@ -103,5 +106,9 @@ public class WebApi {
     public static final String CheckLogSearch2 = "CheckLogSearch2";
     public static final String CheckStoreSearch1 = "CheckStoreSearch1";
     public static final String CheckStoreSearch2 = "CheckStoreSearch2";
+
+    public static final String CheckBatch = "CheckBatch";
+    public static final String InsertForInOutY = "InsertForInOutY";
+
 
 }

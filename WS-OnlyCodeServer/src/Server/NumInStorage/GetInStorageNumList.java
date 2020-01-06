@@ -44,14 +44,17 @@ public class GetInStorageNumList extends HttpServlet {
                 System.out.println(request.getParameter("sqlip")+" "
                         +request.getParameter("sqlport")+" "+request.getParameter("sqlname")
                         +" "+request.getParameter("sqlpass")+" "+request.getParameter("sqluser"));
-                if (!"".equals(bean.FItemID)){
+                if (null!=bean.FItemID && !"".equals(bean.FItemID)){
                     con= con+" and t1.FItemID = "+bean.FItemID;
                 }
-                if (!"".equals(bean.FStockID)){
+                if (null!=bean.FStockID && !"".equals(bean.FStockID)){
                     con =con + " and t1.FStockID= "+bean.FStockID;
                 }
-                if (!"".equals(bean.FStockPlaceID)){
+                if (null!=bean.FStockPlaceID && !"".equals(bean.FStockPlaceID)){
                     con =con + "  and t1.FStockPlaceID= "+bean.FStockPlaceID;
+                }
+                if (null!=bean.FBatchNo && !"".equals(bean.FBatchNo)){
+                    con =con + "  and t1.FBatchNo= "+bean.FBatchNo;
                 }
                 Lg.e("查询条件",bean);
                 SQL = "select t2.FModel,t2.FNumber as 物料编码,t2.FName as 物料名称,convert(float,t1.FQty) as 基本单位库存,convert(float,t1.FSecQty) as 辅助单位库存,t6.FName as 辅助单位,t5.FName as 基本单位,t3.FName as 仓库,t4.FName as 仓位,t1.FBatchNo as 批次,t1.FKFDate as 生产日期,t1.FKFPeriod as 保质期 from ICInventory t1 left join t_ICItem t2 on t1.FItemID = t2.FItemID left join t_stock t3 on t1.FStockID = t3.FItemID left join t_stockPlace t4 on t1.FStockPlaceID = t4.FSPID left join t_Measureunit t5 on t2.FUnitID = t5.FItemID left join t_Measureunit t6 on t2.FSecUnitID = t6.FItemID where 1=1 "+con;

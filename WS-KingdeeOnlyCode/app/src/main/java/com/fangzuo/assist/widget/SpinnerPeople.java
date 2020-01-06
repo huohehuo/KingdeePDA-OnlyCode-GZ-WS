@@ -224,7 +224,7 @@ public class SpinnerPeople extends RelativeLayout {
     public void setAutoSelection(String saveKeyStr,String string) {
         saveKeyString =saveKeyStr;
         autoString = string;
-        if ("".equals(string)){
+        if ("".equals(string) || !"".equals(saveKeyStr)){
             autoString = Hawk.get(saveKeyString,"");
         }
         for (int j = 0; j < adapter.getCount(); j++) {

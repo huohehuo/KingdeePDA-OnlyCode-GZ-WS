@@ -67,6 +67,7 @@ public class DownloadInfo extends HttpServlet {
         ArrayList<bibiezhong> container;
         ArrayList<GProduct> gProducts;
         ArrayList<Suppliers4P2> suppliers4P2s;
+        ArrayList<CheckType> checkTypes;
         Gson gson = new Gson();
         int size = 0;
         DownloadReturnBean dBean = new DownloadReturnBean();
@@ -210,6 +211,13 @@ public class DownloadInfo extends HttpServlet {
                             dBean.suppliers4P2s = suppliers4P2s;
                             size += suppliers4P2s.size();
                             break;
+                        case 22:
+                            checkTypes = getCheckTypes(statement, rSet, version, dBean);
+                            System.out.println("checkTypes" + checkTypes.size());
+                            Lg.e("checkTypes：",checkTypes);
+                            dBean.checkTypes = checkTypes;
+                            size += checkTypes.size();
+                            break;
                         default:
                             break;
                     }
@@ -317,6 +325,24 @@ public class DownloadInfo extends HttpServlet {
                 bean.FUserID = rSet.getString("FUserID");
                 bean.FLevel = rSet.getString("FLevel");
                 bean.FPermit = rSet.getString("FPermit");
+                container.add(bean);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return container;
+    }
+    private ArrayList<CheckType> getCheckTypes(Statement statement, ResultSet rSet, String version, DownloadReturnBean dBean) {
+        ArrayList<CheckType> container = new ArrayList<>();
+        String sql = "select FInterID,FBillNo from ICQCScheme where FTranType=45 and  FInterID>0 and FCheckerID>0 and FCancellation=0 And GetDate() between  FValidDate And  FInvalidDate";
+        try {
+            rSet = statement.executeQuery(sql);
+            while (rSet.next()) {
+                DownloadReturnBean.CheckType bean = dBean.new CheckType();
+                bean.FInterID = rSet.getString("FInterID");
+                bean.FBillNo = rSet.getString("FBillNo");
                 container.add(bean);
             }
         } catch (SQLException e) {
@@ -624,7 +650,7 @@ public class DownloadInfo extends HttpServlet {
         } else if (version.contains("80010" )) {
             sql = "select t1.FItemID,t1.FEmpID,t1.FName,t1.FNumber,t1.FTypeID,t1.FSPGroupID," +
                     "t1.FGroupID,t1.FStockGroupID,t1.FIsStockMgr,t1.FUnderStock from t_Stock" +
-                    " t1 left join t_Item t2 on t1.FItemID=t2.FItemID WHERE t2.FItemClassID=5 AND t2.FDetail=1  AND (((FTypeID not in (501,502,503)) and FTypeID <> 504)) AND t2.FDeleteD=0 "; //���k3
+                    " t1 left join t_Item t2 on t1.FItemID=t2.FItemID WHERE t2.FItemClassID=5 AND t2.FDetail=1  AND (( FTypeID <> 504)) AND t2.FDeleteD=0 "; //���k3
         } else {
             sql = "select FItemID,FEmpID,FName,FNumber,FTypeID,FSPGroupID,FGroupID,FStockGroupID," +
                     "FIsStockMgr,'' as FUnderStock from t_Stock where FDeleteD=0 ";//רҵ��

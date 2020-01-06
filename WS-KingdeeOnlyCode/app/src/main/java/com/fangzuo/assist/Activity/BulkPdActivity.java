@@ -334,10 +334,7 @@ public class BulkPdActivity extends BaseActivity {
         ivStorage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString("search", edStorage.getText().toString());
-                b.putInt("where", Info.Search_Storage);
-                startNewActivityForResult(ProductSearchActivity.class, R.anim.activity_open, 0, Info.Search_Storage, b);
+                SearchDataActivity.start(mContext,edStorage.getText().toString(),Info.Search_Storage,EventBusInfoCode.Search_Storage,100);
             }
         });
 
@@ -537,6 +534,11 @@ public class BulkPdActivity extends BaseActivity {
         if (null == storage) {
             Toast.showText(mContext, "仓库不能为空");
             MediaPlayer.getInstance(mContext).error();
+            lockScan(0);
+            return;
+        }
+        if (LocDataUtil.checkHasBarcode(mContext,binding.edSn.getText().toString())){
+            Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
             lockScan(0);
             return;
         }

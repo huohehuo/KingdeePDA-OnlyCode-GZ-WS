@@ -494,7 +494,15 @@ public class PackageActivity extends BaseActivity {
             lockScan(0);
             return;
         }
-
+        List<T_Detail> list = t_detailDao.queryBuilder().where(
+                T_DetailDao.Properties.DataPush.eq(binding.etZz.getText().toString()),
+                T_DetailDao.Properties.FBarcode.eq(barcodeStr)
+        ).build().list();
+        if (list.size()>0){
+            Toast.showText(mContext,"本地已存在单据信息");
+            lockScan(0);
+            return;
+        }
         //插入条码唯一临时表
 //        CodeCheckBean bean = new CodeCheckBean(barcodeStr,binding.etZz.getText().toString() + "",BasicShareUtil.getInstance(mContext).getIMIE());
         CodeCheckBean bean = new CodeCheckBean();
@@ -509,13 +517,7 @@ public class PackageActivity extends BaseActivity {
 
     private void Addorder(){
         String second = getTimesecond();
-        List<T_Detail> list = t_detailDao.queryBuilder().where(
-                T_DetailDao.Properties.DataPush.eq(binding.etZz.getText().toString()),
-                T_DetailDao.Properties.FBarcode.eq(barcodeStr)
-        ).build().list();
-        if (list.size()>0){
-            return;
-        }
+
         t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(ordercode)).build().list());
         T_main t_main = new T_main();
         t_main.FIndex = second;

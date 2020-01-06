@@ -7,8 +7,10 @@ public class Config {
     public static final String Data_Url = "DownData/AllData.txt";
 
     public static String PDA_Project_Type="PDA_Project_Type";//项目一期二期区分
+    public static final String OBJ_BLUETOOTH="key_Bluetooth_object";
     public static final String DATABASESETTING = "master";
     public static final String PDA = "PDA";
+    public static final String PrintNum = "PrintNum";
     public static final String[] PDA_Type = {"请选择设备型号","G02A设备", "8000设备", "5000设备","手机端"};
 
     //用于接口回调的判断------------------------------------------
@@ -65,10 +67,14 @@ public class Config {
     public static final int PushDownSNActivity             =10003;
     public static final int ShouLiaoTongZhiActivity        =10004;
     public static final int OutsourcingOrdersISActivity    =10005;
+    public static final int OutsourcingOrdersIS2Activity    =1000502;
     public static final int OutsourcingOrdersOSActivity    =10006;
     public static final int ProducePushInStoreActivity     =10007;
+    public static final int ProducePushInStore2Activity    =1000702;
     public static final int ShengchanrenwudanxiatuilingliaoActivity =10008;
+    public static final int Shengchanrenwudanxiatuilingliao2Activity =1000802;
     public static final int CGDDPDSLTZDActivity                     =10009;
+    public static final int WwOrder2SLTZActivity                     =1000902;
     public static final int XSDDPDFLTZDActivity                     =10010;
     public static final int SCRWDPDSCHBDActivity                    =10011;
     public static final int HBDPDCPRKActivity                       =10012;
@@ -80,9 +86,11 @@ public class Config {
     public static final int ProductInStorageActivity                =10017;
     public static final int ProductInStorageRedActivity             =1001702;
     public static final int OtherInStoreActivity                    =10018;
+    public static final int OtherInStore2Activity                   =1001802;
     public static final int SoldOutActivity                         =10019;
     public static final int ProduceAndGetActivity                   =10020;
     public static final int OtherOutStoreActivity                   =10021;
+    public static final int OtherOutStore2Activity                  =1002102;
     public static final int OtherOutStore4RedActivity               =10028;
     public static final int PDActivity                              =10022;
     public static final int DBActivity                              =10023;
@@ -91,6 +99,7 @@ public class Config {
     public static final int PdBackMsg2SaleOutRedActivity            =10025;
     public static final int DbCheckGoodsActivity                    =10026;
     public static final int ProductInCheckGoodsActivity             =10027;
+    public static final int PdShouLiao2LLCheckActivity              =10032;
     //p2
     public static final int ScanCheckActivity                       =10028;
     public static final int CreateSaleOutActivity                   =10029;

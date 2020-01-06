@@ -50,14 +50,12 @@ public class HBDPDCPRKUpload extends HttpServlet {
 				
 				PurchaseInStoreUploadBean pBean = gson.fromJson(parameter, PurchaseInStoreUploadBean.class);
 				for(int i =0;i<pBean.list.size();i++){
-					sta = conn.prepareStatement("exec proc_PushProductInICMORpt ?,?,?,?,?,?");
+					sta = conn.prepareStatement("exec proc_PushProductInICMORpt ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?");
 					String main = pBean.list.get(i).main;
 					sta.setString(1, main);
-					sta.setString(2, "");
-					sta.setString(3, "");
-					sta.setString(4, "");
-					sta.setString(5, "");
-					sta.setString(6, "");
+					for(int j = 2;j<=41;j++){
+						sta.setString(j, "");
+					}
 					for(int j = 0;j<pBean.list.get(i).detail.size();j++){
 						sta.setString(j+2, pBean.list.get(i).detail.get(j));
 					}

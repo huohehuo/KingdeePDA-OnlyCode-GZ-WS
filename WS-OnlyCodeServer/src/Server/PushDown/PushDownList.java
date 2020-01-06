@@ -52,7 +52,7 @@ public class PushDownList extends HttpServlet {
             if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
                 condition += " and  FBillNo like \'%" + pushDownListRequestBean.code + "%\'";
             }
-            if (pushDownListRequestBean.id == 9){
+            if (pushDownListRequestBean.id == 9 || pushDownListRequestBean.id == 25 ){
                 if (pushDownListRequestBean.StartTime != null && !pushDownListRequestBean.StartTime.equals("") && pushDownListRequestBean.endTime != null && !pushDownListRequestBean.endTime.equals("")) {
                     condition += " and  FPlanCommitDate between " + "\'" + pushDownListRequestBean.StartTime + "\'" + "and" + "\'" + pushDownListRequestBean.endTime + "\'";
                 }
@@ -132,6 +132,7 @@ public class PushDownList extends HttpServlet {
                             "where (t1.FTranType=24 AND ((t1.FCheckerID<=0 OR t1.FCheckerID  IS NULL)  AND  " +
                             "t1.FCancellation = 0))" + condition + "order by t1.FBillNo desc";
                     break;
+                case 25://生产单下推产品入库
                 case 9://生产单下推产品入库
                     if (version.startsWith("3003")){
                         SQL = "select '' AS FMangerID,'' AS FEmpID,'' AS FSupplyID,FDeptID AS FDeptID, FDate,FInterID,FBillNo,FDeptID FWorkShop,t2.FName,FDate as  FPlanCommitDate,row_number() over (order by t1.FBillNo desc) as row_num from ICMO t1 left join t_Department t2 on t1.FDeptID = t2.FItemID left join t_ICItem t3 on t1.FItemID=t3.FItemID where  FAuxQty-FAuxFinishQty>0 and FStatus in(1,2) " + condition;
@@ -152,12 +153,14 @@ public class PushDownList extends HttpServlet {
                             "where t3.FAuxQtyPass-t3.FAuxQtySelStock>0 and (t1.FStatus=1 or t1.FStatus=2)  " +
                             "and FCancellation=0" + condition + "order by t1.FBillNo desc";
                     break;
+                case 26://委外订单下推委外入库
                 case 11://委外订单下推委外入库
                     SQL = "select top 50 * from (select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'' FDeptID,'' FEmpID,FMangerID,t1.FInterID from ICSubContract t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join ICSubContractEntry t3 on t1.FInterID=t3.FInterID where t3.FAuxQty-t3.FAuxCommitQty>0 and (t1.FStatus=1 or t1.FStatus=2) and FCancellation=0 and t3.FMrpClosed = 0) t where 1=1  " + condition + " order by t.FBillNo desc";
                     break;
                 case 12://委外订单下推委外出库
                     SQL = "select top 50 * from (select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'' FDeptID,'' FEmpID,FMangerID,t1.FInterID from ICSubContract t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join PPBOMEntry t3 on t1.FInterID=t3.FICMOInterID where t3.FAuxQtyMust+FAuxQtySupply-t3.FAuxQty>0 and (t1.FStatus=1 or t1.FStatus=2) and FCancellation=0  ) t where 1=1  " + condition + " order by t.FBillNo desc";
                     break;
+                case 27://生产任务单下推生产领料
                 case 13://生产任务单下推生产领料
                     SQL = "select top 50 * from (select distinct(t4.FICMOInterID),t1.FInterID,t1.FBillNo," +
                             "t5.FWorkSHop,'' as FMangerID,'' as FEmpID,'' as FSupplyID,'' as FDeptID," +
@@ -175,6 +178,12 @@ public class PushDownList extends HttpServlet {
                             "t1.FClosed=0 and FCancellation=0) t where 1=1 " + condition + " order by " +
                             "t.FBillNo desc";
                     break;
+                case 30://采购订单下推收料通知单
+                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'''' FDeptID,'''' FEmpID,FMangerID,t1.FInterID from ICSubContract t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join ICSubContractEntry t3 on t1.FInterID=t3.FInterID where t3.FAuxQty-t3.FAuxCommitQty>0 and t1.FCancellation=0   and (t1.FInvStyle=14190 OR ISNULL(t1.FInvStyle,0)=0) AND (CASE WHEN EXISTS(SELECT TOP 1 1 FROM t_SystemProfile WHERE FCategory='IC' AND FKey='EnableSupplierCooperation' AND FValue>0) THEN (SELECT TOP 1 1 FROM t_Supplier WHERE (FSupplierCoroutineFlag=0 OR (FSupplierCoroutineFlag=1 AND t3.FSupConfirm = 'Y')) AND FItemID=t1.FSupplyID) ELSE 1 END)=1 AND t1.FStatus >0 AND t3.FMrpClosed<>1 AND t3.FInHighLimitQty>t3.FAuxCommitQty AND t1.FClassTypeID=1007105) t where 1=1 " + condition + " order by " +
+                            "t.FBillNo desc";
+                    break;
+
+
                 case 15://销售订单下推发料通知单
                     SQL = "select * from(select distinct(t1.FBillNo),t2.FName,t1.FDate,FCustID as FSupplyID ," +
                             "FDeptID,FEmpID,FMangerID,t1.FInterID from SEOrder t1 left join t_Organization " +
@@ -250,6 +259,12 @@ public class PushDownList extends HttpServlet {
                     //下载发货通知
                     SQL = "select FBillNo,'' FName,FDate,FSupplyID ,FDeptID,FEmpID,'' as FMangerID,FInterID from ICStockBill t1    where (t1.FTranType=41 AND (not exists(select 1 from t_PDABarCodeCheckBillNo where FInterID=t1.FInterID) and t1.FStatus in(0)  and t1.FCancellation = 0 ))"+ condition;
                     break;
+                case 28:
+                    //下载发货通知
+//                    SQL = "select FBillNo,'' FName,FDate,FSupplyID ,FDeptID,FEmpID,'' as FMangerID,FInterID from ICStockBill t1    where (t1.FTranType=41 AND (not exists(select 1 from t_PDABarCodeCheckBillNo where FInterID=t1.FInterID) and t1.FStatus in(0)  and t1.FCancellation = 0 ))"+ condition;
+                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+                    break;
+
 
             }
             System.out.println("下推查找语句：" + SQL);

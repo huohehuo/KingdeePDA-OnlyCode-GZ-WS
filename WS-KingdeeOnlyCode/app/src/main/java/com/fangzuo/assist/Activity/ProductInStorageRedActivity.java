@@ -59,6 +59,7 @@ import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.GreenDaoManager;
 import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
+import com.fangzuo.assist.Utils.LocDataUtil;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
 import com.fangzuo.assist.Utils.ShareUtil;
@@ -67,6 +68,7 @@ import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
 import com.fangzuo.assist.widget.SpinnerStorage;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.assist.zxing.activity.CaptureActivity;
 import com.fangzuo.greendao.gen.DaoSession;
@@ -133,7 +135,7 @@ public class ProductInStorageRedActivity extends BaseActivity {
     @BindView(R.id.isAutoAdd)
     CheckBox autoAdd;
     @BindView(R.id.sp_which_storage)
-    SpinnerStorage spWhichStorage;
+    SpinnerStorage4Type spWhichStorage;
     @BindView(R.id.cb_isStorage)
     CheckBox cbIsStorage;
     @BindView(R.id.edghunit)
@@ -832,6 +834,12 @@ public class ProductInStorageRedActivity extends BaseActivity {
             Toast.showText(mContext, "请输入批次号");
             lockScan(0);
         } else {
+
+            if (LocDataUtil.checkHasBarcode(mContext,barcode)){
+                Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
+                lockScan(0);
+                return;
+            }
             //插入条码唯一临时表
             CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",storageId==null?"":storageId,wavehouseID == null ? "0" : wavehouseID,BasicShareUtil.getInstance(mContext).getIMIE());
             DataModel.codeInsertForIn(gson.toJson(bean));

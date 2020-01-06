@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fangzuo.assist.Activity.UnBoxActivity">
+    <include layout="@layout/top_bar"/>
+    <EditText
+        android:id="@+id/ed_code"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_edittext_selector"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:hint="请输入条码"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:id="@+id/btn_unbox"
+        android:layout_width="match_parent"
+        android:layout_margin="12dp"
+        android:layout_height="38dp"
+        android:textColor="@android:color/white"
+        android:text="拆箱"
+        android:background="@drawable/btn_check"/>
+
+</LinearLayout>

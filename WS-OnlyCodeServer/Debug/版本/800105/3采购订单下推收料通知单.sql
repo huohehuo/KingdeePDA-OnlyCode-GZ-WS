@@ -66,8 +66,8 @@ set @FExplanation='' --备注
     select @value= Fvalue  from t_systemprofile where Fkey in ('UPSTOCKWHENSAVE') AND FCateGory='IC' 
 INSERT INTO POInstock(FInterID,FBillNo,FBrNo,FTranType,FCancellation,FStatus,FUpStockWhenSave,Fdate,FSupplyID,FCheckDate,FFManagerID,FDeptID,FEmpID,FBillerID,
 FCurrencyID,FBizType,FExchangeRateType,FExchangeRate,FPOStyle,FWWType,FRelateBrID,FMultiCheckDate1,FMultiCheckDate2,FMultiCheckDate3,FMultiCheckDate4,
-FMultiCheckDate5,FMultiCheckDate6,FSelTranType,FFetchAdd,FExplanation,FAreaPS,FManageType,FPOMode,FPrintCount) 
-SELECT @FInterID,@FBillNo,'0',72,0,0,@value,@Fdate,@FSupplyID,Null,@FFManagerID,@FDeptID,@FEmpID,@FBillerID,@FCurrencyID,12510,1,1,@FPOStyle,0,0,Null,Null,Null,Null,Null,Null,71,@FFetchAdd,@FExplanation,20302,0,36680,0
+FMultiCheckDate5,FMultiCheckDate6,FSelTranType,FFetchAdd,FExplanation,FAreaPS,FManageType,FPOMode,FPrintCount,FHeadSelfP0341) 
+SELECT @FInterID,@FBillNo,'0',72,0,0,@value,@Fdate,@FSupplyID,Null,@FFManagerID,@FDeptID,@FEmpID,@FBillerID,@FCurrencyID,12510,1,1,@FPOStyle,0,0,Null,Null,Null,Null,Null,Null,71,@FFetchAdd,@FExplanation,20302,0,36680,0,CONVERT(varchar(128),GETDATE(),20)
 
 declare @FEntryID varchar(20),       --新的明细序号
         @FSourceEntryID varchar(20), --下推单据的明细id
@@ -96,7 +96,8 @@ declare @FEntryID varchar(20),       --新的明细序号
         @FSecQty decimal(28,10),   --辅助单位数量
           @FSecUnitID  varchar(50),  
           @FDischarged int,--采购检验方式
-       
+        @FEntrySelfP0377 decimal(28,8),--函税单价 
+        @FEntrySelfP0378  decimal(28,8),
           
         @detailqty int,               --明细参数的个数
         @detailcount int,             --明细每行数据的长度 
@@ -140,9 +141,11 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FSourceInterId=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+8) --下推的明FInterID
 	set @FBatchNo=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)
 	select @FExchangeRate=isnull(FExchangeRate,1),@FSourceBillNo=FBillNo,@FPOStyle=FPOStyle from POOrder where FInterID=@FSourceInterId --下推的单据编号
-		set @Fauxprice = @Fauxprice * @FExchangeRate 
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FRateOrder = ISNULL(FCess,0)  from POOrderEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
-	 
+		
+	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FRateOrder = ISNULL(FCess,0),@Fauxprice=FAuxTaxPrice  from POOrderEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	 set @Fauxprice = @Fauxprice * @FExchangeRate 
+	 set @FEntrySelfP0377 = @Fauxprice
+	 set @FEntrySelfP0378=@FEntrySelfP0377*@Fauxqty
 	select @FCoefficient=FCoefficient from t_MeasureUnit where FMeasureUnitID=@FUnitID --单位换算率
 	set @FQtyMust=@FAuxQtyMust*@FCoefficient --基本单位可验收的数量 
 	select @FPlanPrice=isnull(FPlanPrice,0)*@FExchangeRate from t_ICItem where   FItemID=@FItemID 
@@ -170,14 +173,15 @@ declare @FEntryID varchar(20),       --新的明细序号
   FContractInterID,FContractEntryID,FOrderBillNo,FOrderInterID,FOrderEntryID,FPlanMode,FMTONo,FOrderType,FAuxQtyPass,FQtyPass,FSecQtyPass,FAuxConPassQty,
   FConPassQty,FSecConPassQty,FAuxNotPassQty,FNotPassQty,FSecNotPassQty,FAuxSampleBreakQty,FSampleBreakQty,FSecSampleBreakQty,FScrapQty,FAuxScrapQty,
   FSecScrapQty,FAuxRelateQty,FRelateQty,FSecRelateQty,FAuxQCheckQty,FQCheckQty,FSecQCheckQty,FAuxBackQty,FBackQty,FSecBackQty,FScrapInCommitQty,
-  FAuxScrapInCommitQty,FSecScrapInCommitQty,FDeliveryNoticeFID,FDeliveryNoticeEntryID,FTime,FSamBillNo,FSamInterID,FSamEntryID)  
-  SELECT @FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQty,@FUnitID,@Fauxqty,@FSecCoefficient,@FSecQty,1059,@FDischarged,@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,
-  @FSourceBillNo,71,@FSourceInterId,@FSourceEntryID,'',0,0,@FSourceBillNo,@FSourceInterId,@FSourceEntryID,14036,'',71,@FAuxQty,@FQty,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0,0 
+  FAuxScrapInCommitQty,FSecScrapInCommitQty,FDeliveryNoticeFID,FDeliveryNoticeEntryID,FTime,FSamBillNo,FSamInterID,FSamEntryID, FEntrySelfP0377,FEntrySelfP0378)  
+  SELECT @FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQty,@FUnitID,@Fauxqty,@FSecCoefficient,@FSecQty,1059,353,@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,
+  @FSourceBillNo,71,@FSourceInterId,@FSourceEntryID,'',0,0,@FSourceBillNo,@FSourceInterId,@FSourceEntryID,14036,'',71,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0,0 , @FEntrySelfP0377,@FEntrySelfP0378
 end
 set @detailqty=@detailqty+1
 end
 EXEC p_UpdateBillRelateData 72,@FInterID,'POInstock','POInstockEntry' 
-	update POInStock set  FPOStyle=@FPOStyle where FInterID =@FInterID
+select @FDeptID=FDeptID,@FEmpID =FEmpID   from Poorder where FInterID = @FSourceInterId
+	update POInStock set  FPOStyle=@FPOStyle,FDeptID=@FDeptID,FEmpID =@FEmpID where FInterID =@FInterID
 	
  UPDATE pn SET FCommitQty=ISNULL(pn.FCommitQty,0)+ISNULL(t.FQty,0),FAuxCommitQty=ISNULL(pn.FAuxCommitQty,0)+ISNULL(t.FQty,0)/ISNULL(m.FCoefficient,1)
 ,FSecCommitQty=ISNULL(pn.FSecCommitQty,0)+t.FSecQty
@@ -307,7 +311,90 @@ INNER JOIN POOrderEntry u1 ON u0.FRelTranType=71 AND u0.FRelInterID=u1.FInterID 
 WHERE exists(select 1 from  #tmpPMCIndex where FIndex=u0.FIndex)
 DROP TABLE #tmpPMCIndex
 
+--审核
+SET NOCOUNT ON
+CREATE TABLE #TempBill
+(FID INT IDENTITY (1,1),FBrNo VARCHAR(10) NOT NULL DEFAULT(''),
+ FInterID INT NOT NULL DEFAULT(0),
+ FEntryID INT NOT NULL DEFAULT(0),
+ FTranType INT NOT NULL DEFAULT(0),
+ FItemID INT NOT NULL DEFAULT(0),
+ FBatchNo NVARCHAR(255) NOT NULL DEFAULT(''),
+ FMTONo NVARCHAR(255) NOT NULL DEFAULT(''),
+ FAuxPropID INT NOT NULL DEFAULT(0),
+ FStockID INT NOT NULL DEFAULT(0),
+ FStockPlaceID INT NOT NULL DEFAULT(0),
+ FKFPeriod INT NOT NULL DEFAULT(0),
+ FKFDate VARCHAR(20) NOT NULL DEFAULT(''),
+ FSupplyID INT NOT NULL DEFAULT(0),
+ FQty DECIMAL(28,10) NOT NULL DEFAULT(0),
+ FSecQty DECIMAL(28,10) NOT NULL DEFAULT(0),
+ FAmount DECIMAL(28,2)  NOT NULL DEFAULT(0) 
+)
+
+INSERT INTO #TempBill(FBrNo,FInterID,FEntryID,FTranType,FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate,FQty,FSecQty)
+SELECT '',u1.FInterID,u1.FEntryID,72 AS FTranType,u1.FItemID,ISNULL(u1.FBatchNo,'') AS FBatchNo,ISNULL(u1.FMTONo,'') AS FMTONo,
+       u1.FAuxPropID,ISNULL(u1.FStockID,0) AS FStockID,ISNULL(u1.FDCSPID,0) AS FDCSPID,ISNULL(u1.FKFPeriod,0) AS FKFPeriod,
+       LEFT(ISNULL(CONVERT(VARCHAR(20),u1.FKFdate ,120),''),10) AS FKFDate,
+1*u1.FQty AS FQty,1*u1.FSecQty AS FSecQty
+FROM POInstockEntry u1 INNER JOIN t_Stock t1 ON u1.FStockID=t1.FItemID
+WHERE u1.FInterID=@FInterID AND t1.FTypeID IN (501,503)
+ order by  u1.FEntryID
  
+SELECT * INTO #TempBill2 FROM #TempBill 
+UPDATE t1
+SET t1.FQty=t1.FQty+(u1.FQty),
+t1.FSecQty=t1.FSecQty+(u1.FSecQty)
+FROM POInventory t1 INNER JOIN
+(SELECT FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate
+        ,SUM(FQty) AS FQty,SUM(FSecQty) AS FSecQty
+ FROM #TempBill2 
+ GROUP BY FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate
+) u1
+ON t1.FItemID=u1.FItemID AND t1.FBatchNo=u1.FBatchNo AND t1.FMTONo=u1.FMTONo AND t1.FAuxPropID=u1.FAuxPropID
+   AND t1.FStockID=u1.FStockID AND t1.FStockPlaceID=u1.FStockPlaceID 
+   AND t1.FKFPeriod=u1.FKFPeriod AND t1.FKFDate=u1.FKFDate
+
+DELETE u1
+FROM POInventory t1 INNER JOIN #TempBill2 u1
+ON t1.FItemID=u1.FItemID AND t1.FBatchNo=u1.FBatchNo AND t1.FMTONo=u1.FMTONo AND t1.FAuxPropID=u1.FAuxPropID
+   AND t1.FStockID=u1.FStockID AND t1.FStockPlaceID=u1.FStockPlaceID 
+   AND t1.FKFPeriod=u1.FKFPeriod AND t1.FKFDate=u1.FKFDate
+
+INSERT INTO POInventory(FBrNo,FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate,FQty,FSecQty)
+SELECT '',FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate,
+       SUM(FQty) AS FQty,SUM(FSecQty) AS FSecQty
+FROM #TempBill2
+GROUP BY FItemID,FBatchNo,FMTONo,FAuxPropID,FStockID,FStockPlaceID,FKFPeriod,FKFDate
+
+UPDATE t1
+SET t1.FStockTypeID = t2.FTypeID
+FROM POInventory t1 INNER JOIN
+t_Stock t2 ON t1.FStockID = t2.FItemID
+INNER JOIN #TempBill2 t3 
+ON t1.FStockID = t3.FStockID 
+AND t1.FItemID = t3.FItemID 
+AND t1.FBatchNo = t3.FBatchNo 
+AND t1.FMTONo = t3.FMTONo 
+AND t1.FAuxPropID = t3.FAuxPropID 
+AND t1.FStockPlaceID = t3.FStockPlaceID 
+AND t1.FKFPeriod = t3.FKFPeriod 
+AND t1.FKFDate = t3.FKFDate 
+DROP TABLE #TempBill2
+DROP TABLE #TempBill
+
+Update POInstock Set FCheckerID=@FBillerID,FStatus=1,FCheckDate=@Fdate WHERE FInterID=@FInterID
+UPDATE t1 SET t1.FReceiveQty=t1.FReceiveQty+t2.FQty,t1.FReceiveAuxQty= (t1.FReceiveQty+t2.FQty)/M1.FCoefficient
+FROM ICSampleReqEntry t1 INNER JOIN t_MeasureUnit M1 ON T1.FUNITID=M1.FMEASUREUNITID 
+INNER Join POInstockEntry t2 ON t1.FID=t2.FSamInterID AND t1.FEntryID=t2.FSamEntryID 
+WHERE t2.FInterID=@FInterID
+UPDATE t1 SET t1.FSendQty=t1.FSendQty+t2.FQty,t1.FSendAuxQty= (t1.FSendQty+t2.FQty)/M1.FCoefficient
+FROM ICSampleReqEntry t1 INNER JOIN t_MeasureUnit M1 ON T1.FUNITID=M1.FMEASUREUNITID 
+INNER Join (select FSourceInterId,FSourceEntryID,FQty from POInstockEntry where FInterID = @FInterID and FSourceTranType=1007304 ) t2 ON t1.FID=t2.FSourceInterId AND t1.FEntryID=t2.FSourceEntryID 
+--
+
+select t1.FBillNo as 单据编号,t5.FName as 供应商,t4.FName as 报检人,t3.FNumber as 物料代码,t3.FName as 物料名称,t3.FModel as 规格型号,convert(float,SUM( t2.FAuxQty)) as 报检数量 from  POInstock t1 left join POInstockEntry t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t2.FItemID = t3.FItemID left join t_user t4 on t1.FBillerID=t4.FUserID left join t_Supplier t5 on t1.FSupplyID = t5.FItemID where t1.FInterID=@FInterID  group by t1.FBillNo,t5.FName,t4.FName,t3.FNumber,t3.FName,t3.FModel,t1.FInterID
+ --select t1.FBillNo as 单据编号,t4.FName as 报检人,t3.FNumber as 物料代码,t3.FName as 物料名称,t3.FName as 规格型号,convert(float, t2.FAuxQty) as 报检数量 from  POInstock t1 left join POInstockEntry t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t2.FItemID = t3.FItemID left join t_user t4 on t1.FBillerID=t4.FUserID  where t2.FInterID =@FInterID
 
 commit tran 
 return;

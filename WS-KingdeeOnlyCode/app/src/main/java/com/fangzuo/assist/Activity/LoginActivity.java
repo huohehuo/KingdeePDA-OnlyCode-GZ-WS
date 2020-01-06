@@ -343,6 +343,8 @@ public class LoginActivity extends BaseActivity implements EasyPermissions.Permi
     private void getPermisssion() {
         String[] perm = {
                 Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if (!EasyPermissions.hasPermissions(mContext, perm)) {
             EasyPermissions.requestPermissions(this, "必要的权限", 0, perm);

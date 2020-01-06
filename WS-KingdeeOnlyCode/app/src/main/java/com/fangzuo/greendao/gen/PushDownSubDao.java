@@ -48,6 +48,7 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
         public final static Property FSCSPID = new Property(21, String.class, "FSCSPID", false, "FSCSPID");
         public final static Property FStorageIn = new Property(22, String.class, "FStorageIn", false, "FSTORAGE_IN");
         public final static Property FStorageOut = new Property(23, String.class, "FStorageOut", false, "FSTORAGE_OUT");
+        public final static Property Tag = new Property(24, int.class, "tag", false, "TAG");
     }
 
 
@@ -86,7 +87,8 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
                 "\"FSCSTOCK_ID\" TEXT," + // 20: FSCStockID
                 "\"FSCSPID\" TEXT," + // 21: FSCSPID
                 "\"FSTORAGE_IN\" TEXT," + // 22: FStorageIn
-                "\"FSTORAGE_OUT\" TEXT);"); // 23: FStorageOut
+                "\"FSTORAGE_OUT\" TEXT," + // 23: FStorageOut
+                "\"TAG\" INTEGER NOT NULL );"); // 24: tag
     }
 
     /** Drops the underlying database table. */
@@ -218,6 +220,7 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
         if (FStorageOut != null) {
             stmt.bindString(24, FStorageOut);
         }
+        stmt.bindLong(25, entity.getTag());
     }
 
     @Override
@@ -343,6 +346,7 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
         if (FStorageOut != null) {
             stmt.bindString(24, FStorageOut);
         }
+        stmt.bindLong(25, entity.getTag());
     }
 
     @Override
@@ -376,7 +380,8 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // FSCStockID
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // FSCSPID
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // FStorageIn
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23) // FStorageOut
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // FStorageOut
+            cursor.getInt(offset + 24) // tag
         );
         return entity;
     }
@@ -407,6 +412,7 @@ public class PushDownSubDao extends AbstractDao<PushDownSub, Long> {
         entity.setFSCSPID(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setFStorageIn(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setFStorageOut(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setTag(cursor.getInt(offset + 24));
      }
     
     @Override

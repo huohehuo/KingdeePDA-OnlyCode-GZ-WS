@@ -6,16 +6,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
 import com.fangzuo.assist.Activity.Crash.App;
+import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.BasicShareUtil;
 import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.Toast;
+import com.fangzuo.assist.widget.LoadingUtil;
 import com.orhanobut.hawk.Hawk;
 
 import butterknife.BindView;
@@ -33,6 +37,8 @@ public class IpPortActivity extends BaseActivity {
     Button btnSave;
     @BindView(R.id.sp_pda)
     Spinner spPda;
+    @BindView(R.id.iv_check)
+    ImageView ivCheck;
     @BindView(R.id.btn_back)
     RelativeLayout btnBack;
     @BindView(R.id.tv_title)
@@ -72,19 +78,19 @@ public class IpPortActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-//        btnSave.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                if ("1".equals(Hawk.get(Config.PDA_Project_Type,"1"))){
-//                    Hawk.put(Config.PDA_Project_Type,"2");
-//                    Toast.showText(mContext,"已切换到供应商端");
-//                }else{
-//                    Hawk.put(Config.PDA_Project_Type,"1");
-//                    Toast.showText(mContext,"已切换到客户端");
-//                }
-//                return true;
-//            }
-//        });
+        btnSave.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if ("1".equals(Hawk.get(Config.PDA_Project_Type,"1"))){
+                    Hawk.put(Config.PDA_Project_Type,"2");
+                    Toast.showText(mContext,"已切换到供应商端");
+                }else{
+                    Hawk.put(Config.PDA_Project_Type,"1");
+                    Toast.showText(mContext,"已切换到客户端");
+                }
+                return true;
+            }
+        });
         spPda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -124,7 +130,7 @@ public class IpPortActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.btn_save,R.id.btn_back, R.id.tv_title})
+    @OnClick({R.id.btn_save,R.id.btn_back, R.id.tv_title, R.id.iv_check})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -138,6 +144,29 @@ public class IpPortActivity extends BaseActivity {
                     share.setPort(edPort.getText().toString());
                     finish();
                 }
+                break;
+            case R.id.iv_check:
+                if (!edPort.getText().toString().equals("") && !edIp.getText().toString().equals("")) {
+                    share.setIP(edIp.getText().toString());
+                    share.setPort(edPort.getText().toString());
+//                    finish();
+                }
+                LoadingUtil.showDialog(mContext, "正在检测服务端是否连通...");
+                App.getRService().doIOAction("TestServlet", "检测服务端是否连通", new MySubscribe<CommonResponse>() {
+                    @Override
+                    public void onNext(CommonResponse commonResponse) {
+                        super.onNext(commonResponse);
+                        LoadingUtil.dismiss();
+                        LoadingUtil.showAlter(mContext, "连接成功");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        LoadingUtil.dismiss();
+                        LoadingUtil.showAlter(mContext, "连接失败");
+                    }
+                });
                 break;
         }
     }

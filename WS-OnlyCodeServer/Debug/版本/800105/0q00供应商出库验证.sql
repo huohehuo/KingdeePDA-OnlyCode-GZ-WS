@@ -93,7 +93,7 @@ if not exists(select 1 from #Tmp11111)
 begin
 insert into #Tmp11111(FExplanation)values(@FBillNo)
 end
-select t1.FExplanation as 说明,t1.FBillNo,t1.FItemID,t1.FUnitID,convert(float,FQty) as FQty,t1.FStockID,t1.FStockPlaceID,t1.FBatchNo,t1.FKFPeriod,t1.FKFDate,t1.FPrice as 单价,t2.FNumber as 商品编码,t2.FName as 商品名称 from #Tmp11111 t1 inner join t_ICItem t2 on t1.FItemID = t2.FItemID
+select  t6.FName as 所属仓库,t_2043.FName as 产品系列,t1.FExplanation as 说明,t1.FBillNo,t1.FItemID,t1.FUnitID,convert(float,FQty) as FQty,t1.FStockID,t1.FStockPlaceID,t1.FBatchNo,t1.FKFPeriod,t1.FKFDate,t1.FPrice as 单价,t2.FNumber as 商品编码,t2.FName as 商品名称 from #Tmp11111 t1 inner join t_ICItem t2 on t1.FItemID = t2.FItemID left join t_Item_2043  t_2043  on t2.F_109=t_2043.FItemID  left join t_Stock t6 on t1.FStockID =t6.FItemID
 drop table #Tmp11111
 commit tran 
 return;

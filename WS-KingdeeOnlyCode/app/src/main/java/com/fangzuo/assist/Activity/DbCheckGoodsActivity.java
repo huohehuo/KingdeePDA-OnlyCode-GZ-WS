@@ -308,13 +308,14 @@ public class DbCheckGoodsActivity extends BaseActivity {
     }
 
     private void getList() {
-        container.clear();
+        container = new ArrayList<>();
         pushDownSubDao = daoSession.getPushDownSubDao();
         pushDownMainDao = daoSession.getPushDownMainDao();
         //根据跳转的数据，查找并添加所有的订单信息
         for (int i = 0; i < fidcontainer.size(); i++) {
             QueryBuilder<PushDownSub> qb = pushDownSubDao.queryBuilder();
             List<PushDownSub> list = qb.where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
                     PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))
             ).build().list();
             container.addAll(list);
@@ -784,6 +785,7 @@ public class DbCheckGoodsActivity extends BaseActivity {
         T_Detail t_detail = new T_Detail();
         t_detail.FBatch = batchNo == null ? "" : batchNo;
         t_detail.FOrderId = ordercode;
+        t_detail.tag = tag;
         t_detail.FBarcode = barcode;
         t_detail.IMIE = BasicShareUtil.getInstance(mContext).getIMIE();
         t_detail.FProductId = product.FItemID;
@@ -990,9 +992,13 @@ public class DbCheckGoodsActivity extends BaseActivity {
                             T_DetailDao.Properties.Activity.eq(activity)
                     ).build().list());
                     pushDownSubDao.deleteInTx(pushDownSubDao.queryBuilder().where(
-                            PushDownSubDao.Properties.FInterID.eq(commonBean.FStandby1)).build().list());
+                            PushDownSubDao.Properties.Tag.eq(tag),
+                            PushDownSubDao.Properties.FInterID.eq(commonBean.FStandby1)
+                    ).build().list());
                     pushDownMainDao.deleteInTx(pushDownMainDao.queryBuilder().where(
-                            PushDownMainDao.Properties.FInterID.eq(commonBean.FStandby1)).build().list());
+                            PushDownMainDao.Properties.Tag.eq(tag),
+                            PushDownMainDao.Properties.FInterID.eq(commonBean.FStandby1)
+                    ).build().list());
                     if (finalI ==backDataList.size()-1){
                         EventBusUtil.sendEvent(new ClassEvent("upload","",errorOrderId));
                     }

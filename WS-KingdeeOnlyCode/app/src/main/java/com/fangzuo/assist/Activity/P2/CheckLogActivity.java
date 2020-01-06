@@ -67,7 +67,8 @@ public class CheckLogActivity extends BaseActivity {
 
     @Override
     protected void OnReceive(String code) {
-
+        edCode.setText(code);
+        lockScan(0);
     }
 
     @OnClick({R.id.btn_back, R.id.search_client, R.id.tv_date_start, R.id.tv_date_end, R.id.btn_check})

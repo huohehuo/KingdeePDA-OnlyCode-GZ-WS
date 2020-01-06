@@ -6,6 +6,7 @@ import com.fangzuo.assist.Beans.BackOrderResult;
 import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.Beans.OrderQuery;
 import com.fangzuo.assist.Beans.OrderQueryResult;
+import com.fangzuo.assist.Beans.PostBean;
 import com.fangzuo.assist.Beans.SendOrderQuery;
 import com.fangzuo.assist.Beans.SendOrderResult;
 
@@ -154,6 +155,9 @@ interface ServiceRequest {
     @FormUrlEncoded
     @POST("{actionio}")
     Observable<CommonResponse> actionIO(@Path("actionio") String io , @FieldMap Map<String, String> params);
+
+    @POST("{actionio}")
+    Observable<CommonResponse> actionIO4Post(@Path("actionio") String io , @Body PostBean params);//以body的形式传递数据到服务器，服务器再解析body数据到指定类
 
 
     @POST("{actionio}")

@@ -69,8 +69,9 @@ declare
     set @FPDAID =dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+7)  --PDA序列号
     set @FOrderID =dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+8)  --单据id
     set @FType =dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)  --单据类型
+ 
     set @detailIndex=@detailIndex+1 
-     if(@FTypeID=0)
+     if(@FTypeID=0 and @FBatchNo<>'')
      begin
          if exists(select 1 from a_DetailsTable where FItemID=@FItemID and FUnitID=@FUnitID and FStockID=@FStockID and FStockPlaceID=@FStockPlaceID and FBatchNo=@FBatchNo and FPDAID=@FPDAID and FOrderID=@FOrderID and FType=@FType)
            update  a_DetailsTable set FQty=FQty+@FQty where FItemID=@FItemID and FUnitID=@FUnitID and FStockID=@FStockID and FStockPlaceID=@FStockPlaceID and FBatchNo=@FBatchNo and FPDAID=@FPDAID and FOrderID=@FOrderID and FType=@FType

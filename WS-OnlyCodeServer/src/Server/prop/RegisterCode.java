@@ -2,6 +2,7 @@ package Server.prop;
 
 import Utils.CommonJson;
 import Utils.JDBCUtil;
+import Utils.Lg;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,6 +24,7 @@ public class RegisterCode extends HttpServlet {
         Connection conn = null;
         PreparedStatement sta = null;
         String paramter = request.getParameter("json");
+        Lg.e("进入注册",paramter);
         if(paramter!=null&&!paramter.equals("")){
             try {
                 conn = JDBCUtil.getSQLiteConn1();

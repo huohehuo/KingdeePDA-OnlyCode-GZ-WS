@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
 import com.fangzuo.assist.Adapter.SearchAdapter;
+import com.fangzuo.assist.Adapter.SearchCheckResultAdapter;
 import com.fangzuo.assist.Adapter.SearchClientAdapter;
 import com.fangzuo.assist.Adapter.SearchDbTypeAdapter;
 import com.fangzuo.assist.Adapter.SearchDepartmentAdapter;
@@ -19,6 +20,7 @@ import com.fangzuo.assist.Adapter.SearchSupplierAdapter;
 import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.Beans.DownloadReturnBean;
 import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
+import com.fangzuo.assist.Dao.CheckResult;
 import com.fangzuo.assist.Dao.Client;
 import com.fangzuo.assist.Dao.DbType;
 import com.fangzuo.assist.Dao.GetGoodsDepartment;
@@ -75,6 +77,7 @@ public class ProductSearchActivity extends BaseActivity {
     private List<Suppliers> suppliersList;
     private List<DbType> dbTypeList;
     private List<Storage> storageList;
+    private List<CheckResult> resultList;
     private List<Client> itemAllClient;
     private List<Client> itemClient;
     private List<GetGoodsDepartment> goodsDepartmentList;
@@ -96,6 +99,7 @@ public class ProductSearchActivity extends BaseActivity {
         if (where == Info.SEARCHCLIENT) title.setText("查询结果(客户)");
         if (where == Info.SEARCHJH) title.setText("查询结果(交货单位)");
         if (where == Info.Search_Storage) title.setText("查询结果(仓库)");
+        if (where == Info.Search_CheckResult) title.setText("查询结果(质检结果)");
     }
 
     @Override
@@ -389,6 +393,50 @@ public class ProductSearchActivity extends BaseActivity {
                 }
 
             }
+        }else if (where == Info.Search_CheckResult) {
+            model.setText("编号");
+            name.setText("名称");
+            if (BasicShareUtil.getInstance(mContext).getIsOL()) {
+                Asynchttp.post(mContext, getBaseUrl() + WebApi.ResultSearchLike, searchString, new Asynchttp.Response() {
+                    @Override
+                    public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
+                        DownloadReturnBean dBean = new Gson().fromJson(cBean.returnJson, DownloadReturnBean.class);
+                        resultList = dBean.checkResults;
+                        if (resultList.size() > 0) {
+                            SearchCheckResultAdapter ada1 = new SearchCheckResultAdapter(mContext, resultList);
+                            lvResult.setAdapter(ada1);
+                            ada1.notifyDataSetChanged();
+                        } else {
+                            Toast.showText(mContext, "无数据");
+                            setResult(-9998, null);
+                            onBackPressed();
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String Msg, AsyncHttpClient client) {
+                        Toast.showText(mContext, Msg);
+                    }
+                });
+            }else{
+//                StorageDao suppliersDao = GreenDaoManager.getmInstance(mContext).getDaoSession().getStorageDao();
+//                List<Storage> list = suppliersDao.queryBuilder().whereOr(
+//                        StorageDao.Properties.FName.like("%" + searchString + "%"),
+//                        StorageDao.Properties.FItemID.like("%" + searchString + "%")
+//                ).orderAsc(StorageDao.Properties.FItemID).limit(50).build().list();
+//                storageList = new ArrayList<>();
+//                storageList.addAll(list);
+//                if (storageList.size() > 0) {
+//                    SearchStorageAdapter ada1 = new SearchStorageAdapter(mContext, storageList);
+//                    lvResult.setAdapter(ada1);
+//                    ada1.notifyDataSetChanged();
+//                } else {
+                    Toast.showText(mContext, "未查询到数据");
+                    setResult(-9998, null);
+                    onBackPressed();
+//                }
+
+            }
         }
 
 
@@ -430,6 +478,9 @@ public class ProductSearchActivity extends BaseActivity {
                     onBackPressed();
                 } else if (where == Info.Search_Storage) {
                     EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.Search_Storage,storageList.get(i)));
+                    onBackPressed();
+                } else if (where == Info.Search_CheckResult) {
+                    EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.Search_CheckResult,resultList.get(i)));
                     onBackPressed();
                 }
 

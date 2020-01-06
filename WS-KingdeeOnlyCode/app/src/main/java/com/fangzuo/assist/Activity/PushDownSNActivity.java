@@ -78,6 +78,7 @@ import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
 import com.fangzuo.assist.widget.SpinnerPeople;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.greendao.gen.BarCodeDao;
 import com.fangzuo.greendao.gen.DaoSession;
@@ -111,7 +112,7 @@ public class PushDownSNActivity extends BaseActivity {
     @BindView(R.id.lv_pushsub)
     ListView lvPushsub;
     @BindView(R.id.sp_storage)
-    Spinner spStorage;
+    SpinnerStorage4Type spStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.productName)
@@ -160,6 +161,8 @@ public class PushDownSNActivity extends BaseActivity {
     SpinnerPeople spSendman;
     @BindView(R.id.tv_kucun)
     TextView tvKucun;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     private DaoSession daosession;
@@ -340,10 +343,12 @@ public class PushDownSNActivity extends BaseActivity {
                 ).build().list());
                 for (int i = 0; i < fidc.size(); i++) {
                     List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
+                            PushDownSubDao.Properties.Tag.eq(tag),
                             PushDownSubDao.Properties.FInterID.eq(fidc.get(i))
                     ).build().list();
                     pushDownSubDao.deleteInTx(pushDownSubs);
                     List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(
+                            PushDownMainDao.Properties.Tag.eq(tag),
                             PushDownMainDao.Properties.FInterID.eq(fidc.get(i))
                     ).build().list();
                     pushDownMainDao.deleteInTx(pushDownMains);
@@ -523,7 +528,9 @@ public class PushDownSNActivity extends BaseActivity {
         container = new ArrayList<>();
         fidcontainer = getIntent().getExtras().getStringArrayList("fid");
         getList();
-        List<PushDownMain> list1 = pushDownMainDao.queryBuilder().where(PushDownMainDao.Properties.FInterID.eq(fidcontainer.get(0))).build().list();
+        List<PushDownMain> list1 = pushDownMainDao.queryBuilder().where(
+                PushDownMainDao.Properties.FInterID.eq(fidcontainer.get(0))
+        ).build().list();
         if (list1.size() > 0) {
             fwanglaiUnit = list1.get(0).FSupplyID;
             employeeId = list1.get(0).FEmpID;
@@ -539,18 +546,23 @@ public class PushDownSNActivity extends BaseActivity {
     }
 
     private void getList() {
-        container.clear();
+        Lg.e("container",container);
+        container = new ArrayList<>();
         pushDownSubDao = daosession.getPushDownSubDao();
         pushDownMainDao = daosession.getPushDownMainDao();
         for (int i = 0; i < fidcontainer.size(); i++) {
             QueryBuilder<PushDownSub> qb = pushDownSubDao.queryBuilder();
-            list = qb.where(PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
+            List<PushDownSub> list = qb.where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
+                    PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))
+            ).build().list();
             container.addAll(list);
         }
         if (container.size() > 0) {
             pushDownSubListAdapter = new PushDownSubListAdapter(mContext, container);
             lvPushsub.setAdapter(pushDownSubListAdapter);
             pushDownSubListAdapter.notifyDataSetChanged();
+            tvTitle.setText("发货通知下推"+"("+container.size()+")");
         } else {
             Toast.showText(mContext, "未查询到数据");
         }
@@ -704,7 +716,7 @@ public class PushDownSNActivity extends BaseActivity {
         spStorage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                storage = (Storage) storageSpinner.getItem(i);
+                storage = (Storage) spStorage.getAdapter().getItem(i);
                 Lg.e("仓库",storage);
                 if ("1".equals(storage.FUnderStock)) {
                     checkStorage = true;
@@ -844,12 +856,13 @@ public class PushDownSNActivity extends BaseActivity {
             if (null == codeCheckBackDataBean)return;
             wavehouseAutoString=codeCheckBackDataBean==null?"":codeCheckBackDataBean.FStockPlaceID;
             if (cbIsStorage.isChecked()) {
-                for (int j = 0; j < storageSpinner.getCount(); j++) {
-                    if (((Storage)storageSpinner.getItem(j)).FItemID.equals(codeCheckBackDataBean.FStockID)) {
-                        spStorage.setSelection(j);
-                        break;
-                    }
-                }
+                spStorage.setAutoSelection("",codeCheckBackDataBean.FStockID);
+//                for (int j = 0; j < storageSpinner.getCount(); j++) {
+//                    if (((Storage)storageSpinner.getItem(j)).FItemID.equals(codeCheckBackDataBean.FStockID)) {
+//                        spStorage.setSelection(j);
+//                        break;
+//                    }
+//                }
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -861,12 +874,13 @@ public class PushDownSNActivity extends BaseActivity {
         }else{
             wavehouseAutoString =pushDownSub.FDCStockID;
             if (cbIsStorage.isChecked()) {
-                for (int j = 0; j < storageSpinner.getCount(); j++) {
-                    if (((Storage)storageSpinner.getItem(j)).FItemID.equals(pushDownSub.FDCStockID)) {
-                        spStorage.setSelection(j);
-                        break;
-                    }
-                }
+                spStorage.setAutoSelection("",pushDownSub.FDCStockID);
+//                for (int j = 0; j < storageSpinner.getCount(); j++) {
+//                    if (((Storage)storageSpinner.getItem(j)).FItemID.equals(pushDownSub.FDCStockID)) {
+//                        spStorage.setSelection(j);
+//                        break;
+//                    }
+//                }
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -956,7 +970,7 @@ public class PushDownSNActivity extends BaseActivity {
     }
 
     private void LoadBasicData() {
-        storageSpinner = method.getStorageSpinner(spStorage);
+        spStorage.setAutoSelection("","");
         tvDate.setText(getTime(true));
         tvDatePay.setText(getTime(true));
         slaesRange = method.getPurchaseRange(spSaleScope);
@@ -1248,6 +1262,7 @@ public class PushDownSNActivity extends BaseActivity {
         t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(ordercode)).build().list());
                     String second = getTimesecond();
                     T_main t_main = new T_main();
+        t_main.tag = tag;
         t_main.FIndex = second;
         t_main.MakerId = share.getsetUserID();
         t_main.DataInput = tvDate.getText().toString();
@@ -1286,6 +1301,7 @@ public class PushDownSNActivity extends BaseActivity {
                     long insert1 = t_mainDao.insert(t_main);
 
                     T_Detail t_detail = new T_Detail();
+        t_detail.tag = tag;
         t_detail.FIndex = second;
         t_detail.FBarcode = barcode;
         t_detail.MakerId = share.getsetUserID();

@@ -3,6 +3,7 @@ package Server.Check;
 import Bean.PurchaseInStoreUploadBean;
 import Utils.CommonJson;
 import Utils.JDBCUtil;
+import Utils.Lg;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -41,6 +42,7 @@ public class InsertForInOutY extends HttpServlet {
 		Connection conn = null;
 		PreparedStatement sta = null;
 		boolean execute = true;
+		Lg.e("写入临时表InsertForInOutY",parameter);
 		if(parameter!=null&&!parameter.equals("")){
 			try {
 				System.out.println(parameter);

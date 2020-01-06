@@ -26,7 +26,7 @@ declare @FInterID varchar(20),     --单号id
         @FSupplyID varchar(20),   --购货单位id
         @FCurrencyID nvarchar(20),--币别id 
         @FCheckDate varchar(50),  --审核日期 
-        @FFManagerID varchar(20), --验收
+        @FFManagerID varchar(20), --领料
         @FSManagerID varchar(20), --保管
         @FManagerID varchar(20),  --主管id
         @FDeptID varchar(20),     --部门id
@@ -292,7 +292,7 @@ EXEC p_UpdateBillRelateData 29,@FInterID,'ICStockBill','ICStockBillEntry'
  end
  if(CONVERT(int, @FSManagerID)>0)
  begin
- update ICStockBill set FSManagerID=@FSManagerID,FFManagerID=@FSManagerID where FInterID=@FInterID
+ update ICStockBill set FSManagerID=@FSManagerID  where FInterID=@FInterID
  end
 if exists(select 1 from t_PDABarCodeType where FType=1)
 begin

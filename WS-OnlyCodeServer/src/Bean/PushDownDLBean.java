@@ -35,6 +35,7 @@ public class PushDownDLBean {
         public String FKFDate;
         public String FEntrySelfS0168;
         public String FProductType;
+        public int tag;
 
         @Override
         public String toString() {

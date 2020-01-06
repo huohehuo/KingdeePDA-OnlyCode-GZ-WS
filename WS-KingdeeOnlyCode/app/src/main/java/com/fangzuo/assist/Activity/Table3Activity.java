@@ -15,20 +15,29 @@ import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
 import com.fangzuo.assist.Activity.Crash.App;
+import com.fangzuo.assist.Adapter.PrintHistoryAdapter;
+import com.fangzuo.assist.Adapter.ProductselectAdapter1;
 import com.fangzuo.assist.Adapter.TableAdapter4;
 import com.fangzuo.assist.Beans.CommonResponse;
+import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
 import com.fangzuo.assist.Beans.PurchaseInStoreUploadBean;
+import com.fangzuo.assist.Dao.PrintHistory;
 import com.fangzuo.assist.Dao.PushDownSub;
 import com.fangzuo.assist.Dao.T_Detail;
 import com.fangzuo.assist.Dao.T_main;
 import com.fangzuo.assist.Dao.Unit;
 import com.fangzuo.assist.R;
 import com.fangzuo.assist.RxSerivce.MySubscribe;
+import com.fangzuo.assist.Utils.CommonUtil;
+import com.fangzuo.assist.Utils.Config;
+import com.fangzuo.assist.Utils.EventBusInfoCode;
+import com.fangzuo.assist.Utils.EventBusUtil;
 import com.fangzuo.assist.Utils.GreenDaoManager;
 import com.fangzuo.assist.Utils.Lg;
 import com.fangzuo.assist.Utils.Toast;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.greendao.gen.DaoSession;
+import com.fangzuo.greendao.gen.PrintHistoryDao;
 import com.fangzuo.greendao.gen.PushDownSubDao;
 import com.fangzuo.greendao.gen.T_DetailDao;
 import com.fangzuo.greendao.gen.T_mainDao;
@@ -68,6 +77,28 @@ public class Table3Activity extends BaseActivity implements TableAdapter4.InnerC
     private TableAdapter4 tableAdapter;
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveEvent(ClassEvent event) {
+        switch (event.Msg) {
+
+            case EventBusInfoCode.Print_Out://打印
+                List<PrintHistory> data = (List<PrintHistory>) event.postEvent;
+                try {
+                    CommonUtil.doPrint(mContext,data,"1");
+                } catch (Exception e) {
+//                    e.printStackTrace();
+                    LoadingUtil.showAlter(mContext,"打印错误","请检查打印机");
+
+                }
+                break;
+        }
+    }
+
+    @Override
     protected void initView() {
         setContentView(R.layout.activity_table3);
         ButterKnife.bind(this);
@@ -84,6 +115,7 @@ public class Table3Activity extends BaseActivity implements TableAdapter4.InnerC
         //获得跳转信息
         activity = extras.getInt("activity");
         Log.e(TAG, "获得跳转信息activity" + activity);
+
         initList();
 
     }
@@ -249,6 +281,7 @@ public class Table3Activity extends BaseActivity implements TableAdapter4.InnerC
                                 for (T_Detail t_detail:t_detailList) {
                                     PushDownSubDao pushDownSubDao = daoSession.getPushDownSubDao();
                                     List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
+                                            PushDownSubDao.Properties.Tag.eq(t_detail.tag),
                                             PushDownSubDao.Properties.FInterID.eq(t_detail.FInterID),
                                             PushDownSubDao.Properties.FItemID.eq(t_detail.FProductId),
                                             PushDownSubDao.Properties.FEntryID.eq(t_detail.FEntryID)

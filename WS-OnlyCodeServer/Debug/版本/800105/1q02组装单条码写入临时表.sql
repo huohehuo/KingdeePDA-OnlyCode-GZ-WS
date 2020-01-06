@@ -44,8 +44,11 @@ declare @FInterID varchar(20),     --µ¥ºÅid
     FBillNo   varchar(255),--ËµÃ÷ 
 )
 set @FBillNo='OK'
+      if not exists(select 1 from a_DetailsTable where FBarCode=@FBarCode)
+       begin
  	insert into a_DetailsTable(FPDAID,FOrderID,FBarCode,FItemID,FStockID,FStockPlaceID, FBatchNo,  FKFPeriod,  FKFDate,  FQty,FUnitID)
     values(@FPDAID,@FOrderID,@FBarCode,@FItemID,@FStockID,@FStockPlaceID, @FBatchNo,  0,  '',  1,@FUnitID) 
+       end
 if not exists(select 1 from #Tmp11111)
 begin
 insert into #Tmp11111(FBillNo)values(@FBillNo)

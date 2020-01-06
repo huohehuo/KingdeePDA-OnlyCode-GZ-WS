@@ -51,6 +51,7 @@ import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.EventBusUtil;
 import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
+import com.fangzuo.assist.Utils.LocDataUtil;
 import com.fangzuo.assist.Utils.MD5;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
@@ -519,6 +520,11 @@ public class GyYhRedActivity extends BaseActivity {
 //                }
 //            });
 //        }else{
+        if (LocDataUtil.checkHasBarcode(mContext,barcodeStr)){
+            Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
+            lockScan(0);
+            return;
+        }
             //添加进临时表
             DataModel.InsertForInOutY(WebApi.InsertForOnlyCodeOutRed, gson.toJson(new CheckInOutBean("",
                     ordercode + "", barcodeStr, edNum.getText().toString(), default_storageID, default_waveHouseID,

@@ -149,7 +149,7 @@
                     >
 
 
-                    <com.fangzuo.assist.widget.SpinnerStorage
+                    <com.fangzuo.assist.widget.SpinnerStorage4Type
                         android:id="@+id/sp_which_storage"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

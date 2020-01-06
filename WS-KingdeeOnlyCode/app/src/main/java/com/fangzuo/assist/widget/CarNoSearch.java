@@ -61,6 +61,7 @@ public class CarNoSearch extends RelativeLayout {
         button = (Button) findViewById(R.id.btn_search);
         textView = (TextView) findViewById(R.id.tv_name);
         recyclerView = findViewById(R.id.ry_search);
+
         recyclerView.setAdapter(adapter = new CarNoScAdapter(context));
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         employeeDao = daoSession.getEmployeeDao();

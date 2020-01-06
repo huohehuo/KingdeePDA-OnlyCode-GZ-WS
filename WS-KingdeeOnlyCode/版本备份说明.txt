@@ -1,11 +1,11 @@
-版本号：1.80
+﻿版本号：1.885/1.4
 
 versionCode:3
 versionName:1.0
 
-GreenDao version:15
+GreenDao version:21
 
 
 
 
-备注：准备添加：电商出库字段：1.发货单号 2.平台单号 3.客户(店铺)
+备注：收料通知单下推来料检验单添加字段前备份

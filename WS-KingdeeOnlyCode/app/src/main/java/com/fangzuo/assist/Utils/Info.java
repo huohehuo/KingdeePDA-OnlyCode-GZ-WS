@@ -10,7 +10,7 @@ public class Info {
 
     public static String getAppNo(){
         if ("1".equals(Hawk.get(Config.PDA_Project_Type,"1"))){
-            return "1.885";
+            return "1.899";
         }else{
             return "1.4";
         }
@@ -33,6 +33,7 @@ public class Info {
     public static final int SEARCHJH = 7770;
     public static final int Search_DbType = 7769;
     public static final int Search_Man = 7771;
+    public static final int Search_CheckResult = 7772;
 
     public static final String AutoLoginName="AutoLoginName";
     public static final String AutoLoginPw="AutoLoginPw";

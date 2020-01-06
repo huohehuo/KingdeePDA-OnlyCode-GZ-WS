@@ -49,6 +49,7 @@ import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.EventBusUtil;
 import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
+import com.fangzuo.assist.Utils.LocDataUtil;
 import com.fangzuo.assist.Utils.MD5;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
@@ -527,7 +528,11 @@ public class GyYhActivity extends BaseActivity {
             lockScan(0);
             return;
         }
-
+        if (LocDataUtil.checkHasBarcode(mContext,barcodeStr)){
+            Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
+            lockScan(0);
+            return;
+        }
         if (Hawk.get(Info.FirstInOut,"0").equals("1")){
             CheckInOutBean bean = new CheckInOutBean(barcodeStr);
             App.getRService().doIOAction(WebApi.CheckFirstInOut,gson.toJson(bean), new MySubscribe<CommonResponse>() {

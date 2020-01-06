@@ -64,6 +64,7 @@ import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.GreenDaoManager;
 import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
+import com.fangzuo.assist.Utils.LocDataUtil;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
 import com.fangzuo.assist.Utils.ShareUtil;
@@ -75,6 +76,7 @@ import com.fangzuo.assist.widget.SpinnerGProduct;
 import com.fangzuo.assist.widget.SpinnerPeople;
 import com.fangzuo.assist.widget.SpinnerPeople2;
 import com.fangzuo.assist.widget.SpinnerStorage;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.assist.zxing.activity.CaptureActivity;
 import com.fangzuo.greendao.gen.BarCodeDao;
@@ -107,7 +109,7 @@ public class OtherOutStoreActivity extends BaseActivity {
     @BindView(R.id.search_supplier)
     RelativeLayout searchSupplier;
     @BindView(R.id.sp_which_storage)
-    SpinnerStorage spWhichStorage;
+    SpinnerStorage4Type spWhichStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.scanbyCamera)
@@ -978,6 +980,13 @@ public class OtherOutStoreActivity extends BaseActivity {
             lockScan(0);
             return;
         }
+        if ("".equals(edZhaiyao.getText().toString())){
+            Toast.showText(mContext, "请输入用途");
+            MediaPlayer.getInstance(mContext).error();
+            lockScan(0);
+            return;
+        }
+
         if (edEmployee.getText().toString().equals("")){
             employeePerson = null;
         }
@@ -1035,6 +1044,11 @@ public class OtherOutStoreActivity extends BaseActivity {
         if (Double.parseDouble(codeCheckBackDataBean.FQty)<Double.parseDouble(edNum.getText().toString())){
             Toast.showText(mContext, "修改的数量不能大于扫码数量");
             MediaPlayer.getInstance(mContext).error();
+            lockScan(0);
+            return;
+        }
+        if (LocDataUtil.checkHasBarcode(mContext,barcode)){
+            Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
             lockScan(0);
             return;
         }

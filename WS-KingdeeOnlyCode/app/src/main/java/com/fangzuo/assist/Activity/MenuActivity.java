@@ -121,8 +121,6 @@ public class MenuActivity extends BaseActivity {
     public void initView() {
         setContentView(R.layout.activity_menu);
         mContext = this;
-        BasicShareUtil share = BasicShareUtil.getInstance(mContext);
-        DaoSession session = GreenDaoManager.getmInstance(mContext).getDaoSession();
         ButterKnife.bind(mContext);
         initFragments();
         Welcome();
@@ -186,12 +184,12 @@ public class MenuActivity extends BaseActivity {
                         ivSale.setImageResource(R.mipmap.sale);
                         tvSale.setTextColor(tvcolor);
                         break;
-//                    case 2:
-//                        resetBottomView();
-//                        ivStorage.setImageResource(R.mipmap.storage);
-//                        tvStorage.setTextColor(tvcolor);
-//                        break;
                     case 2:
+                        resetBottomView();
+                        ivStorage.setImageResource(R.mipmap.storage);
+                        tvStorage.setTextColor(tvcolor);
+                        break;
+                    case 3:
                         resetBottomView();
                         ivSetting.setImageResource(R.mipmap.setting_focus);
                         tvSetting.setTextColor(tvcolor);
@@ -219,12 +217,12 @@ public class MenuActivity extends BaseActivity {
         FragmentManager fm = getSupportFragmentManager();
         PurchaseFragment purchaseFragment = new PurchaseFragment();
         SaleFragment saleFragment = new SaleFragment();
-//        StorageFragment storageFragment = new StorageFragment();
+        StorageFragment storageFragment = new StorageFragment();
         SettingFragment settingFragment = new SettingFragment();
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(purchaseFragment);
         fragments.add(saleFragment);
-//        fragments.add(storageFragment);
+        fragments.add(storageFragment);
         fragments.add(settingFragment);
         MenuFragmentAdapter menuFragmentAdapter = new MenuFragmentAdapter(fm, fragments);
         viewPager.setAdapter(menuFragmentAdapter);
@@ -262,7 +260,7 @@ public class MenuActivity extends BaseActivity {
 
     @OnClick(R.id.bottom_btn_setting)
     public void onBottomBtnSettingClicked() {
-        viewPager.setCurrentItem(2, true);
+        viewPager.setCurrentItem(3, true);
         resetBottomView();
         ivSetting.setImageResource(R.mipmap.setting_focus);
         tvSetting.setTextColor(tvcolor);

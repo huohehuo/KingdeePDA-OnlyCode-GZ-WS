@@ -1083,6 +1083,13 @@ public class OtherInStoreActivity extends BaseActivity {
             Toast.showText(mContext, "请输入批次号");
             lockScan(0);
         } else {
+
+            if (LocDataUtil.checkHasBarcode(mContext,barcode)){
+                Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
+                lockScan(0);
+                return;
+            }
+
             //插入条码唯一临时表
             CodeCheckBean bean = new CodeCheckBean(barcode, ordercode + "", storageId == null ? "" : storageId, wavehouseID == null ? "0" : wavehouseID, BasicShareUtil.getInstance(mContext).getIMIE());
             DataModel.codeInsertForIn(gson.toJson(bean));

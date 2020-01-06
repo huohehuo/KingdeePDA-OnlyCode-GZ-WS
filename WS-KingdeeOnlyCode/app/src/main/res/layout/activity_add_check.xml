@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="com.fangzuo.assist.Activity.AddCheckActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            android:layout_height="50dp">
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/backarror"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="21sp"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:text="检验录入"
+                android:textColor="@android:color/black"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="检验数量"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/ed_num_check"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="2"
+                android:background="@drawable/bg_edittext_selector"
+                android:gravity="center"
+                android:imeOptions="actionNone"
+                android:singleLine="true" />
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="合格数量"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/ed_num_pass"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="2"
+                android:background="@drawable/bg_edittext_selector"
+                android:gravity="center"
+                android:imeOptions="actionNone"
+                android:singleLine="true" />
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="样品破坏数"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/ed_num_broken"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="2"
+                android:background="@drawable/bg_edittext_selector"
+                android:gravity="center"
+                android:imeOptions="actionNone"
+                android:singleLine="true" />
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                android:text="质检方案"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <include layout="@layout/line_shu"/>
+            <com.fangzuo.assist.widget.SpinnerCheckType
+                android:id="@+id/sp_checkType"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                android:text="质检结果"
+                android:layout_weight="1.2"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <EditText
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:id="@+id/ed_result"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:background="@drawable/bg_edittext_selector"
+                android:layout_weight="2" />
+            <RelativeLayout
+                android:id="@+id/search_result"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/search" />
+            </RelativeLayout>
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                android:text="送检人"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <include layout="@layout/line_shu"/>
+            <com.fangzuo.assist.widget.SpinnerPeople2
+                android:id="@+id/sp_send_man"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <include layout="@layout/line_heng"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                android:text="检验员"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <include layout="@layout/line_shu"/>
+            <com.fangzuo.assist.widget.SpinnerPeople
+                android:id="@+id/sp_check_man"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <include layout="@layout/line_heng"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:text="检验"
+            android:background="@drawable/btn_check"/>
+    </LinearLayout>
+
+</LinearLayout>

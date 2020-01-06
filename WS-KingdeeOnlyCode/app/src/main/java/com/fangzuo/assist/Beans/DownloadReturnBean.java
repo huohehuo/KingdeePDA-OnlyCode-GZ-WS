@@ -1,6 +1,8 @@
 package com.fangzuo.assist.Beans;
 
 import com.fangzuo.assist.Dao.Bibie;
+import com.fangzuo.assist.Dao.CheckResult;
+import com.fangzuo.assist.Dao.CheckType;
 import com.fangzuo.assist.Dao.Client;
 import com.fangzuo.assist.Dao.DbType;
 import com.fangzuo.assist.Dao.Department;
@@ -11,6 +13,7 @@ import com.fangzuo.assist.Dao.InStorageNum;
 import com.fangzuo.assist.Dao.InStoreType;
 import com.fangzuo.assist.Dao.PayType;
 import com.fangzuo.assist.Dao.PriceMethod;
+import com.fangzuo.assist.Dao.PrintHistory;
 import com.fangzuo.assist.Dao.Product;
 import com.fangzuo.assist.Dao.PurchaseMethod;
 import com.fangzuo.assist.Dao.Storage;
@@ -52,6 +55,9 @@ public class DownloadReturnBean {
 	public ArrayList<DbType> dbTypes;
 	public ArrayList<Suppliers4P2> suppliers4P2s;
 	public ArrayList<CheckLogBackBean> checkLogBackBeans;
+	public ArrayList<CheckType> checkTypes;
+	public ArrayList<CheckResult> checkResults;
+	public ArrayList<PrintHistory> printHistories;
 
 
 

@@ -72,6 +72,7 @@ import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
 import com.fangzuo.assist.widget.SpinnerStorage;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.greendao.gen.BarCodeDao;
 import com.fangzuo.greendao.gen.DaoSession;
@@ -104,7 +105,7 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
     @BindView(R.id.lv_pushsub)
     ListView lvPushsub;
     @BindView(R.id.sp_storage)
-    SpinnerStorage spStorage;
+    SpinnerStorage4Type spStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.productName)
@@ -334,12 +335,14 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
     }
 
     private void getList() {
-        container.clear();
+        container = new ArrayList<>();
         pushDownSubDao = daosession.getPushDownSubDao();
         pushDownMainDao = daosession.getPushDownMainDao();
         for (int i = 0; i < fidcontainer.size(); i++) {
             QueryBuilder<PushDownSub> qb = pushDownSubDao.queryBuilder();
-            List<PushDownSub> list = qb.where(PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
+            List<PushDownSub> list = qb.where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
+                    PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
             container.addAll(list);
         }
         if (container.size() > 0) {
@@ -789,6 +792,7 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
             Lg.e("获得明细换算率失败："+unitrateSub);
         }
     }
+
     private void clickList(final Product product) {
         if (codeCheckBackDataBean == null){
             lockScan(0);
@@ -904,7 +908,7 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
                 startNewActivity(Table3Activity.class, 0, 0, false, b);
                 break;
             case R.id.tv_date:
-                getdate();
+                datePicker(tvDate);
                 break;
 
         }
@@ -916,29 +920,6 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
         super.onResume();
         Log.e("resume", "resume");
         getList();
-    }
-
-    private void getdate() {
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            }
-        }, year, month, day);
-
-        datePickerDialog.setButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                int year = datePickerDialog.getDatePicker().getYear();
-                int month = datePickerDialog.getDatePicker().getMonth();
-                int day = datePickerDialog.getDatePicker().getDayOfMonth();
-                date = year + "-" + ((month < 10) ? "0" + (month + 1) : (month + 1)) + "-" + ((day < 10) ? "0" + day : day);
-                tvDate.setText(date);
-                Toast.showText(mContext, date);
-                datePickerDialog.dismiss();
-
-            }
-        });
-        datePickerDialog.show();
     }
 
     private void AddorderBefore(){
@@ -1079,6 +1060,7 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
 
                     String second = getTimesecond();
                     T_main t_main = new T_main();
+        t_main.tag = tag;
         t_main.FIndex = second;
         t_main.MakerId = share.getsetUserID();
         t_main.DataInput = tvDate.getText().toString();
@@ -1116,6 +1098,7 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
                     long insert1 = t_mainDao.insert(t_main);
 
                     T_Detail t_detail = new T_Detail();
+        t_detail.tag = tag;
         t_detail.FIndex = second;
         t_detail.FBarcode = barcode;
         t_detail.MakerId = share.getsetUserID();
@@ -1343,9 +1326,15 @@ public class ShengchanrenwudanxiatuilingliaoActivity extends BaseActivity {
                     t_mainDao.delete(list1.get(i));
                 }
                 for (int i = 0; i < fidc.size(); i++) {
-                    List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(PushDownSubDao.Properties.FInterID.eq(fidc.get(i))).build().list();
+                    List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
+                            PushDownSubDao.Properties.Tag.eq(tag),
+                            PushDownSubDao.Properties.FInterID.eq(fidc.get(i))
+                    ).build().list();
                     pushDownSubDao.deleteInTx(pushDownSubs);
-                    List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(PushDownMainDao.Properties.FInterID.eq(fidc.get(i))).build().list();
+                    List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(
+                            PushDownMainDao.Properties.Tag.eq(tag),
+                            PushDownMainDao.Properties.FInterID.eq(fidc.get(i))
+                    ).build().list();
                     pushDownMainDao.deleteInTx(pushDownMains);
                 }
                 btnBackorder.setClickable(true);

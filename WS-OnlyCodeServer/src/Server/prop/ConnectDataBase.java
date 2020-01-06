@@ -64,6 +64,7 @@ public class ConnectDataBase extends HttpServlet {
 					dBean.name = rs.getString("cacc_name");
 					container.add(dBean);
 				}
+				Lg.e("账套",container);
 				if(container.size()>0){
 					response.getWriter().write(CommonJson.getCommonJson(true, JsonCreater.ConnectResponse(container)));
 				}else{

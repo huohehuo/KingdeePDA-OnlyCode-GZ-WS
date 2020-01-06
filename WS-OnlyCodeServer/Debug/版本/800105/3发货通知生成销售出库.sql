@@ -127,6 +127,9 @@ declare @FEntryID varchar(20),       --新的明细序号
         @FEntrySelfB0176 varchar(800),--成品系列
           @FSecUnitID  varchar(50), 
           @FEntrySelfB0175 varchar(255),--快递单号
+          @FEntrySelfB0173 decimal(28,10),--本位币
+          @FEntrySelfB0174  decimal(28,10),--本位币
+          @FOLOrderBillNo varchar(128),--125
         @detailqty int,               --明细参数的个数
         @detailcount int,             --明细每行数据的长度 
         @detailIndex int,            --明细每行下标
@@ -186,7 +189,9 @@ declare @FEntryID varchar(20),       --新的明细序号
          begin  
 	select @FExchangeRate=isnull(FExchangeRate,1),@FSourceBillNo=FBillNo,@FSEOutBillNo=FBillNo from SEOutStock where FInterID=@FSourceInterId --下推的单据编号
 	set @FConsignPrice = @FConsignPrice * @FExchangeRate
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderEntryID=FOrderEntryID,@FOrderInterID=FOrderInterID,@FOrderBillNo=FOrderBillNo,@FSEOutInterID=FInterID,@FSEOutEntryID=FEntryID from SEOutStockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	select @FEntrySelfB0173 = FAuxPrice,@FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderEntryID=FOrderEntryID,@FOrderInterID=FOrderInterID,@FOrderBillNo=FOrderBillNo,@FSEOutInterID=FInterID,@FSEOutEntryID=FEntryID from SEOutStockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	set @FEntrySelfB0174=@FEntrySelfB0173*@Fauxqty
+	set @FOLOrderBillNo=@FOrderBillNo
 	select @FCoefficient=isnull(FCoefficient,1) from t_MeasureUnit where FMeasureUnitID=@FUnitID --单位换算率
 	set @FQtyMust=@FAuxQtyMust*@FCoefficient --基本单位可验收的数量 
 	select @FPlanPrice=isnull(FPlanPrice,0)* @FExchangeRate from t_ICItem where   FItemID=@FItemID 
@@ -230,7 +235,7 @@ declare @FEntryID varchar(20),       --新的明细序号
          select @FEntryID=isnull(MAX(FEntryID),0)+1 from ICStockBillEntry where FInterID=@FInterID 
            if exists(select 1 from ICStockBillEntry where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175)
 		       begin
-		         update ICStockBillEntry set FSecQty=isnull(FSecQty,0)+@FSecQty,FConsignAmount=isnull(FConsignAmount,0)+@FConsignAmount,FQty=isnull(FQty,0)+@FQty,Fauxqty=isnull(Fauxqty,0)+@Fauxqty,FPlanAmount=isnull(FPlanAmount,0)+@FPlanAmount where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175
+		         update ICStockBillEntry set FSecQty=isnull(FSecQty,0)+@FSecQty,FConsignAmount=isnull(FConsignAmount,0)+@FConsignAmount,FQty=isnull(FQty,0)+@FQty,Fauxqty=isnull(Fauxqty,0)+@Fauxqty,FPlanAmount=isnull(FPlanAmount,0)+@FPlanAmount,FEntrySelfB0174=FEntrySelfB0174+@FEntrySelfB0174 where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175
 		       end
 		        else
 		        begin
@@ -241,10 +246,10 @@ declare @FEntryID varchar(20),       --新的明细序号
  FSourceBillNo,FSourceTranType,FSourceInterId,FSourceEntryID,FContractBillNo,FContractInterID,
  FContractEntryID,FOrderBillNo,FOrderInterID,FOrderEntryID,FAllHookQTY,FCurrentHookQTY,FQtyMust,
  FSepcialSaleId,FPlanMode,FMTONo,FClientOrderNo,FConfirmMemEntry,FClientEntryID,FChkPassItem,
- FSEOutBillNo,FSEOutEntryID,FSEOutInterID,FEntrySelfB0175,FEntrySelfB0176)
-  SELECT @FInterID,@FEntryID,'0','','',@FItemID,'',0,@FBatchNo,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,
+ FSEOutBillNo,FSEOutEntryID,FSEOutInterID,FEntrySelfB0175,FEntrySelfB0176,FEntrySelfB0173,FEntrySelfB0174)
+  SELECT @FInterID,@FEntryID,'0','','',@FItemID,@FOLOrderBillNo,0,@FBatchNo,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,
  @FSecCoefficient,@FSecQty,@FAuxPlanPrice,@FPlanAmount,0,0,'',@FKFDate,@FKFPeriod,@FPeriodDate,0,0,@FDCStockID,@FDCSPID,@FConsignPrice,0,
-  @FConsignAmount,0,0,0,@FSourceBillNo,83,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,@FQtyMust,0,14036,'','','','0',1058,@FSEOutBillNo,@FSEOutEntryID,@FSEOutInterID,@FEntrySelfB0175,@FEntrySelfB0176
+  @FConsignAmount,0,0,0,@FSourceBillNo,83,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,@FQtyMust,0,14036,'','','','0',1058,@FSEOutBillNo,@FSEOutEntryID,@FSEOutInterID,@FEntrySelfB0175,@FEntrySelfB0176,@FEntrySelfB0173,@FEntrySelfB0174
  end
      fetch next from my_cursor into @FBarCode,@FItemID,@FBatchNo,@FKFDate,@FKFPeriod,@Fauxqty,@FDCStockID,@FDCSPID --再次将游标停在第一条记录前面，第一次执行，测试有没有记录存在,估测也是为@@FETCH_STATUS赋值
 				 end  
@@ -255,7 +260,9 @@ declare @FEntryID varchar(20),       --新的明细序号
        begin
        	select @FExchangeRate=isnull(FExchangeRate,1),@FSourceBillNo=FBillNo,@FSEOutBillNo=FBillNo from SEOutStock where FInterID=@FSourceInterId --下推的单据编号
 	set @FConsignPrice = @FConsignPrice * @FExchangeRate
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderEntryID=FOrderEntryID,@FOrderInterID=FOrderInterID,@FOrderBillNo=FOrderBillNo,@FSEOutInterID=FInterID,@FSEOutEntryID=FEntryID from SEOutStockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	select @FEntrySelfB0173 = FAuxPrice,@FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderEntryID=FOrderEntryID,@FOrderInterID=FOrderInterID,@FOrderBillNo=FOrderBillNo,@FSEOutInterID=FInterID,@FSEOutEntryID=FEntryID from SEOutStockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+ 	set @FOLOrderBillNo=@FOrderBillNo
+ 	set @FEntrySelfB0174=@FEntrySelfB0173*@Fauxqty
 	select @FCoefficient=isnull(FCoefficient,1) from t_MeasureUnit where FMeasureUnitID=@FUnitID --单位换算率
 	set @FQtyMust=@FAuxQtyMust*@FCoefficient --基本单位可验收的数量 
 	select @FPlanPrice=isnull(FPlanPrice,0)* @FExchangeRate from t_ICItem where   FItemID=@FItemID 
@@ -299,7 +306,7 @@ declare @FEntryID varchar(20),       --新的明细序号
          select @FEntryID=isnull(MAX(FEntryID),0)+1 from ICStockBillEntry where FInterID=@FInterID 
            if exists(select 1 from ICStockBillEntry where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175)
 		       begin
-		         update ICStockBillEntry set FSecQty=isnull(FSecQty,0)+@FSecQty,FConsignAmount=isnull(FConsignAmount,0)+@FConsignAmount,FQty=isnull(FQty,0)+@FQty,Fauxqty=isnull(Fauxqty,0)+@Fauxqty,FPlanAmount=isnull(FPlanAmount,0)+@FPlanAmount where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175
+		         update ICStockBillEntry set FSecQty=isnull(FSecQty,0)+@FSecQty,FConsignAmount=isnull(FConsignAmount,0)+@FConsignAmount,FQty=isnull(FQty,0)+@FQty,Fauxqty=isnull(Fauxqty,0)+@Fauxqty,FPlanAmount=isnull(FPlanAmount,0)+@FPlanAmount,FEntrySelfB0174=FEntrySelfB0174+@FEntrySelfB0174 where FItemID=@FItemID and FBatchNo=@FBatchNo and FUnitID=@FUnitID and isnull(FKFDate,'')=isnull(@FKFDate,'') and FKFPeriod=@FKFPeriod and FDCStockID=@FDCStockID and FDCSPID=@FDCSPID and FInterID =@FInterID and FSourceInterId=@FSourceInterId and FSourceEntryID=@FSourceEntryID and isnull(FEntrySelfB0175,'') = @FEntrySelfB0175
 		       end
 		        else
 		        begin
@@ -310,10 +317,10 @@ declare @FEntryID varchar(20),       --新的明细序号
  FSourceBillNo,FSourceTranType,FSourceInterId,FSourceEntryID,FContractBillNo,FContractInterID,
  FContractEntryID,FOrderBillNo,FOrderInterID,FOrderEntryID,FAllHookQTY,FCurrentHookQTY,FQtyMust,
  FSepcialSaleId,FPlanMode,FMTONo,FClientOrderNo,FConfirmMemEntry,FClientEntryID,FChkPassItem,
- FSEOutBillNo,FSEOutEntryID,FSEOutInterID,FEntrySelfB0175,FEntrySelfB0176)
-  SELECT @FInterID,@FEntryID,'0','','',@FItemID,'',0,@FBatchNo,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,
+ FSEOutBillNo,FSEOutEntryID,FSEOutInterID,FEntrySelfB0175,FEntrySelfB0176,FEntrySelfB0173,FEntrySelfB0174)
+  SELECT @FInterID,@FEntryID,'0','','',@FItemID,@FOLOrderBillNo,0,@FBatchNo,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,
  @FSecCoefficient,@FSecQty,@FAuxPlanPrice,@FPlanAmount,0,0,'',@FKFDate,@FKFPeriod,@FPeriodDate,0,0,@FDCStockID,@FDCSPID,@FConsignPrice,0,
-  @FConsignAmount,0,0,0,@FSourceBillNo,83,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,@FQtyMust,0,14036,'','','','0',1058,@FSEOutBillNo,@FSEOutEntryID,@FSEOutInterID,@FEntrySelfB0175,@FEntrySelfB0176
+  @FConsignAmount,0,0,0,@FSourceBillNo,83,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,@FQtyMust,0,14036,'','','','0',1058,@FSEOutBillNo,@FSEOutEntryID,@FSEOutInterID,@FEntrySelfB0175,@FEntrySelfB0176,@FEntrySelfB0173,@FEntrySelfB0174
  end
  end
 end
@@ -326,15 +333,16 @@ declare @FHeadSelfB0163 varchar(1024),
         @FHeadSelfB0157 varchar(255), -- 客户分类
         @FHeadSelfB0159 varchar(255), --收货电话地址
         @FHeadSelfB0160	 varchar(255), --业务说明
+        @FHeadSelfB0170 varchar(128),--是否报关
         @FHeadSelfB0161  varchar(255) --单据说明
          if exists(select 1 from ICStockBillEntry t1 left join t_Stock t2 on t1.FDCStockID = t2.FItemID  where t1.FInterID = @FInterID and t2.FEmpID >0 )
  begin
  select @FSManagerID=t2.FEmpID from ICStockBillEntry t1 left join t_Stock t2 on t1.FDCStockID = t2.FItemID  where t1.FInterID = @FInterID and t2.FEmpID >0
  end
  
-select @FHeadSelfB0160=FHeadSelfS0242,@FHeadSelfB0161=FHeadSelfS0244,@FExplanation=FExplanation,@FSaleStyle=FSalType,@FHeadSelfB0163=FHeadSelfS0243,@FHeadSelfB0159=FHeadSelfS0240,@FDeptID=FDeptID,@FEmpID=FEmpID from  SEOutStock where FInterID=@FSourceInterId
+select @FHeadSelfB0170 = FHeadSelfS0247,@FHeadSelfB0160=FHeadSelfS0242,@FHeadSelfB0161=FHeadSelfS0244,@FExplanation=FExplanation,@FSaleStyle=FSalType,@FHeadSelfB0163=FHeadSelfS0243,@FHeadSelfB0159=FHeadSelfS0240,@FDeptID=FDeptID,@FEmpID=FEmpID from  SEOutStock where FInterID=@FSourceInterId
 select @FHeadSelfB0157 = t2.FName from t_Organization t1 left join t_SubMessage t2 on t1.FTypeID = t2.FInterID where FItemID=@FSupplyID
-update ICStockBill set FHeadSelfB0157=@FHeadSelfB0157, FHeadSelfB0160=@FHeadSelfB0160,FHeadSelfB0161=@FHeadSelfB0161,FExplanation=@FExplanation,FSaleStyle=@FSaleStyle,FHeadSelfB0163=@FHeadSelfB0163,FHeadSelfB0159=@FHeadSelfB0159,FSManagerID=@FSManagerID,FEmpID=@FEmpID,FDeptID=@FDeptID where FInterID=@FInterID
+update ICStockBill set FHeadSelfB0170=@FHeadSelfB0170,FHeadSelfB0157=@FHeadSelfB0157, FHeadSelfB0160=@FHeadSelfB0160,FHeadSelfB0161=@FHeadSelfB0161,FExplanation=@FExplanation,FSaleStyle=@FSaleStyle,FHeadSelfB0163=@FHeadSelfB0163,FHeadSelfB0159=@FHeadSelfB0159,FSManagerID=@FSManagerID,FEmpID=@FEmpID,FDeptID=@FDeptID where FInterID=@FInterID
 if exists(select 1 from t_PDABarCodeType where FType=1)
 begin
 --单个

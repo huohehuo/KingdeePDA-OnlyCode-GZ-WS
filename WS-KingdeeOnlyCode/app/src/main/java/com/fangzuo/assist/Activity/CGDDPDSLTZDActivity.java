@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
+import com.fangzuo.assist.Activity.Crash.App;
 import com.fangzuo.assist.Adapter.BatchNoSpAdapter;
 import com.fangzuo.assist.Adapter.EmployeeSpAdapter;
 import com.fangzuo.assist.Adapter.PayMethodSpAdapter;
@@ -36,6 +37,7 @@ import com.fangzuo.assist.Beans.PurchaseInStoreUploadBean;
 import com.fangzuo.assist.Dao.BarCode;
 import com.fangzuo.assist.Dao.Employee;
 import com.fangzuo.assist.Dao.InStorageNum;
+import com.fangzuo.assist.Dao.PrintHistory;
 import com.fangzuo.assist.Dao.Product;
 import com.fangzuo.assist.Dao.PurchaseMethod;
 import com.fangzuo.assist.Dao.PushDownMain;
@@ -46,9 +48,11 @@ import com.fangzuo.assist.Dao.T_main;
 import com.fangzuo.assist.Dao.Unit;
 import com.fangzuo.assist.Dao.WaveHouse;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.BasicShareUtil;
 import com.fangzuo.assist.Utils.CommonMethod;
+import com.fangzuo.assist.Utils.CommonUtil;
 import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.DoubleUtil;
 import com.fangzuo.assist.Utils.GreenDaoManager;
@@ -60,6 +64,7 @@ import com.fangzuo.assist.Utils.Toast;
 import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.greendao.gen.BarCodeDao;
 import com.fangzuo.greendao.gen.DaoSession;
 import com.fangzuo.greendao.gen.InStorageNumDao;
@@ -71,6 +76,7 @@ import com.fangzuo.greendao.gen.T_mainDao;
 import com.fangzuo.greendao.gen.UnitDao;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
+import com.orhanobut.hawk.Hawk;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -91,7 +97,7 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     @BindView(R.id.lv_pushsub)
     ListView lvPushsub;
     @BindView(R.id.sp_storage)
-    Spinner spStorage;
+    SpinnerStorage4Type spStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.productName)
@@ -122,6 +128,8 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     Spinner spManager;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.ed_pihao)
+    EditText edPihao;
     private DaoSession daosession;
     private CommonMethod method;
     private int year;
@@ -171,13 +179,13 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     private T_mainDao t_mainDao;
     private String datePay;
     private boolean isHebing = true;
-    private BatchNoSpAdapter batchNoSpAdapter;
+//    private BatchNoSpAdapter batchNoSpAdapter;
     private String batchNo;
     private T_DetailDao t_detailDao;
     private boolean isGetDefaultStorage;
     private List<Storage> storages;
     private Product product;
-    private boolean isAuto = false;
+    private boolean isAuto = true;
     private ShareUtil share;
     private String captureID;
     private String captureName;
@@ -204,12 +212,16 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                         default_unitID = dBean.products.get(0).FUnitID;
                         fromScan = true;
                         setProduct(product);
+                    }else{
+
+                        lockScan(0);
                     }
                 }
 
                 @Override
                 public void onFailed(String Msg, AsyncHttpClient client) {
                     Toast.showText(mContext, Msg);
+                    lockScan(0);
                 }
             });
         } else {
@@ -221,8 +233,12 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                     default_unitID = barCodes.get(0).FUnitID;
                     fromScan = true;
                     setProduct(product);
+                }else{
+
+                    lockScan(0);
                 }
             }else{
+                lockScan(0);
                 Toast.showText(mContext,"条码不存在");
                 MediaPlayer.getInstance(mContext).error();
             }
@@ -272,11 +288,13 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
             }
 
             if(flag){
+                lockScan(0);
                     Toast.showText(mContext,"商品不存在");
                     MediaPlayer.getInstance(mContext).error();
 
             }
         } else {
+            lockScan(0);
             Toast.showText(mContext, "列表中不存在商品");
         }
     }
@@ -292,8 +310,8 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         year = Calendar.getInstance().get(Calendar.YEAR);
         month = Calendar.getInstance().get(Calendar.MONTH);
         day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        cbIsAuto.setChecked(share.getPDPOisAuto());
-        isAuto = share.getPDPOisAuto();
+//        isAuto = share.getPDPOisAuto();
+        cbIsAuto.setChecked(true);
     }
 
     @Override
@@ -313,12 +331,14 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     }
 
     private void getList() {
-        container.clear();
+        container = new ArrayList<>();
         pushDownSubDao = daosession.getPushDownSubDao();
         pushDownMainDao = daosession.getPushDownMainDao();
         for (int i = 0; i < fidcontainer.size(); i++) {
             QueryBuilder<PushDownSub> qb = pushDownSubDao.queryBuilder();
-            list = qb.where(PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
+            list = qb.where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
+                    PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
             container.addAll(list);
         }
         if (container.size() > 0) {
@@ -331,7 +351,8 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     }
 
     private void LoadBasicData() {
-        storageSpinner = method.getStorageSpinner(spStorage);
+        spStorage.setAutoSelection(Config.Storage+activity,"",1);
+
         tvDate.setText(getTime(true));
         payMethodSpinner = method.getPayMethodSpinner(spPurchaseMethod);
         employeeAdapter = method.getEmployeeAdapter(spManager);
@@ -423,7 +444,8 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         spStorage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                storage = (Storage) storageSpinner.getItem(i);
+                storage = (Storage) spStorage.getAdapter().getItem(i);
+                Hawk.put(Config.Storage+activity,storage.FName);
                 storageID = storage.FItemID;
                 storageName = storage.FName;
                 waveHouseID="0";
@@ -467,12 +489,16 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                                 product = dBean.products.get(0);
                                 Log.e("product.size", product + "");
                                 clickList(product);
+                            }else{
+
+                                lockScan(0);
                             }
                         }
 
                         @Override
                         public void onFailed(String Msg, AsyncHttpClient client) {
                             Toast.showText(mContext, Msg);
+                            lockScan(0);
                         }
                     });
                 } else {
@@ -480,6 +506,9 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                     if (products.size() > 0) {
                         product = products.get(0);
                         clickList(product);
+                    }else{
+
+                        lockScan(0);
                     }
                 }
 
@@ -497,18 +526,18 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
             }
         });
 
-        spBatchNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                InStorageNum inStorageNum = (InStorageNum) batchNoSpAdapter.getItem(i);
-                batchNo = inStorageNum.FBatchNo;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        spBatchNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                InStorageNum inStorageNum = (InStorageNum) batchNoSpAdapter.getItem(i);
+//                batchNo = inStorageNum.FBatchNo;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
     }
     //获取明细里面的单位的换算率
     private void getUnitrateSub(PushDownSub pushDownSub){
@@ -532,28 +561,18 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         if ((product.FBatchManager) != null && (product.FBatchManager).equals("1")) {
             fBatchManager = true;
             spBatchNo.setEnabled(true);
+            edPihao.setEnabled(true);
         } else {
+            edPihao.setText("");
             spBatchNo.setEnabled(false);
             fBatchManager = false;
         }
         if (isGetDefaultStorage) {
-            for (int j = 0; j < storageSpinner.getCount(); j++) {
-                if (((Storage) storageSpinner.getItem(j)).FItemID.equals(product.FDefaultLoc)) {
-                    spStorage.setSelection(j);
-                    break;
-                }
-            }
+            spStorage.setAutoSelection("",product.FDefaultLoc,1);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     spWavehouse.setAuto(mContext,storage,wavehouseAutoString);
-//
-//                    for (int j = 0; j < waveHouseAdapter.getCount(); j++) {
-//                        if (((WaveHouse) waveHouseAdapter.getItem(j)).FSPID.equals(product.FSPID)) {
-//                            spWavehouse.setSelection(j);
-//                            break;
-//                        }
-//                    }
                 }
             }, 50);
         }
@@ -569,7 +588,7 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         fromScan = false;
         getBatchNo();
         if (isAuto) {
-            edNum.setText("1.0");
+//            edNum.setText("1.0");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -592,7 +611,15 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     }
     @Override
     protected void OnReceive(String code) {
-        ScanBarCode(code);
+        List<String> list = CommonUtil.ScanBack(code);
+        if (list.size()>0){
+            edNum.setText(list.get(3));
+            edPihao.setText(list.get(1));
+            ScanBarCode(list.get(0));
+        }else{
+            lockScan(0);
+        }
+//        ScanBarCode(code);
 
     }
 
@@ -657,33 +684,54 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         if (product != null) {
 
             String discount = "";
+            batchNo = edPihao.getText().toString();
             String num = edNum.getText().toString();
             T_DetailDao t_detailDao = daosession.getT_DetailDao();
             T_mainDao t_mainDao = daosession.getT_mainDao();
             if (edNum.getText().toString().equals("")||edNum.getText().toString().equals("0")) {
                 MediaPlayer.getInstance(mContext).error();
                 Toast.showText(mContext, "请输入数量");
+                lockScan(0);
                 return;
             }
+
+            if (null == storage) {
+                MediaPlayer.getInstance(mContext).error();
+                Toast.showText(mContext, "请选择仓库");
+                lockScan(0);
+                return;
+            }
+            if (fBatchManager && "".equals(edPihao.getText().toString())) {
+                MediaPlayer.getInstance(mContext).error();
+                Toast.showText(mContext, "请输入批号信息");
+                lockScan(0);
+                return;
+            }
+
             if (fid == null) {
                 MediaPlayer.getInstance(mContext).error();
                 Toast.showText(mContext, "请选择单据");
+                lockScan(0);
                 return;
             }
             if (Double.parseDouble(pushDownSub.FAuxQty) < ((Double.parseDouble(num) * unitrate)/unitrateSub + Double.parseDouble(pushDownSub.FQtying))) {
                 MediaPlayer.getInstance(mContext).error();
                 Toast.showText(mContext, "大兄弟,您的数量超过我的想象");
+                lockScan(0);
                 return;
             }
-            ProgressDialog pg = new ProgressDialog(mContext);
-            pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pg.setMessage("请稍后...");
-            pg.setCancelable(false);
-            pg.show();
+            LoadingUtil.show(mContext,"正在添加...");
                 if (isHebing) {
-                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity), T_DetailDao.Properties.FInterID.eq(fid)
-                            , T_DetailDao.Properties.FProductId.eq(product.FItemID == null ? "" : product.FItemID), T_DetailDao.Properties.FStorageId.eq(storageID), T_DetailDao.Properties.FPositionId.eq(waveHouseID)
-                            , T_DetailDao.Properties.FUnitId.eq(unitId), T_DetailDao.Properties.FEntryID.eq(fentryid), T_DetailDao.Properties.FBatch.eq(batchNo == null ? "0" : batchNo)).build().list();
+                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.Activity.eq(activity),
+                            T_DetailDao.Properties.FInterID.eq(fid),
+                            T_DetailDao.Properties.FProductId.eq(product.FItemID),
+                            T_DetailDao.Properties.FStorageId.eq(storageID),
+                            T_DetailDao.Properties.FPositionId.eq(waveHouseID),
+                            T_DetailDao.Properties.FUnitId.eq(unitId),
+                            T_DetailDao.Properties.FEntryID.eq(fentryid),
+                            T_DetailDao.Properties.FBatch.eq(batchNo)
+                    ).build().list();
                     if (detailhebing.size() > 0) {
                         for (int i = 0; i < detailhebing.size(); i++) {
                             num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
@@ -697,6 +745,7 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                 }
                 String second = getTimesecond();
                 T_main t_main = new T_main();
+                t_main.tag = tag;
                 t_main.FDepartment = "";
                 t_main.FDepartmentId = departmentId == null ? "" : departmentId;
                 t_main.FIndex = second;
@@ -730,6 +779,8 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                 long insert1 = t_mainDao.insert(t_main);
 
                 T_Detail t_detail = new T_Detail();
+                t_detail.tag = tag;
+                t_detail.FBarcode = billNo;
                 t_detail.FBillNo = billNo;
                 t_detail.FBatch = batchNo == null ? "" : batchNo;
                 t_detail.FOrderId = 0;
@@ -752,6 +803,7 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                 t_detail.FInterID = fid == null ? "" : fid;
                 long insert = t_detailDao.insert(t_detail);
 
+                lockScan(0);
                 if (insert1 > 0 && insert > 0) {
                     pushDownSub.FQtying = DoubleUtil.sum(Double.parseDouble(pushDownSub.FQtying), (Double.parseDouble(edNum.getText().toString()) * unitrate)/unitrateSub) + "";
                     pushDownSubDao.update(pushDownSub);
@@ -759,11 +811,11 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                     MediaPlayer.getInstance(mContext).ok();
                     pushDownSubListAdapter.notifyDataSetChanged();
                     resetAll();
-                    pg.dismiss();
+                    LoadingUtil.dismiss();
                 } else {
                     Toast.showText(mContext, "添加失败，请重试");
                     MediaPlayer.getInstance(mContext).error();
-                    pg.dismiss();
+                    LoadingUtil.dismiss();
                 }
         } else {
             Toast.showText(mContext, "未选中物料");
@@ -778,43 +830,44 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
     }
 
     private void getBatchNo() {
-        if (waveHouseID == null) {
-            waveHouseID = "0";
-        }
-        if (fBatchManager) {
-            if (BasicShareUtil.getInstance(mContext).getIsOL()) {
-                GetBatchNoBean gBean = new GetBatchNoBean();
-                gBean.ProductID = productID;
-                gBean.StorageID = storageID;
-                gBean.WaveHouseID = waveHouseID;
-                Synchttp.post(mContext, WebApi.GETPICI, new Gson().toJson(gBean), new Synchttp.Response() {
-                    @Override
-                    public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
-                        DownloadReturnBean downloadReturnBean = new Gson().fromJson(cBean.returnJson, DownloadReturnBean.class);
-                        batchNoSpAdapter = new BatchNoSpAdapter(mContext, downloadReturnBean.InstorageNum);
-                        spBatchNo.setAdapter(batchNoSpAdapter);
-                        batchNoSpAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onFailed(String Msg, AsyncHttpClient client) {
-                        Toast.showText(mContext, Msg);
-                    }
-                });
-            } else {
-                InStorageNumDao inStorageNumDao = daosession.getInStorageNumDao();
-                List<InStorageNum> inStorageNa = inStorageNumDao.queryBuilder().where(
-                        InStorageNumDao.Properties.FStockID.eq(storageID),
-                        InStorageNumDao.Properties.FStockPlaceID.eq(waveHouseID),
-                        InStorageNumDao.Properties.FItemID.eq(productID)
-                ).build().list();
-                if (inStorageNa.size() > 0) {
-                    batchNoSpAdapter = new BatchNoSpAdapter(mContext, inStorageNa);
-                    spBatchNo.setAdapter(batchNoSpAdapter);
-                    batchNoSpAdapter.notifyDataSetChanged();
-                }
-            }
-        }
+        return;
+//        if (waveHouseID == null) {
+//            waveHouseID = "0";
+//        }
+//        if (fBatchManager) {
+//            if (BasicShareUtil.getInstance(mContext).getIsOL()) {
+//                GetBatchNoBean gBean = new GetBatchNoBean();
+//                gBean.ProductID = productID;
+//                gBean.StorageID = storageID;
+//                gBean.WaveHouseID = waveHouseID;
+//                Synchttp.post(mContext, WebApi.GETPICI, new Gson().toJson(gBean), new Synchttp.Response() {
+//                    @Override
+//                    public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
+//                        DownloadReturnBean downloadReturnBean = new Gson().fromJson(cBean.returnJson, DownloadReturnBean.class);
+//                        batchNoSpAdapter = new BatchNoSpAdapter(mContext, downloadReturnBean.InstorageNum);
+//                        spBatchNo.setAdapter(batchNoSpAdapter);
+//                        batchNoSpAdapter.notifyDataSetChanged();
+//                    }
+//
+//                    @Override
+//                    public void onFailed(String Msg, AsyncHttpClient client) {
+//                        Toast.showText(mContext, Msg);
+//                    }
+//                });
+//            } else {
+//                InStorageNumDao inStorageNumDao = daosession.getInStorageNumDao();
+//                List<InStorageNum> inStorageNa = inStorageNumDao.queryBuilder().where(
+//                        InStorageNumDao.Properties.FStockID.eq(storageID),
+//                        InStorageNumDao.Properties.FStockPlaceID.eq(waveHouseID),
+//                        InStorageNumDao.Properties.FItemID.eq(productID)
+//                ).build().list();
+//                if (inStorageNa.size() > 0) {
+//                    batchNoSpAdapter = new BatchNoSpAdapter(mContext, inStorageNa);
+//                    spBatchNo.setAdapter(batchNoSpAdapter);
+//                    batchNoSpAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        }
 
 
     }
@@ -825,7 +878,9 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         t_detailDao = daosession.getT_DetailDao();
         fidc = new ArrayList<>();
         ArrayList<PurchaseInStoreUploadBean.purchaseInStore> data = new ArrayList<>();
-        List<T_main> mainsTemp = t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list();
+        List<T_main> mainsTemp = t_mainDao.queryBuilder().where(
+                T_mainDao.Properties.Activity.eq(activity)
+        ).build().list();
         Lg.e(mainsTemp.size()+"");
         TreeSet<String> getFids=new TreeSet<>();
         for (int i = 0; i < mainsTemp.size(); i++) {
@@ -846,18 +901,34 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                     String detail = "";
                     T_main t_main = mains.get(i);
                     fidc.add(t_main.FDeliveryType);
-                    main = t_main.FMakerId + "|" + t_main.orderDate + "|" + t_main.FPaymentDate + "|" + t_main.supplierId + "|" + t_main.FPaymentTypeId + "|"
-                            + "|" + t_main.FDepartmentId + "|" +
-                            t_main.FSalesManId + "|" + t_main.Rem + "|" + t_main.FDirectorId + "|";
+                    main = t_main.FMakerId + "|" +
+                            t_main.orderDate + "|" +
+                            t_main.FPaymentDate + "|" +
+                            t_main.supplierId + "|" +
+                            t_main.saleWayId + "|" +
+                             "0|" +
+                            "0|" +
+                            t_main.Rem + "|" +
+                            t_main.FDirectorId + "|";
                     puBean.main = main;
-                    List<T_Detail> details = t_detailDao.queryBuilder().where(T_DetailDao.Properties.FInterID.eq(t_main.FDeliveryType), T_DetailDao.Properties.Activity.eq(activity)).build().list();
+                    List<T_Detail> details = t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.FInterID.eq(t_main.FDeliveryType),
+                            T_DetailDao.Properties.Activity.eq(activity)
+                    ).build().list();
                     for (int j = 0; j < details.size(); j++) {
                         if (j != 0 && j % 49 == 0) {
                             Log.e("j%49", j % 49 + "");
                             T_Detail t_detail = details.get(j);
-                            detail = detail + t_detail.FProductId + "|" + t_detail.FUnitId + "|" + t_detail.FTaxUnitPrice + "|" +
-                                    t_detail.FQuantity + "|" + t_detail.FStorageId + "|" + t_detail.FPositionId + "|" + t_detail.FEntryID +
-                                    "|" + t_detail.FInterID + "|" + t_detail.FBatch + "|";
+                            detail = detail +
+                                    t_detail.FProductId + "|" +
+                                    t_detail.FUnitId + "|" +
+                                    t_detail.FTaxUnitPrice + "|" +
+                                    t_detail.FQuantity + "|" +
+                                    t_detail.FStorageId + "|" +
+                                    t_detail.FPositionId + "|" +
+                                    t_detail.FEntryID + "|" +
+                                    t_detail.FInterID + "|" +
+                                    t_detail.FBatch + "|";
                             detail = detail.subSequence(0, detail.length() - 1).toString();
                             detailContainer.add(detail);
                             detail = "";
@@ -865,9 +936,16 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
                             Log.e("j", j + "");
                             Log.e("details.size()", details.size() + "");
                             T_Detail t_detail = details.get(j);
-                            detail = detail + t_detail.FProductId + "|" + t_detail.FUnitId + "|" + t_detail.FTaxUnitPrice + "|" +
-                                    t_detail.FQuantity + "|" + t_detail.FStorageId + "|" + t_detail.FPositionId + "|" + t_detail.FEntryID +
-                                    "|" + t_detail.FInterID + "|" + t_detail.FBatch + "|";
+                            detail = detail +
+                                    t_detail.FProductId + "|" +
+                                    t_detail.FUnitId + "|" +
+                                    t_detail.FTaxUnitPrice + "|" +
+                                    t_detail.FQuantity + "|" +
+                                    t_detail.FStorageId + "|" +
+                                    t_detail.FPositionId + "|" +
+                                    t_detail.FEntryID + "|" +
+                                    t_detail.FInterID + "|" +
+                                    t_detail.FBatch + "|";
                             Log.e("detail1", detail);
                         }
 
@@ -887,41 +965,58 @@ public class CGDDPDSLTZDActivity extends BaseActivity {
         postToServer(data);
     }
 
-    private void postToServer(ArrayList<PurchaseInStoreUploadBean.purchaseInStore> data) {
+    private void postToServer(final ArrayList<PurchaseInStoreUploadBean.purchaseInStore> data) {
         PurchaseInStoreUploadBean pBean = new PurchaseInStoreUploadBean();
         pBean.list = data;
         Gson gson = new Gson();
-        Asynchttp.post(mContext, getBaseUrl() + WebApi.CGDDPDSLTZDUpload, gson.toJson(pBean), new Asynchttp.Response() {
+        App.getRService().doIOAction(WebApi.CGDDPDSLTZDUpload, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
             @Override
-            public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
-                MediaPlayer.getInstance(mContext).ok();
-                Toast.showText(mContext, "上传成功");
-                List<T_Detail> list = t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity)).build().list();
-                List<T_main> list1 = t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list();
-                for (int i = 0; i < list.size(); i++) {
-                    t_detailDao.delete(list.get(i));
+            public void onNext(CommonResponse commonResponse) {
+                super.onNext(commonResponse);if (!commonResponse.state)return;
+                DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
+                if (null!=dBean.printHistories && dBean.printHistories.size()>0){
+                    MediaPlayer.getInstance(mContext).ok();
+                    Toast.showText(mContext, "上传成功");
+                    t_detailDao.deleteInTx(t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity)).build().list());
+                    t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list());
+                    for (int i = 0; i < fidc.size(); i++) {
+                        List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
+                                PushDownSubDao.Properties.Tag.eq(tag),
+                                PushDownSubDao.Properties.FInterID.eq(fidc.get(i))
+                        ).build().list();
+                        pushDownSubDao.deleteInTx(pushDownSubs);
+                        List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(
+                                PushDownMainDao.Properties.Tag.eq(tag),
+                                PushDownMainDao.Properties.FInterID.eq(fidc.get(i))
+                        ).build().list();
+                        pushDownMainDao.deleteInTx(pushDownMains);
+                    }
+                    btnBackorder.setClickable(true);
+                    LoadingUtil.dismiss();
+                    //保存打印数据到本地
+                    daoSession.getPrintHistoryDao().insertInTx(dBean.printHistories);
+                    try {
+                        CommonUtil.doPrint(mContext, dBean.printHistories, "1");
+                    } catch (Exception e) {
+                        Lg.e("打印错误",e.getMessage());
+                        Toast.showText(mContext,"打印错误"+e.getMessage());
+                    }
+                    Bundle b = new Bundle();
+                    b.putInt("123",tag);
+                    startNewActivity(PushDownPagerActivity.class, 0, 0, true, b);
+
+
+                }else{
+                    Toast.showText(mContext,"返回数据为空，回单失败");
                 }
-                for (int i = 0; i < list1.size(); i++) {
-                    t_mainDao.delete(list1.get(i));
-                }
-                for (int i = 0; i < fidc.size(); i++) {
-                    List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(PushDownSubDao.Properties.FInterID.eq(fidc.get(i))).build().list();
-                    pushDownSubDao.deleteInTx(pushDownSubs);
-                    List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(PushDownMainDao.Properties.FInterID.eq(fidc.get(i))).build().list();
-                    pushDownMainDao.deleteInTx(pushDownMains);
-                }
-                btnBackorder.setClickable(true);
-                LoadingUtil.dismiss();
-                Bundle b = new Bundle();
-                b.putInt("123",tag);
-                startNewActivity(PushDownPagerActivity.class, 0, 0, true, b);
             }
 
             @Override
-            public void onFailed(String Msg, AsyncHttpClient client) {
+            public void onError(Throwable e) {
+//                super.onError(e);
                 MediaPlayer.getInstance(mContext).error();
                 btnBackorder.setClickable(true);
-                Toast.showText(mContext, Msg);
+                Toast.showText(mContext, e.getMessage());
                 LoadingUtil.dismiss();
             }
         });

@@ -44,3 +44,7 @@ IF Not EXISTS ( SELECT 1 FROM SYSOBJECTS T1  INNER JOIN SYSCOLUMNS T2 ON T1.ID=T
 begin
 alter table t_PDABarCodeSign_Out add FStockPlaceID int --³ö¿â²ÖÎ»
 end
+IF Not EXISTS ( SELECT 1 FROM SYSOBJECTS T1  INNER JOIN SYSCOLUMNS T2 ON T1.ID=T2.ID  WHERE T1.NAME='t_PDABarCodeSign_Out' AND T2.NAME='FMDUserID')
+begin
+alter table t_PDABarCodeSign_Out add FMDUserID int -- 
+end

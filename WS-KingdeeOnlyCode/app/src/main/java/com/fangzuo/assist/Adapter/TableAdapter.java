@@ -70,12 +70,16 @@ public class TableAdapter extends BaseAdapter implements View.OnClickListener {
 
         DaoSession daoSession = GreenDaoManager.getmInstance(context).getDaoSession();
         T_mainDao t_mainDao = daoSession.getT_mainDao();
-        List<T_main> t_mains = t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(detail.get(i).FOrderId),T_mainDao.Properties.Activity.eq(detail.get(i).activity)).build().list();
-        if(t_mains.size()>0){
-            if(t_mains.get(0).activity== Config.DBActivity){
+        List<T_main> t_mains = t_mainDao.queryBuilder().where(
+                T_mainDao.Properties.OrderId.eq(detail.get(i).FOrderId),
+                T_mainDao.Properties.Activity.eq(detail.get(i).activity)
+        ).build().list();
+        String date  = t_mains.size()>0?t_mains.get(0).orderDate:"";
+//        if(t_mains.size()>0){
+            if(detail.get(i).activity== Config.DBActivity){
                 viewHolder.llWavehosue.setVisibility(View.VISIBLE);
                 viewHolder.barCode.setText("条码:" + detail.get(i).FBarcode);
-                viewHolder.productname.setText("单据编号:" + t_mains.get(0).orderId);
+                viewHolder.productname.setText("单据编号:" + detail.get(i).FOrderId);
                 viewHolder.productId.setText("物料编码:" + detail.get(i).FProductCode);
                 viewHolder.productxh.setText("调入仓库:" + detail.get(i).FStorage);
                 viewHolder.num.setText("数量:" + detail.get(i).FQuantity+detail.get(i).FUnit);
@@ -93,15 +97,15 @@ public class TableAdapter extends BaseAdapter implements View.OnClickListener {
                 viewHolder.num.setText("数量:" + detail.get(i).FQuantity+detail.get(i).FUnit);
                 viewHolder.price.setText("价格:" + detail.get(i).FTaxUnitPrice);
                 viewHolder.storage.setText("仓库:" + detail.get(i).FStorage);
-                viewHolder.date.setText("下单日期:" + t_mains.get(0).orderDate);
-            }
+                viewHolder.date.setText("下单日期:" + date);
+//            }
 
+        }
             viewHolder.delete.setOnClickListener(this);
             viewHolder.delete.setTag(i);
             viewHolder.fix.setOnClickListener(this);
             viewHolder.fix.setTag(i);
             viewHolder.cbIscheck.setChecked(isCheck.get(i));
-        }
 
         return view;
     }

@@ -31,9 +31,12 @@ import com.fangzuo.assist.Activity.Crash.App;
 import com.fangzuo.assist.Activity.FHTZDDBActivity;
 import com.fangzuo.assist.Activity.HBDPDCPRKActivity;
 import com.fangzuo.assist.Activity.OutCheckGoodsActivity;
+import com.fangzuo.assist.Activity.OutsourcingOrdersIS2Activity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersISActivity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersOSActivity;
 import com.fangzuo.assist.Activity.PdBackMsg2SaleOutRedActivity;
+import com.fangzuo.assist.Activity.PdShouLiao2LLCheckActivity;
+import com.fangzuo.assist.Activity.ProducePushInStore2Activity;
 import com.fangzuo.assist.Activity.ProducePushInStoreActivity;
 import com.fangzuo.assist.Activity.ProductSearchActivity;
 import com.fangzuo.assist.Activity.PushDownMTActivity;
@@ -43,6 +46,7 @@ import com.fangzuo.assist.Activity.PushDownSNActivity;
 import com.fangzuo.assist.Activity.SCRWDPDSCHBDActivity;
 import com.fangzuo.assist.Activity.ShengchanrenwudanxiatuilingliaoActivity;
 import com.fangzuo.assist.Activity.ShouLiaoTongZhiActivity;
+import com.fangzuo.assist.Activity.WwOrder2SLTZActivity;
 import com.fangzuo.assist.Activity.XSDDPDFLTZDActivity;
 import com.fangzuo.assist.Adapter.PushDownListAdapter;
 import com.fangzuo.assist.Beans.CodeCheckBackDataBean;
@@ -63,6 +67,7 @@ import com.fangzuo.assist.R;
 import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.BasicShareUtil;
+import com.fangzuo.assist.Utils.CommonUtil;
 import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.DataModel;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
@@ -225,6 +230,7 @@ public class DownLoadPushFragment extends BaseFragment {
         isCheck = new ArrayList<>();
         downloadIDs = new ArrayList<>();
         daosession = GreenDaoManager.getmInstance(mContext).getDaoSession();
+        pushDownMainDao = daosession.getPushDownMainDao();
         t_detailDao = daosession.getT_DetailDao();
 
         if (tag == 1 || tag == 3) {
@@ -264,7 +270,7 @@ public class DownLoadPushFragment extends BaseFragment {
     @Override
     protected void OnReceive(String barCode) {
         Log.e("Fragment-code:", barCode);
-        if (tag == 23 || tag == 3){
+        if (tag == 23 || tag == 3 || tag == 28 ){
 //            if (checkHasBarCode().size() > 0) {
 //                ArrayList<String> list = new ArrayList<>();
 //                list.add(checkHasBarCode().get(0).FInterID);
@@ -272,6 +278,11 @@ public class DownLoadPushFragment extends BaseFragment {
 //            }else{
                 downFromScan(barCode);
 //            }
+        }else if (tag==14 || tag == 30){
+            List<String> list = CommonUtil.ScanBack(barCode);
+            if (list.size()>0){
+                downFromScan(list.get(2));
+            }
         }else{
             LoadingUtil.showDialog(mContext, "正在查找...");
             //查询条码唯一表
@@ -306,7 +317,16 @@ public class DownLoadPushFragment extends BaseFragment {
                 try{
                     getActivity().finish();
                 }catch (Exception e){}
-            }else if (tag == 11){
+            }else if (tag == 25){
+                if (checkHasBarCode().size() > 0) {
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(checkHasBarCode().get(0).FInterID);
+                    ProducePushInStore2Activity.start(mContext, barcode, list);
+                }
+                try{
+                    getActivity().finish();
+                }catch (Exception e){}
+            } else if (tag == 11){
                 if (checkHasBarCode().size() > 0) {
                     ArrayList<String> list = new ArrayList<>();
                     list.add(checkHasBarCode().get(0).FInterID);
@@ -316,7 +336,16 @@ public class DownLoadPushFragment extends BaseFragment {
                     getActivity().finish();
                 }catch (Exception e){}
             }
-
+            else if (tag == 26){
+                if (checkHasBarCode().size() > 0) {
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(checkHasBarCode().get(0).FInterID);
+                    OutsourcingOrdersIS2Activity.start(mContext, barcode, list);
+                }
+                try{
+                    getActivity().finish();
+                }catch (Exception e){}
+            }
         } else {
             Lg.e("ssssssss");
             final ProgressDialog pg = new ProgressDialog(mContext);
@@ -337,9 +366,11 @@ public class DownLoadPushFragment extends BaseFragment {
                             pg.dismiss();
                             Log.e(TAG, "OnReceive-获取数据:" + cBean.returnJson);
                             final ScanDLReturnBean sBean = new Gson().fromJson(cBean.returnJson, ScanDLReturnBean.class);
-                            PushDownMainDao pushDownMainDao = daosession.getPushDownMainDao();
                             PushDownSubDao pushDownSubDao = daosession.getPushDownSubDao();
-                            List<PushDownMain> list = pushDownMainDao.queryBuilder().where(PushDownMainDao.Properties.FInterID.eq(sBean.list1.get(0).FInterID)).build().list();
+                            List<PushDownMain> list = pushDownMainDao.queryBuilder().where(
+                                    PushDownMainDao.Properties.Tag.eq(tag),
+                                    PushDownMainDao.Properties.FInterID.eq(sBean.list1.get(0).FInterID)
+                            ).build().list();
                             if (list.size() > 0) {
 //                            pushDownMainDao.deleteInTx(list);
 //                            List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(PushDownSubDao.Properties.FInterID.eq(sBean.list1.get(0).FInterID)).build().list();
@@ -365,8 +396,18 @@ public class DownLoadPushFragment extends BaseFragment {
                                         try{
                                             getActivity().finish();
                                         }catch (Exception e){}
+                                    }else if (tag == 25 ){
+                                        ProducePushInStore2Activity.start(mContext, barcode, container);
+                                        try{
+                                            getActivity().finish();
+                                        }catch (Exception e){}
                                     }else if (tag == 11 ){
                                         OutsourcingOrdersISActivity.start(mContext, barcode, container);
+                                        try{
+                                            getActivity().finish();
+                                        }catch (Exception e){}
+                                    }else if (tag == 26 ){
+                                        OutsourcingOrdersIS2Activity.start(mContext, barcode, container);
                                         try{
                                             getActivity().finish();
                                         }catch (Exception e){}
@@ -399,6 +440,9 @@ public class DownLoadPushFragment extends BaseFragment {
                                             case 14://采购订单下推收料通知单
                                                 intent = new Intent(mContext, CGDDPDSLTZDActivity.class);
                                                 break;
+                                            case 30://采购订单下推收料通知单
+                                                intent = new Intent(mContext, WwOrder2SLTZActivity.class);
+                                                break;
                                             case 15://销售订单下推发料通知单
                                                 intent = new Intent(mContext, XSDDPDFLTZDActivity.class);
                                                 break;
@@ -416,6 +460,9 @@ public class DownLoadPushFragment extends BaseFragment {
                                                 break;
                                             case 23://退货通知单下推销售出库红字
                                                 intent = new Intent(mContext, PdBackMsg2SaleOutRedActivity.class);
+                                                break;
+                                            case 28://退货通知单下推销售出库红字
+                                                intent = new Intent(mContext, PdShouLiao2LLCheckActivity.class);
                                                 break;
 //                            case 8:
 //                                intent = new Intent(mContext, GetGoodsCheckActivity.class);
@@ -632,8 +679,9 @@ public class DownLoadPushFragment extends BaseFragment {
     //下载数据
     private void download(final ArrayList<PushDownMain> downloadIDs) {
         num=downloadIDs.size();
-        pushDownMainDao = daosession.getPushDownMainDao();
-        pushDownMains = pushDownMainDao.loadAll();
+        pushDownMains = pushDownMainDao.queryBuilder().where(
+                PushDownMainDao.Properties.Tag.eq(tag)
+        ).build().list();
         boolean hasData = false;
         for (int i = 0; i < downloadIDs.size(); i++) {
             for (int j = 0; j < pushDownMains.size(); j++) {
@@ -669,33 +717,41 @@ public class DownLoadPushFragment extends BaseFragment {
                         if (pushDownMains.get(j).FInterID.equals(downloadIDs.get(finalI).FInterID)) {
                             pushDownMainDao.delete(pushDownMains.get(j));
                             //查找本地的下推订单信息，若和选择的下推订单id相同，则删除本地相对应的下推订单信息，
-                            List<PushDownSub> pushDownSubs = pushDownSubDao.loadAll();
-                            for (int k = 0; k < pushDownSubs.size(); k++) {
-                                if (pushDownMains.get(j).FInterID.equals(pushDownSubs.get(k).FInterID)) {
-                                    pushDownSubDao.delete(pushDownSubs.get(k));
-                                }
-                            }
+                            pushDownSubDao.deleteInTx(pushDownSubDao.queryBuilder().where(
+                                    PushDownSubDao.Properties.Tag.eq(tag),
+                                    PushDownSubDao.Properties.FInterID.eq(pushDownMains.get(j).FInterID)
+                            ).build().list());
+//                            List<PushDownSub> pushDownSubs = pushDownSubDao.loadAll();
+//                            for (int k = 0; k < pushDownSubs.size(); k++) {
+//                                if (pushDownMains.get(j).FInterID.equals(pushDownSubs.get(k).FInterID)) {
+//                                    pushDownSubDao.delete(pushDownSubs.get(k));
+//                                }
+//                            }
                         }
                     }
                     //异步添加下推订单信息
-                    for (int j = 0; j < pBean.list.size(); j++) {
-                        pushDownSubDao.insertOrReplaceInTx(pBean.list.get(j));
-                    }
+                    pushDownSubDao.insertInTx(pBean.list);
+//                    for (int j = 0; j < pBean.list.size(); j++) {
+//                        pushDownSubDao.insertOrReplaceInTx(pBean.list.get(j));
+//                    }
 
                     T_mainDao t_mainDao = daosession.getT_mainDao();
                     T_DetailDao t_detailDao = daosession.getT_DetailDao();
                     //删除本地指定数据
                     t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(
+                            T_mainDao.Properties.Tag.eq(tag),
                             T_mainDao.Properties.FDeliveryType.eq(
                                     downloadIDs.get(finalI).FInterID)
                     ).build().list());
                     //删除本地指定数据
                     t_detailDao.deleteInTx(t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.Tag.eq(tag),
                             T_DetailDao.Properties.FInterID.eq(
                                     downloadIDs.get(finalI).FInterID)
                     ).build().list());
                     //异步添加单据信息
-                    pushDownMainDao.insertOrReplaceInTx(pushDownMain);
+                    pushDownMainDao.insertInTx(pushDownMain);
+//                    pushDownMainDao.insertOrReplaceInTx(pushDownMain);
                     if (num>1){
                         num=num-1;
                     }

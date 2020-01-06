@@ -68,6 +68,7 @@ public class T_mainDao extends AbstractDao<T_main, String> {
         public final static Property MakerId = new Property(41, String.class, "MakerId", false, "MAKER_ID");
         public final static Property DataInput = new Property(42, String.class, "DataInput", false, "DATA_INPUT");
         public final static Property DataPush = new Property(43, String.class, "DataPush", false, "DATA_PUSH");
+        public final static Property Tag = new Property(44, int.class, "tag", false, "TAG");
     }
 
 
@@ -126,7 +127,8 @@ public class T_mainDao extends AbstractDao<T_main, String> {
                 "\"IMIE\" TEXT," + // 40: IMIE
                 "\"MAKER_ID\" TEXT," + // 41: MakerId
                 "\"DATA_INPUT\" TEXT," + // 42: DataInput
-                "\"DATA_PUSH\" TEXT);"); // 43: DataPush
+                "\"DATA_PUSH\" TEXT," + // 43: DataPush
+                "\"TAG\" INTEGER NOT NULL );"); // 44: tag
     }
 
     /** Drops the underlying database table. */
@@ -350,6 +352,7 @@ public class T_mainDao extends AbstractDao<T_main, String> {
         if (DataPush != null) {
             stmt.bindString(44, DataPush);
         }
+        stmt.bindLong(45, entity.getTag());
     }
 
     @Override
@@ -567,6 +570,7 @@ public class T_mainDao extends AbstractDao<T_main, String> {
         if (DataPush != null) {
             stmt.bindString(44, DataPush);
         }
+        stmt.bindLong(45, entity.getTag());
     }
 
     @Override
@@ -620,7 +624,8 @@ public class T_mainDao extends AbstractDao<T_main, String> {
             cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40), // IMIE
             cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41), // MakerId
             cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42), // DataInput
-            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43) // DataPush
+            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43), // DataPush
+            cursor.getInt(offset + 44) // tag
         );
         return entity;
     }
@@ -671,6 +676,7 @@ public class T_mainDao extends AbstractDao<T_main, String> {
         entity.setMakerId(cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41));
         entity.setDataInput(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
         entity.setDataPush(cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43));
+        entity.setTag(cursor.getInt(offset + 44));
      }
     
     @Override

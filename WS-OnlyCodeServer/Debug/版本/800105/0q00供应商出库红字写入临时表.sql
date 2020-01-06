@@ -42,8 +42,11 @@ set @FBillNo='OK'
              select  top 1 @FItemID=   FItemID  from t_PDABarCodeSign where FBarCode=@FBarCode
                 select @FCustID=FCustID from t_UserPDASupply where FID = @FUserID
              select top 1   @FPrice=FPrice  from t_PDAModifyPriceEntry where FItemID=@FItemID and FCustID=@FCustID order by FEntryID desc
+        if not exists(select 1 from a_DetailsTable where FBarCode=@FBarCode)
+       begin
      insert into a_DetailsTable(FPDAID,FOrderID,FBarCode,FItemID,FStockID,FStockPlaceID, FBatchNo,  FKFPeriod,  FKFDate,  FQty,FInterID,FPrice)
      select top 1  @FPDAID,@FOrderID, FBarCode, FItemID,FStockID,FStockPlaceID,  FBatchNo,  FKFPeriod,  FKFDate,@FQty,@FInterID,@FPrice from t_PDABarCodeSign where FBarCode=@FBarCode 
+       end
      end
  
  

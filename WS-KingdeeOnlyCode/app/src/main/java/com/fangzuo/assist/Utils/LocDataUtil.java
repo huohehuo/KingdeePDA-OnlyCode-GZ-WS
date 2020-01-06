@@ -37,6 +37,29 @@ public class LocDataUtil {
             return false;
         }
     }
+    public static boolean checkHasBarcode(Context mContext,String barcode) {
+        if (null== barcode ||"".equals(barcode)){
+//            Toast.showText(mContext,"条码为空，请重新扫码添加");
+            return true;
+        }
+        List<T_Detail> list1 = GreenDaoManager.getmInstance(mContext).getDaoSession().getT_DetailDao().queryBuilder().where(
+                T_DetailDao.Properties.FBarcode.eq(barcode)
+        ).build().list();
+        return list1.size()>0;
+    }
+    public static boolean checkHasBarcode(Context mContext,int activity,String barcode) {
+        if (null== barcode){
+//            Toast.showText(mContext,"条码为空，请重新扫码添加");
+            barcode="";
+        }
+        List<T_Detail> list1 = GreenDaoManager.getmInstance(mContext).getDaoSession().getT_DetailDao().queryBuilder().where(
+                T_DetailDao.Properties.Activity.eq(activity),
+                T_DetailDao.Properties.FBarcode.eq(barcode)
+        ).build().list();
+        return list1.size()>0;
+    }
+
+
     public static String getDetailNum(Context mContext,long orderid) {
         List<T_Detail> list1 = GreenDaoManager.getmInstance(mContext).getDaoSession().getT_DetailDao().queryBuilder().where(
                 T_DetailDao.Properties.FOrderId.eq(orderid)).build().list();

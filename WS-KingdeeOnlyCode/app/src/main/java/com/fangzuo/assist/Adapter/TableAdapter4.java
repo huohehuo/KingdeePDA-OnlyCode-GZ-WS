@@ -14,6 +14,7 @@ import com.fangzuo.assist.Activity.DBActivity;
 import com.fangzuo.assist.Dao.T_Detail;
 import com.fangzuo.assist.Dao.T_main;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.GreenDaoManager;
 import com.fangzuo.greendao.gen.DaoSession;
 import com.fangzuo.greendao.gen.T_mainDao;
@@ -83,8 +84,20 @@ public class TableAdapter4 extends BaseAdapter implements View.OnClickListener {
 //                viewHolder.wavehouseout.setText("调出仓位"+detail.get(i).Foutwavehousename);
 //
 //            }else {
+            if (detail.get(i).activity == Config.CGDDPDSLTZDActivity ||
+                    detail.get(i).activity == Config.ShouLiaoTongZhiActivity ||
+                    detail.get(i).activity == Config.OutsourcingOrdersIS2Activity ||
+                    detail.get(i).activity == Config.ProducePushInStore2Activity){
+                viewHolder.barCode.setVisibility(View.GONE);
+            }else{
                 viewHolder.barCode.setText("条码:" + detail.get(i).FBarcode);
+            }
+            if (null==detail.get(i).FBillNo){
+                viewHolder.productname.setVisibility(View.GONE);
+            }else{
                 viewHolder.productname.setText("单据编号:" + detail.get(i).FBillNo);
+            }
+
                 viewHolder.productId.setText("物料编码:" + detail.get(i).FProductCode);
                 viewHolder.productxh.setText("物料名:" + detail.get(i).FProductName);
                 viewHolder.num.setText("数量:" + detail.get(i).FQuantity+detail.get(i).FUnit);

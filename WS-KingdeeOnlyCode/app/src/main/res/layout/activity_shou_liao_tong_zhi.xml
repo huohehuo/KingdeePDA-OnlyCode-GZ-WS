@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Spinner
+                <com.fangzuo.assist.widget.SpinnerStorage4Type
                     android:id="@+id/sp_storage"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -347,7 +347,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="19sp" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="是否良品"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+            <com.fangzuo.assist.widget.SpinnerGProduct
+                android:id="@+id/sp_gproduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"

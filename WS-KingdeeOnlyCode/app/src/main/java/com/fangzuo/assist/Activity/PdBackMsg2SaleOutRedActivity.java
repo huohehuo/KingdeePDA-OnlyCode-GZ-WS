@@ -78,6 +78,7 @@ import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
 import com.fangzuo.assist.widget.SpinnerPeople;
 import com.fangzuo.assist.widget.SpinnerStorage;
+import com.fangzuo.assist.widget.SpinnerStorage4Type;
 import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.greendao.gen.BarCodeDao;
 import com.fangzuo.greendao.gen.DaoSession;
@@ -112,7 +113,7 @@ public class PdBackMsg2SaleOutRedActivity extends BaseActivity {
     @BindView(R.id.lv_pushsub)
     ListView lvPushsub;
     @BindView(R.id.sp_storage)
-    SpinnerStorage spStorage;
+    SpinnerStorage4Type spStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.productName)
@@ -309,10 +310,12 @@ public class PdBackMsg2SaleOutRedActivity extends BaseActivity {
                 ).build().list());
                 for (int i = 0; i < fidc.size(); i++) {
                     List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
+                            PushDownSubDao.Properties.Tag.eq(tag),
                             PushDownSubDao.Properties.FInterID.eq(fidc.get(i))
                     ).build().list();
                     pushDownSubDao.deleteInTx(pushDownSubs);
                     List<PushDownMain> pushDownMains = pushDownMainDao.queryBuilder().where(
+                            PushDownMainDao.Properties.Tag.eq(tag),
                             PushDownMainDao.Properties.FInterID.eq(fidc.get(i))
                     ).build().list();
                     pushDownMainDao.deleteInTx(pushDownMains);
@@ -503,12 +506,14 @@ public class PdBackMsg2SaleOutRedActivity extends BaseActivity {
     }
 
     private void getList() {
-        container.clear();
+        container = new ArrayList<>();
         pushDownSubDao = daosession.getPushDownSubDao();
         pushDownMainDao = daosession.getPushDownMainDao();
         for (int i = 0; i < fidcontainer.size(); i++) {
             QueryBuilder<PushDownSub> qb = pushDownSubDao.queryBuilder();
-            list = qb.where(PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
+            list = qb.where(
+                    PushDownSubDao.Properties.Tag.eq(tag),
+                    PushDownSubDao.Properties.FInterID.eq(fidcontainer.get(i))).build().list();
             container.addAll(list);
         }
         if (container.size() > 0) {
@@ -1199,6 +1204,7 @@ public class PdBackMsg2SaleOutRedActivity extends BaseActivity {
 //                    }
         String second = getTimesecond();
         T_main t_main = new T_main();
+        t_main.tag = tag;
         t_main.FIndex = second;
         t_main.MakerId = share.getsetUserID();
         t_main.DataInput = tvDate.getText().toString();
@@ -1237,6 +1243,7 @@ public class PdBackMsg2SaleOutRedActivity extends BaseActivity {
         long insert1 = t_mainDao.insert(t_main);
 
         T_Detail t_detail = new T_Detail();
+        t_detail.tag = tag;
         t_detail.FIndex = second;
         t_detail.FBarcode = barcode;
         t_detail.MakerId = share.getsetUserID();

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/top_bar"
+            android:id="@+id/toolbar"/>
+        <TextView
+            android:id="@+id/tv_bluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="80dp"
+            android:layout_margin="20dp"
+            android:text="蓝牙配置"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#58000000" />
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/ry_bluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:recyclerClipToPadding="true"
+            app:recyclerPaddingTop="8dp"
+            app:scrollbarStyle="insideOverlay"
+            app:scrollbars="none" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <TextView
+            android:text="打印数量"
+            android:ems="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/ed_print_num"
+            tools:text="100"
+            android:selectAllOnFocus="true"
+            android:textSize="13sp"
+            android:inputType="number"
+            android:gravity="center"
+            android:background="@drawable/bg_edittext_selector"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/buttonPrint"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_login"
+            android:layout_weight="1"
+            android:text="测试" />
+    </LinearLayout>
+
+</RelativeLayout>

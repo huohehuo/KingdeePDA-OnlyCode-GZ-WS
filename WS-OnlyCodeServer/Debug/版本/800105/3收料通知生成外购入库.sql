@@ -36,6 +36,7 @@ declare @FInterID varchar(20),     --单号id
         @FEmpID varchar(20),      --业务员id
         @FBillerID varchar(20),   --制单人id 
         @FSettleDate varchar(50), --付款日期
+        @FHeadSelfA0145 varchar(128),--是否良品
         @FExplanation varchar(200),--摘要 
         @FMarketingStyle varchar(20),--销售业务类型
         @FSelTranType varchar(20)  --源单类型
@@ -49,6 +50,7 @@ set @FEmpID =dbo.getString(@mainStr,'|',7)    --业务员id
 set @FManagerID =dbo.getString(@mainStr,'|',8) --主管id
 set @FFManagerID=dbo.getString(@mainStr,'|',9) --发货
 set @FSManagerID=dbo.getString(@mainStr,'|',10) --保管 
+set @FHeadSelfA0145 =dbo.getString(@mainStr,'|',11) --是否良品 
 set @Fdate = convert(varchar(20),GETDATE(),23)  
 exec GetICMaxNum 'ICStockBill',@FInterID output,1,@FBillerID --得到@FInterID 
 ------------------------------------------------------------得到编号
@@ -68,9 +70,9 @@ set @FExplanation='' --备注
 INSERT INTO ICStockBill(FInterID,FBillNo,FBrNo,FTranType,FCancellation,FStatus,FUpStockWhenSave,FVchInterID,FROB,FHookStatus,Fdate,
 FSupplyID,FCheckDate,FFManagerID,FSManagerID,FBillerID,FPOStyle,FMultiCheckDate1,FMultiCheckDate2,FMultiCheckDate3,FMultiCheckDate4,
 FMultiCheckDate5,FMultiCheckDate6,FRelateBrID,FPOOrdBillNo,FOrgBillInterID,FSelTranType,FBrID,FExplanation,FDeptID,FManagerID,FEmpID,
-FCussentAcctID,FManageType,FSettleDate,FPrintCount) 
+FCussentAcctID,FManageType,FSettleDate,FPrintCount,FHeadSelfA0145) 
 VALUES (@FInterID,@FBillNo,'0',1,0,0,@value,0,1,0,@Fdate,@FSupplyID,@FCheckDate,@FFManagerID,@FSManagerID,@FBillerID,@FPOStyle,Null,
-Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0)
+Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0,@FHeadSelfA0145)
 update ICStockBill set FUUID=newid() where FInterID=@FInterID
 
 declare @FEntryID varchar(20),       --新的明细序号
@@ -80,7 +82,8 @@ declare @FEntryID varchar(20),       --新的明细序号
         @FOrderBillNo varchar(50),
         @FOrderInterID varchar(50),
         @FOrderEntryID varchar(50),
-        
+        @FPurchasePrice decimal(28,8),--采购单价
+        @FPurchaseAmount decimal(28,8),--采购单价
         @FItemID varchar(20),        --商品id
         @FQty float,                --基本单位数量
         @FQtyMust float,            --基本单位可验数量
@@ -90,7 +93,7 @@ declare @FEntryID varchar(20),       --新的明细序号
         @Fauxprice float,          -- 单价
         @Famount float,          --金额
         @FTaxAmount float,     -- 
-        
+        @FPrice decimal(28,8),--单位成本
         @FPlanPrice float,     --基本单位计划单价
         @FAuxPlanPrice float, --单位计划单价
         @FPlanAmount float,   --计划价金额     
@@ -145,7 +148,12 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FSourceInterId=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+8) --下推的明FInterID
 	set @FBatchNo=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)
 	select @FSourceBillNo=FBillNo,@FPOStyle = FPOStyle,@FDeptID=FDeptID,@FEmpID=FEmpID,@FFetchAdd=FFetchAdd,@FExplanation=FExplanation  from POInstock where FInterID=@FSourceInterId --下推的单据编号
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderBillNo=FOrderBillNo,@FOrderInterID=FOrderInterID,@FOrderEntryID=FOrderEntryID from POInstockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderBillNo=FOrderBillNo,@FOrderInterID=FOrderInterID,@FOrderEntryID=FOrderEntryID,@FPurchasePrice=FAuxPrice from POInstockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	if(@FOrderInterID>0)
+	begin
+	select @Fauxprice=FAuxPrice from POOrderEntry where FInterID=@FOrderInterID  and FEntryID = @FOrderEntryID
+	set @FPrice = @Fauxprice
+	end
 	select @FCoefficient=FCoefficient from t_MeasureUnit where FMeasureUnitID=@FUnitID --单位换算率
 	set @FQtyMust=@FAuxQtyMust*@FCoefficient --基本单位可验收的数量 
 	select @FPlanPrice=isnull(FPlanPrice,0) from t_ICItem where   FItemID=@FItemID 
@@ -153,6 +161,7 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FAuxPlanPrice=@FPlanPrice*@FCoefficient   --单位计划单价
 	set @FPlanAmount=@FAuxPlanPrice*@Fauxqty          --计划单价金额 
 	set @Famount=@Fauxqty*@Fauxprice
+	set @FPurchaseAmount = @FPurchasePrice *@Fauxqty
 	set @detailIndex=@detailIndex+1
     set @FEntryID=@detailqty*50+@detailIndex
     
@@ -184,9 +193,9 @@ INSERT INTO ICStockBillEntry (FInterID,FEntryID,FBrNo,FMapNumber,FMapName,FItemI
 Fauxqty,FSecCoefficient,FSecQty,FAuxPlanPrice,FPlanAmount,Fauxprice,Famount,Fnote,FKFDate,FKFPeriod,FPeriodDate,FDCStockID,FDCSPID,
 FOrgBillEntryID,FSNListID,FSourceBillNo,FSourceTranType,FSourceInterId,FSourceEntryID,FContractBillNo,FContractInterID,FContractEntryID,
 FOrderBillNo,FOrderInterID,FOrderEntryID,FAllHookQTY,FAllHookAmount,FCurrentHookQTY,FCurrentHookAmount,FAuxQtyInvoice,FSecInvoiceQty,
-FQtyInvoice,FPlanMode,FMTONo) 
+FQtyInvoice,FPlanMode,FMTONo,FChkPassItem,FPurchasePrice,FPurchaseAmount,FPrice) 
 VALUES (@FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQtyMust,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,@FSecCoefficient,@FSecQty,@FAuxPlanPrice,@FPlanAmount,
-@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,0,0,@FSourceBillNo,72,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,0,0,0,0,0,14036,'') 
+@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,0,0,@FSourceBillNo,72,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,0,0,0,0,0,14036,'',1058,@FPurchasePrice,@FPurchaseAmount,@FPrice) 
 
 
 end
@@ -202,7 +211,7 @@ declare @fsrccommitfield_prevalue decimal(28,13)
 declare @fsrccommitfield_endvalue decimal(28,13)
 declare @maxorder int 
 update src set @fsrccommitfield_prevalue= isnull(src.fconcommitqty,0),
-     @fsrccommitfield_endvalue=@fsrccommitfield_prevalue+dest.fqty,
+     @fsrccommitfield_endvalue=@fsrccommitfield_prevalue+dest.fauxqty*cast(t1.fcoefficient as float),
 @maxorder=(select fvalue from t_systemprofile where fcategory='ic' and fkey='cqtylargerpoqty'),
      @fcheck_fail=case isnull(@maxorder,0) when 1 then 0 else (case when (1=1) then @fcheck_fail else -1 end) end,
      src.fconcommitqty=@fsrccommitfield_endvalue,
@@ -210,23 +219,97 @@ update src set @fsrccommitfield_prevalue= isnull(src.fconcommitqty,0),
  from poinstockentry src 
      inner join poinstock srchead on src.finterid=srchead.finterid
      inner join 
- (select u1.fsourceinterid as fsourceinterid,u1.fsourceentryid,u1.fitemid,sum(u1.fqty) as fqty
+ (select u1.fsourceinterid as fsourceinterid,u1.fsourceentryid,u1.fitemid,sum(u1.fauxqty) as fauxqty
  from  icstockbillentry u1 
  where u1.finterid=@FInterID
- group by u1.fsourceinterid,u1.fsourceentryid,u1.fitemid) dest 
+ and u1.fchkpassitem=1058 group by u1.fsourceinterid,u1.fsourceentryid,u1.fitemid) dest 
  on dest.fsourceinterid = src.finterid
  and dest.fitemid = src.fitemid
  and src.fentryid = dest.fsourceentryid
  inner join t_measureunit t1 on src.funitid=t1.fitemid
   
-
-
- Update v1 SET v1.FStatus= (CASE WHEN u1.sumqty>0 THEN (CASE WHEN u1.qty <= u1.sumqty THEN 3 ELSE 1 END) ELSE v1.FStatus END),FChildren=(CASE WHEN u1.sumqty>0 THEN 1 ELSE 0 END)
+Update v1 SET v1.FStatus= (CASE WHEN u1.sumqty>0 THEN (CASE WHEN u1.qty <= u1.sumqty THEN 3 ELSE 1 END) ELSE v1.FStatus END),FChildren=(CASE WHEN u1.sumqty>0 THEN 1 ELSE 0 END)
 From POInStock v1
 inner join (select t2.FInterID,SUM(t2.fqty) AS qty, SUM(t2.fconcommitqty + t2.fcommitqty+t2.FSampleBreakQty) AS sumqty from POInStockEntry t2
     inner join ICStockBillEntry t3 on t2.FInterID = t3.fsourceinterid
     where t3.fsourcetrantype=702 AND t3.FInterID = @FInterID group by t2.FInterID) u1
 on v1.FInterID = u1.FInterID
+
+SELECT v1.FInterID,v1.FEntryID,CASE WHEN (SELECT FValue FROM t_SystemProfile WHERE FCategory='IC' AND FKey='MaterialReturnDirect')=1 THEN SUM(ISNULL(v1.FAuxBackQty,0)) ELSE 0 END+SUM(ISNULL(v1.FAuxConCommitQty,0))+ SUM(ISNULL(v1.FAuxScrapInCommitQty,0)) AS FCommitAuxQty,SUM(ISNULL(v1.Fauxqty,0)) AS Fauxqty
+      INTO #tempTable FROM POInStockEntry v1 
+INNER JOIN ICStockBillEntry t1 ON v1.FInterID = t1.FSourceInterID AND t1.FSourceTranType = 72
+       WHERE t1.FInterID = @FInterID GROUP BY v1.FInterID,v1.FEntryID
+UPDATE t SET FStatus =CASE WHEN u.FInterID IS NULL THEN 3 ELSE 1 END,FClosed = CASE WHEN u.FInterID IS NULL THEN 1 ELSE 0 END
+FROM POInStock t
+LEFT JOIN (SELECT DISTINCT FInterID FROM #tempTable WHERE NOT (FCommitAuxQty>=Fauxqty)) u ON u.FInterID=t.FInterID
+WHERE 1=1 AND EXISTS
+(select 1 from ICStockBillEntry t2 where FSourceTranType=72 and FInterID=@FInterID and t.FInterID=t2.FSourceInterID)
+DROP TABLE #tempTable
+
+ 
+update src set @fsrccommitfield_prevalue= isnull(src.fsecconcommitqty,0),
+     @fsrccommitfield_endvalue=@fsrccommitfield_prevalue+dest.fsecqty,
+@maxorder=(select fvalue from t_systemprofile where fcategory='ic' and fkey='cqtylargerpoqty'),
+     @fcheck_fail=case isnull(@maxorder,0) when 1 then 0 else (case when (1=1) then @fcheck_fail else -1 end) end,
+     src.fsecconcommitqty=@fsrccommitfield_endvalue
+ from poinstockentry src 
+     inner join poinstock srchead on src.finterid=srchead.finterid
+     inner join 
+ (select u1.fsourceinterid as fsourceinterid,u1.fsourceentryid,u1.fitemid,sum(u1.fsecqty) as fsecqty
+ from  icstockbillentry u1 
+ where u1.finterid=@FInterID
+ and u1.fchkpassitem=1058 group by u1.fsourceinterid,u1.fsourceentryid,u1.fitemid) dest 
+ on dest.fsourceinterid = src.finterid
+ and dest.fitemid = src.fitemid
+ and src.fentryid = dest.fsourceentryid
+Update v1 SET v1.FStatus= (CASE WHEN u1.sumqty>0 THEN (CASE WHEN u1.qty <= u1.sumqty THEN 3 ELSE 1 END) ELSE v1.FStatus END),FChildren=(CASE WHEN u1.sumqty>0 THEN 1 ELSE 0 END)
+From POInStock v1
+inner join (select t2.FInterID,SUM(t2.fqty) AS qty, SUM(t2.fconcommitqty + t2.fcommitqty+t2.FSampleBreakQty) AS sumqty from POInStockEntry t2
+    inner join ICStockBillEntry t3 on t2.FInterID = t3.fsourceinterid
+    where t3.fsourcetrantype=702 AND t3.FInterID = @FInterID group by t2.FInterID) u1
+on v1.FInterID = u1.FInterID
+
+update src set @fsrccommitfield_prevalue= isnull(src.fscrapincommitqty,0),
+     @fsrccommitfield_endvalue=@fsrccommitfield_prevalue+dest.fqty,
+@maxorder=(select fvalue from t_systemprofile where fcategory='ic' and fkey='cqtylargerpoqty'),
+     @fcheck_fail=case isnull(@maxorder,0) when 1 then 0 else (case when (1=1) then @fcheck_fail else -1 end) end,
+     src.fscrapincommitqty=@fsrccommitfield_endvalue,
+     src.fauxscrapincommitqty=@fsrccommitfield_endvalue/cast(t1.fcoefficient as float)
+ from poinstockentry src 
+     inner join poinstock srchead on src.finterid=srchead.finterid
+     inner join 
+ (select u1.fsourceinterid as fsourceinterid,u1.fsourceentryid,u1.fitemid,sum(u1.fqty) as fqty
+ from  icstockbillentry u1 
+ where u1.finterid=@FInterID
+ and u1.fchkpassitem=1059 group by u1.fsourceinterid,u1.fsourceentryid,u1.fitemid) dest 
+ on dest.fsourceinterid = src.finterid
+ and dest.fitemid = src.fitemid
+ and src.fentryid = dest.fsourceentryid
+ inner join t_measureunit t1 on src.funitid=t1.fitemid
+  
+  
+  Update v1 SET v1.FStatus= (CASE WHEN u1.sumqty>0 THEN (CASE WHEN u1.qty <= u1.sumqty THEN 3 ELSE 1 END) ELSE v1.FStatus END),FChildren=(CASE WHEN u1.sumqty>0 THEN 1 ELSE 0 END)
+From POInStock v1
+inner join (select t2.FInterID,SUM(t2.fqty) AS qty, SUM(t2.fconcommitqty + t2.fcommitqty+t2.FSampleBreakQty) AS sumqty from POInStockEntry t2
+    inner join ICStockBillEntry t3 on t2.FInterID = t3.fsourceinterid
+    where t3.fsourcetrantype=702 AND t3.FInterID = @FInterID group by t2.FInterID) u1
+on v1.FInterID = u1.FInterID
+  
+  update src set @fsrccommitfield_prevalue= isnull(src.fsecscrapincommitqty,0),
+     @fsrccommitfield_endvalue=@fsrccommitfield_prevalue+dest.fsecqty,
+@maxorder=(select fvalue from t_systemprofile where fcategory='ic' and fkey='cqtylargerpoqty'),
+     @fcheck_fail=case isnull(@maxorder,0) when 1 then 0 else (case when (1=1) then @fcheck_fail else -1 end) end,
+     src.fsecscrapincommitqty=@fsrccommitfield_endvalue
+ from poinstockentry src 
+     inner join poinstock srchead on src.finterid=srchead.finterid
+     inner join 
+ (select u1.fsourceinterid as fsourceinterid,u1.fsourceentryid,u1.fitemid,sum(u1.fsecqty) as fsecqty
+ from  icstockbillentry u1 
+ where u1.finterid=@FInterID
+ and u1.fchkpassitem=1059 group by u1.fsourceinterid,u1.fsourceentryid,u1.fitemid) dest 
+ on dest.fsourceinterid = src.finterid
+ and dest.fitemid = src.fitemid
+ and src.fentryid = dest.fsourceentryid
 IF EXISTS (SELECT 1 FROM ICBillRelations_Sale WHERE FBillType = 1 AND FBillID=@FInterID)
 BEGIN
     UPDATE t1 SET t1.FChildren=t1.FChildren+1
@@ -241,49 +324,8 @@ BEGIN
     INNER JOIN POInstock t3 ON t3.FTranType=t2.FSourceTranType AND t3.FInterID=t2.FSourceInterID
     WHERE t1.FTranType=1 AND t1.FInterID=@FInterID AND t2.FSourceInterID>0
 END
-UPDATE m1 SET m1.FQty = m1.FQty +(-1)*m2.FQty 
-             ,m1.FSecQty = m1.FSecQty +(-1)*m2.FSecQty 
-FROM POInventory m1 INNER JOIN 
-(SELECT u1.FItemID,u1.FAuxPropID,ISNULL(u1.FBatchNo,'') AS FBatchNo,ISNULL(u1.FMTONo,'') AS FMTONo,u1.FStockID ,ISNULL(u1.FDCSPID,0) AS FStockPlaceID
-,LEFT(ISNULL(CONVERT(VARCHAR(20),u1.FKFdate ,120),''),10) AS FKFDate,isnull(u1.FKFPeriod,0) AS FKFPeriod
-,t3.FTypeID AS FStockTypeID,SUM(u2.FQty) AS FQty,SUM(u2.FSecQty) AS FSecQty
-FROM POInstockEntry u1 INNER JOIN ICStockBillEntry u2 ON u1.FInterID=u2.FSourceInterID AND u1.FEntryID=u2.FSourceEntryID
-INNER JOIN t_Stock t3 ON u1.FStockID = t3.FItemID
-WHERE u2.FInterID=@FInterID AND (u2.FSourceTranType IN (72, 73) AND t3.FTypeID IN (501,503)) 
-GROUP BY u1.FItemID,u1.FAuxPropID,u1.FBatchNo,u1.FMTONo,u1.FStockID,u1.FDCSPID,u1.FKFDate,u1.FKFPeriod,t3.FTypeID) m2
-ON m1.FItemID=m2.FItemID AND m1.FAuxPropID=m2.FAuxPropID AND m1.FBatchNo=m2.FBatchNo AND m1.FMTONo=m2.FMTONo 
-AND m1.FStockID=m2.FStockID AND m1.FStockPlaceID=m2.FStockPlaceID AND m1.FKFDate=m2.FKFDate
-AND m1.FKFPeriod=m2.FKFPeriod
-  if(@value=1)
-	begin
-	IF EXISTS(SELECT FOrderInterID FROM ICStockBillEntry WHERE FOrderInterID>0 AND FInterID=@FInterID)
-	 UPDATE u1
-	 SET u1.FStockQty=u1.FStockQty+1* CAST(u2.FStockQty AS FLOAT)
-		 ,u1.FSecStockQty=u1.FSecStockQty+1* CAST(u2.FSecStockQty AS FLOAT)
-		 ,u1.FAuxStockQty=ROUND((u1.FStockQty+1* CAST(u2.FStockQty AS FLOAT))/ CAST(t3.FCoefficient AS FLOAT),t1.FQtyDecimal)
-	 FROM POOrderEntry u1 
-	 INNER JOIN 
-	 (SELECT FOrderInterID,FOrderEntryID,FItemID,SUM(FQty)AS FStockQty,SUM(FSecQty)AS FSecStockQty,SUM(FAuxQty) AS FAuxStockQty
-	  FROM ICStockBillEntry WHERE FInterID=@FInterID  GROUP BY FOrderInterID,FOrderEntryID,FItemID) u2
-	 ON u1.FInterID=u2.FOrderInterID AND u1.FEntryID=u2.FOrderEntryID AND u1.FItemID=u2.FItemID
-	 INNER JOIN t_ICItem t1 ON u1.FItemID=t1.FItemID INNER JOIN t_MeasureUnit t3 ON u1.FUnitID=t3.FItemID
 
-	UPDATE p1 
-	SET p1.FMrpClosed=CASE WHEN ISNULL(p1.FMRPAutoClosed,1)=1 THEN (CASE WHEN p1.FStockQty<p1.FQty THEN 0 ELSE 1 END) ELSE p1.FMrpClosed END
-	FROM POOrderEntry p1 INNER JOIN ICStockBillEntry u1 ON u1.FOrderInterID=p1.FInterID AND u1.FOrderEntryID=p1.FEntryID
-	WHERE u1.FInterID=@FInterID
-	end
- Update t
-Set t.FStatus =Case When (SELECT COUNT(1) FROM POOrderEntry WHERE (FCommitQty>0 OR ( ISNULL(FMRPClosed,0) = 1 And FQty <> 0)) AND FInterID IN(@FSourceInterId))=0 Then 1 When EXISTS(SELECT 1 FROM POOrderEntry te WHERE ISNULL(te.FMRPAutoClosed,1)=1 AND  FCommitQty < FQty  AND te.FInterID IN(@FSourceInterId)) Then 2 Else 3 End
-,t.FClosed =Case When EXISTS(SELECT 1 FROM POOrderEntry te WHERE ISNULL(te.FMRPAutoClosed,1)=1 AND  FCommitQty < FQty  AND te.FInterID IN(@FSourceInterId)) Then 0 Else 1 End
-From POOrder t
-WHERE t.FInterID IN(@FSourceInterId)
-
-Update t1 SET t1.FStatus=
-Case when (select count(*) from POInstockEntry where FInterID=t1.FInterID and FConCommitQty<>0)=0 then 1 when (select count(*) from POInstockEntry where FInterID=t2.FSourceInterID and abs(FQty)<=abs(FConCommitQty)+abs(FBackQty))>=(Select Count(1) From POInstockEntry Where FInterID=t2.FSourceInterID) THEN 3 ELSE 2 End 
- From POInstock t1, ICStockBillEntry t2 
-Where t1.FInterID = t2.FSourceInterID
- AND t2.FInterID=@FInterID
+ 
   
 commit tran 
 return;

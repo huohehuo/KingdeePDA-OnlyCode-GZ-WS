@@ -74,9 +74,9 @@ public abstract class BaseActivity extends FragmentActivity {
     public T_DetailDao t_detailDao;
     public DaoSession daoSession;
     public boolean canClick=false;//用于限制下推单手点列表
-    public boolean canScan=true;//用于限制pda扫码，BaseActivity时也会初始化为true
     public Bundle savedInstanceState;
     public ScanManager mCaptureManager;
+    public boolean canScan=true;//用于限制pda扫码，BaseActivity时也会初始化为true
     public void lockScan(int lock){//0:解锁，1：锁住
         if (lock==0){
             Lg.e("解锁");

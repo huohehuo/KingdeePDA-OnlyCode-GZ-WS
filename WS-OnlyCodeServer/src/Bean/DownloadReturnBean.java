@@ -29,9 +29,37 @@ public class DownloadReturnBean {
     public ArrayList<DbType> dbTypes;
     public ArrayList<Suppliers4P2> suppliers4P2s;
     public ArrayList<CheckLogBackBean> checkLogBackBeans;
+    public ArrayList<CheckType> checkTypes;
+    public ArrayList<CheckResult> checkResults;
+    public ArrayList<PrintHistory> printHistories;
 
     public int size;
 
+    public class PrintHistory {
+        public String FTitle;
+        public String FBarCode;
+        public String FBJMan;
+        public String FName;
+        public String FNumber;
+        public String FModel;
+        public String FNum;
+        public String FSupplier;
+        public String tag;
+
+    }
+    public class CheckResult {
+        public String FInterID;
+        public String FName;
+
+
+
+    }
+
+
+    public class CheckType {
+        public String FInterID;
+        public String FBillNo;
+    }
     public class DbType {
         public String FInterID;
         public String FID;

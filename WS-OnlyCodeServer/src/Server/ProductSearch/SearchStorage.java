@@ -1,6 +1,7 @@
 package Server.ProductSearch;
 
 import Bean.DownloadReturnBean;
+import Bean.SearchBean;
 import Utils.CommonJson;
 import Utils.JDBCUtil;
 import Utils.getDataBaseUrl;
@@ -33,14 +34,23 @@ public class SearchStorage extends HttpServlet {
         Connection conn = null;
         PreparedStatement sta = null;
         ResultSet rs = null;
+        String connSql="";
         ArrayList<DownloadReturnBean.storage> container = new ArrayList<>();
         System.out.println(parameter);
         if (parameter != null) {
             try {
+                SearchBean searchBean = new Gson().fromJson(parameter,SearchBean.class);
+                if (null != searchBean.FStorageType){
+                    if ("0".equals(searchBean.FStorageType)){
+                        connSql =" and FTypeID = 500";
+                    }else if ("1".equals(searchBean.FStorageType)){
+                        connSql =" and FTypeID in (500,501) ";
+                    }
+                }
                 System.out.println(request.getParameter("sqlip") + " " + request.getParameter("sqlport") + " " + request.getParameter("sqlname") + " " + request.getParameter("sqlpass") + " " + request.getParameter("sqluser"));
                 conn = JDBCUtil.getConn(getDataBaseUrl.getUrl(request.getParameter("sqlip"), request.getParameter("sqlport"), request.getParameter("sqlname")), request.getParameter("sqlpass"), request.getParameter("sqluser"));
 //                SQL = "SELECT  FInterID, FID,FName  FROM t_SubMessage Where FInterID>0  AND FDeleted=0  And FTypeID=10001 and (FInterID like '%"+parameter+"%' or FName like '%"+parameter+"%') order by FID";//专业版
-                SQL = "select t1.FItemID,t1.FEmpID,t1.FName,t1.FNumber,t1.FTypeID,t1.FSPGroupID,t1.FGroupID,t1.FStockGroupID,t1.FIsStockMgr,t1.FUnderStock from t_Stock t1 left join t_Item t2 on t1.FItemID=t2.FItemID WHERE t2.FItemClassID=5 AND t2.FDetail=1  AND (((FTypeID not in (501,502,503)) and FTypeID <> 504)) AND t2.FDeleteD=0  and (t1.FNumber like '%"+parameter+"%' or t1.FName like '%"+parameter+"%')";//专业版
+                SQL = "select t1.FItemID,t1.FEmpID,t1.FName,t1.FNumber,t1.FTypeID,t1.FSPGroupID,t1.FGroupID,t1.FStockGroupID,t1.FIsStockMgr,t1.FUnderStock from t_Stock t1 left join t_Item t2 on t1.FItemID=t2.FItemID WHERE t2.FItemClassID=5 AND t2.FDetail=1  AND ((FTypeID <> 504)) AND t2.FDeleteD=0  and (t1.FNumber like '%"+searchBean.val1+"%' or t1.FName like '%"+searchBean.val1+"%') "+connSql;//专业版
                 sta = conn.prepareStatement(SQL);
                 System.out.println("SQL:"+SQL);
                 rs = sta.executeQuery();

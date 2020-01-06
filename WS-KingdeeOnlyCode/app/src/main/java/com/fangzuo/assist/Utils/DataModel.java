@@ -71,6 +71,22 @@ public class DataModel {
             }
         });
     }
+
+    public static void CheckBatch(String io,String json){
+        App.getRService().doIOAction(io,json, new MySubscribe<CommonResponse>() {
+            @Override
+            public void onNext(CommonResponse commonResponse) {
+                DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
+                EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.Check_Batch_result,dBean));
+            }
+            @Override
+            public void onError(Throwable e) {
+                Toast.showText(App.getContext(),"查找条码信息错误："+e.toString());
+            }
+        });
+    }
+
+
     public static void codeCheckForOut(String json){
         App.getRService().getCodeCheckDataForOut(json, new MySubscribe<CommonResponse>() {
             @Override
@@ -313,6 +329,7 @@ public class DataModel {
         App.getRService().doIOAction(io,json, new MySubscribe<CommonResponse>() {
             @Override
             public void onNext(CommonResponse commonResponse) {
+                if (!commonResponse.state)return;
                 DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
                 EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.Insert_result,dBean));
             }

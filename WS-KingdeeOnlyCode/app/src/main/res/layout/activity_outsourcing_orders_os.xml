@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Spinner
+                <com.fangzuo.assist.widget.SpinnerStorage4Type
                     android:id="@+id/sp_storage"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -85,7 +85,7 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/divider_color"/>
-                <com.fangzuo.assist.widget.MyWaveHouseSpinner
+                <com.fangzuo.assist.widget.SpinnerWaveHouse
                     android:id="@+id/sp_wavehouse"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -194,11 +194,21 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <Spinner
+                    android:visibility="gone"
                     android:id="@+id/sp_batchNo"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1" />
-
+                <EditText
+                    android:id="@+id/ed_pihao"
+                    android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="40dp"
+                    android:textSize="15sp"
+                    android:imeOptions="actionNone"
+                    android:background="@drawable/bg_edittext_selector"/>
                 <EditText
                     android:id="@+id/ed_num"
                     android:layout_width="0dp"

@@ -101,10 +101,7 @@ public class ChangePriceActivity extends BaseActivity {
                 etStorage.setText("");
                 break;
             case R.id.check_storage:
-                Bundle bss = new Bundle();
-                bss.putString("search", etStorage.getText().toString());
-                bss.putInt("where", Info.Search_Storage);
-                startNewActivityForResult(ProductSearchActivity.class, R.anim.activity_open, 0, Info.Search_Storage, bss);
+                SearchDataActivity.start(mContext,etStorage.getText().toString(),Info.Search_Storage,EventBusInfoCode.Search_Storage,100);
                 break;
             case R.id.btn_change:
                 upLoad();
