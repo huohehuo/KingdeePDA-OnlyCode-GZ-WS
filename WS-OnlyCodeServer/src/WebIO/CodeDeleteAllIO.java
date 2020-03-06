@@ -1,6 +1,7 @@
 package WebIO;
 
 import Utils.JDBCUtil;
+import Utils.Lg;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -49,14 +50,17 @@ public class CodeDeleteAllIO extends HttpServlet {
 //                System.out.println("SQL:"+SQL);
                 sta.execute();
                 response.getWriter().write(gson.toJson(new WebResponse(true,"删除成功")));
+                Lg.e("删除成功");
             } catch (SQLException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 response.getWriter().write(gson.toJson(new WebResponse(false,"数据库错误："+e.toString())));
+                Lg.e("删除错误"+e.toString());
 //                response.getWriter().write(CommonJson.getCommonJson(false,"数据库错误\r\n----------------\r\n错误原因:\r\n"+e.toString()));
 
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 response.getWriter().write(gson.toJson(new WebResponse(false,"数据库错误："+e.toString())));
+                Lg.e("删除错误"+e.toString());
 
 //                response.getWriter().write(CommonJson.getCommonJson(false,"数据库错误\r\n----------------\r\n错误原因:\r\n"+e.toString()));
 

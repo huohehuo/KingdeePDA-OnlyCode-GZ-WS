@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import static Utils.JDBCUtil.ReadAsChars;
 
 /**
- * Created by NB on 2017/8/7.
+ * 销售出库分类汇总
  */
 @WebServlet(urlPatterns = "/SoldOutSortCheckIO")
 public class SoldOutSortCheckIO extends HttpServlet {

@@ -11,6 +11,9 @@ public class PostBean {
     public String sqlpass;
     public String sqlname;
     public String version;
+    public PostBean() {
+
+    }
     public PostBean(String json) {
         BasicShareUtil share = BasicShareUtil.getInstance(App.getContext());
         this.json = json;

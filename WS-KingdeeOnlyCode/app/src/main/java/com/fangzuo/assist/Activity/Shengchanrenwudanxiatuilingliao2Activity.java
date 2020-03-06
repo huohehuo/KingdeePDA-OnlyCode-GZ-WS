@@ -64,6 +64,7 @@ import com.fangzuo.assist.Utils.DoubleUtil;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.EventBusUtil;
 import com.fangzuo.assist.Utils.GreenDaoManager;
+import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
@@ -200,7 +201,6 @@ public class Shengchanrenwudanxiatuilingliao2Activity extends BaseActivity {
     private List<PushDownSub> container;
     @BindView(R.id.cb_isStorage)
     CheckBox cbIsStorage;
-    private boolean isGetDefaultStorage;
     private Product product;
     private boolean isAuto = false;
     private ShareUtil share;
@@ -338,6 +338,7 @@ public class Shengchanrenwudanxiatuilingliao2Activity extends BaseActivity {
         method = CommonMethod.getMethod(mContext);
         cbIsAuto.setChecked(share.getPDMTisAuto());
         isAuto = share.getPDMTisAuto();
+        cbIsStorage.setChecked(Hawk.get(Config.Storage+"auto",false));
     }
 
     @Override
@@ -561,6 +562,7 @@ public class Shengchanrenwudanxiatuilingliao2Activity extends BaseActivity {
                 @Override
                 public void onFailed(String Msg, AsyncHttpClient client) {
                     qty = 0.0;
+                    tvKucun.setText(dealStoreNumForOut(qty + ""));
                 }
             });
         } else {
@@ -714,7 +716,7 @@ public class Shengchanrenwudanxiatuilingliao2Activity extends BaseActivity {
         cbIsStorage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                isGetDefaultStorage = b;
+                Hawk.put(Config.Storage+"auto",b);
             }
         });
 
@@ -880,13 +882,12 @@ public class Shengchanrenwudanxiatuilingliao2Activity extends BaseActivity {
         }
 
 //        getBatchNo();
-        if (true) {
+        if (cbIsStorage.isChecked()) {
             spStorage.setAutoSelection("", product.FDefaultLoc);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     spWavehouse.setAuto(mContext, storage, wavehouseAutoString);
-
 //                    for (int j = 0; j < waveHouseAdapter.getCount(); j++) {
 //                        if (((WaveHouse)waveHouseAdapter.getItem(j)).FSPID.equals(product.FSPID)) {
 //                            spWavehouse.setSelection(j);

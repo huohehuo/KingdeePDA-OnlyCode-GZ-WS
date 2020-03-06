@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.fangzuo.assist.Activity.PostTestActivity">
+    <include layout="@layout/top_bar"/>
+    <EditText
+        android:id="@+id/ed_post_io"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:background="@android:drawable/edit_text"
+        android:gravity="center"
+        android:layout_height="40dp"
+        android:hint="post接口"
+        android:textSize="15sp"
+        />
+    <EditText
+        android:id="@+id/ed_body"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:background="@android:drawable/edit_text"
+        android:gravity="center"
+        android:layout_height="100dp"
+        android:textSize="15sp"
+        />
+
+    <Button
+        android:id="@+id/btn_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="POST"
+        android:background="@drawable/btn_check"/>
+    <EditText
+        android:id="@+id/ed_get_io"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:background="@android:drawable/edit_text"
+        android:gravity="center"
+        android:layout_height="100dp"
+        android:hint="get接口"
+        android:textSize="15sp"
+        />
+    <Button
+        android:id="@+id/btn_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="GET"
+        android:background="@drawable/btn_check"/>
+</LinearLayout>

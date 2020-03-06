@@ -131,6 +131,30 @@ public class DataModel {
     }
 
     //条码检测
+    public static void codeCheck4DB(String io,String json){
+        App.getRService().doIOAction(io,json, new MySubscribe<CommonResponse>() {
+            @Override
+            public void onNext(CommonResponse commonResponse) {
+                DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
+                if (null != dBean && dBean.codeCheckBackDataBeans.size() > 0) {
+                    if ("OK".equals(dBean.codeCheckBackDataBeans.get(0).FTip)) {
+                        EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.CodeCheck_OK,dBean.codeCheckBackDataBeans.get(0)));
+                    } else if ("OK2".equals(dBean.codeCheckBackDataBeans.get(0).FTip)){
+                        EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.CodeCheck_OK,dBean.codeCheckBackDataBeans.get(0)));
+                    }else{
+                        EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.CodeCheck_Error,dBean.codeCheckBackDataBeans.get(0)));
+                    }
+                } else {
+                    EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.CodeCheck_Error,new CodeCheckBackDataBean("找不到条码信息")));
+                }
+            }
+            @Override
+            public void onError(Throwable e) {
+                EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.CodeCheck_Error,new CodeCheckBackDataBean("查找条码信息错误" + e.toString())));
+            }
+        });
+    }
+    //条码检测
     public static void codeCheck(String io,String json){
         App.getRService().doIOAction(io,json, new MySubscribe<CommonResponse>() {
             @Override

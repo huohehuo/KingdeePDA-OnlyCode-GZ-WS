@@ -1173,7 +1173,7 @@ public class PushDownSNActivity extends BaseActivity {
                 return;
             }
         }
-        if (Hawk.get(Info.FirstInOut,"1").equals("1")){
+        if (Hawk.get(Info.FirstInOut,"0").equals("1")){
             CheckInOutBean bean = new CheckInOutBean(barcode);
             App.getRService().doIOAction(WebApi.CheckFirstInOut,gson.toJson(bean), new MySubscribe<CommonResponse>() {
                 @Override

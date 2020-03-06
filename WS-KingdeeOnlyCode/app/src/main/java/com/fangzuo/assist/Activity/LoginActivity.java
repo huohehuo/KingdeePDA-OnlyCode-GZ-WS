@@ -227,6 +227,13 @@ public class LoginActivity extends BaseActivity implements EasyPermissions.Permi
                 Hawk.put(Info.IsRemanber, b);
             }
         });
+        mBtnLogin.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startNewActivity(PostTestActivity.class,0, 0, false, null);
+                return true;
+            }
+        });
 //        mCbisOL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

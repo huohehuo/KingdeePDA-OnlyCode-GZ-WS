@@ -288,10 +288,10 @@ public class DBActivity extends BaseActivity {
                 break;
             case EventBusInfoCode.CodeCheck_OK://检测条码成功
                 codeCheckBackDataBean = (CodeCheckBackDataBean)event.postEvent;
-                Lg.e("条码检查："+codeCheckBackDataBean.toString());
+                Lg.e("条码检查：",codeCheckBackDataBean);
+                LoadingUtil.dismiss();
                 edPihao.setText(codeCheckBackDataBean.FBatchNo);
                 edNum.setText(codeCheckBackDataBean.FQty);
-                LoadingUtil.dismiss();
                 headDone=false;
                 setDATA(codeCheckBackDataBean.FItemID,false);
                 break;
@@ -578,7 +578,7 @@ public class DBActivity extends BaseActivity {
         LoadingUtil.showDialog(mContext,"正在查找...");
         //查询条码唯一表
         CodeCheckBean bean = new CodeCheckBean(barcode);
-        DataModel.codeCheck("CodeCheckForOut4DB",gson.toJson(bean));
+        DataModel.codeCheck4DB("CodeCheckForOut4DB",gson.toJson(bean));
 //        DataModel.codeCheckForOut(gson.toJson(bean));
     }
 
@@ -1169,14 +1169,55 @@ public class DBActivity extends BaseActivity {
                 lockScan(0);
                 return;
             }
-            //插入条码唯一临时表
-            CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",instorageId==null?"":instorageId,inwavehouseID == null ? "0" : inwavehouseID,BasicShareUtil.getInstance(mContext).getIMIE());
-            DataModel.codeInsertForIn(gson.toJson(bean));
+            if ("OK2".equals(codeCheckBackDataBean.FTip)){
+                new AlertDialog.Builder(mContext)
+                        .setTitle("该条码已装箱，是否拆箱并继续添加!")
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                checkForOk2();
+                            }
+                        })
+                        .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                resetAll();
+                            }
+                        })
+                        .create().show();
+            }else{
+                //插入条码唯一临时表
+                CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",instorageId==null?"":instorageId,inwavehouseID == null ? "0" : inwavehouseID,BasicShareUtil.getInstance(mContext).getIMIE());
+                DataModel.codeInsertForIn(gson.toJson(bean));
+            }
         }else{
             Addorder();
         }
-
     }
+    //先执行拆箱，在进行临时表添加
+    private void checkForOk2(){
+        LoadingUtil.showDialog(mContext,"正在拆箱...");
+        String json = barcode+"|"+ ShareUtil.getInstance(mContext).getsetUserID()+"|"+"PDA";
+        App.getRService().doIOAction("UnBoxUpload",json, new MySubscribe<CommonResponse>() {
+            @Override
+            public void onNext(CommonResponse commonResponse) {
+                DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
+                if (null != dBean && dBean.codeCheckBackDataBeans.size() > 0) {
+                    //插入条码唯一临时表
+                    CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",instorageId==null?"":instorageId,inwavehouseID == null ? "0" : inwavehouseID,BasicShareUtil.getInstance(mContext).getIMIE());
+                    DataModel.codeInsertForIn(gson.toJson(bean));
+                    LoadingUtil.dismiss();
+                } else {
+                    LoadingUtil.showAlter(mContext,"拆箱失败,返回数据为空");
+                }
+            }
+            @Override
+            public void onError(Throwable e) {
+                LoadingUtil.showAlter(mContext,"拆箱错误：" + e.toString());
+            }
+        });
+    }
+
     private void Addorder() {
 
         String discount = "0";

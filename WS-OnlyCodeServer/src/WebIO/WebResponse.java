@@ -22,8 +22,65 @@ public class WebResponse {
 	public ArrayList<MdUser> mdUsers;
 	public ArrayList<Client> clients;
 	public ArrayList<SoldOutSortBean> soldOutSortBeans;
+	public ArrayList<CqPdPlanBean> cqPdPlanBeans;
+	public ArrayList<PDSub> pdSubs;
+	public ArrayList<CodeCheckBackDataBean> codeCheckBackDataBeans;
 
+	//条码检测
+	public class CodeCheckBackDataBean {
+		public String FTip;
+		public String FBillNo;
+		public String FItemID;
+		public String FUnitID;
+		public String FQty;
+		public String FStockID;
+		public String FStockPlaceID;
+		public String FBatchNo;
+		public String FKFPeriod;
+		public String FKFDate;
+		public String FNumber;
+		public String FName;
+		public String FPrice;
+		public String FOLOrderBillNo;
+	}
 
+	//盘点明细
+	public class PDSub {
+		public String FID;
+		public String FStockID;
+		public String FItemID;
+		public String FSPName;
+		public String FNumber;
+		public String FName;
+		public String FModel;
+		public String FStockPlaceID;
+		public String FUnitName;
+		public String FQty;//z账存数量
+		public String FQtyAct1;
+		public String FQtyAct;//实存数量
+		public String FCheckQty1;//一盘数量
+		public String FCheckQty;//本次盘点数量
+		public String FAdjQty1;//本次调整数量
+		public String FAdjQty;//已调整数量
+		public String FRemark;
+		public String FUnitID;
+		public String FUnitGroupID;
+		public String FBatchNo;
+		public String FBarCode;
+		public String FStockName;
+
+	}
+
+	//初期盘点方案
+	public class CqPdPlanBean {
+		public String FName;
+		public String FID;
+		public String FDate;
+		public String FMaker ;
+		public String FRemark ;
+	}
+
+	//销售出库分类汇总
 	public class SoldOutSortBean {
 		public String FProductType;
 		public String FNum;
@@ -76,6 +133,7 @@ public class WebResponse {
 		public String FPrice;
 		public String FProductType;
 		public String FBelongStorage;
+		public String FModel;
 	}
 
 	public class CheckLogBackBean {
