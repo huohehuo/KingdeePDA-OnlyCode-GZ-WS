@@ -32,7 +32,7 @@ declare   @FOrderID varchar(50),--PDA单据编号
             --不存在系统
             	insert into t_PDABarCodeCheckFirstEntry(FID,FCheckUserID,FUserIDSupply,FCheckDate,FInterID,FEntryID,FBillNo,FInterIDIn,FInterIDOut,FInterIDAssemble,FInterIDDisassemble,FItemID,FUnitID,FBarCode,FDatePrint,FDateInStore,FDateOutStore,FIsInStore,FIsOutStore,FUserInStore,FUserOutStore,FStockID,FStockPlaceID,FBatchNo,FKFPeriod,FKFDate,FDatePrintShort,FQty,FQtying,FPrintType,FUserPrint,FRemark1,FRemark2,FRemark3,FRemark4,FRemark5,FRemark6,FRemark7,FRemark8,FRemark9,FRemark10,FRemark,FOver,FOrderBillNo,FStatus)
 			select @FID,@FCheckUserID,@FUserIDSupply,CONVERT(varchar(50),getdate(),20),0,0,'',0,0,0,0,0,0,FBarCode,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,'',0,'','',1,0,'',0,'','','','','','','','','','','',0,'',0 from a_DetailsTable where FOrderID=@FOrderID and FPDAID=@FPDAID and not exists(select 1 from t_PDABarCodeSign where FBarCode=a_DetailsTable.FBarCode)
- 
+ delete from a_DetailsTable where FPDAID=@FPDAID and FOrderID=@FOrderID
 --end
 commit tran 
 return;

@@ -50,12 +50,15 @@ public class PrintHistory {
     public String F_TypeID;//区分单据类型 0 是水版 1为原木(英尺版本) todo//早期版本0 是水版 1为原木（立方米版本）,2或者其他为原木英尺版本，0711西安已统一为0水板1原木
     public String F_Plies;//层数
 
-    @Generated(hash = 1107292789)
+    public String FPlanType;
+
+    @Generated(hash = 1310191731)
     public PrintHistory(Long id, String FTitle, String FBarCode, String FBJMan, String FName, String FNumber, String FModel, String FNum,
             String FSupplier, String tag, String FBatch, String FNum2, String FUnit, String FBaseUnit, String FBaseUnitID, String FStoreUnit,
             String FUnitAux, String FNot, String FPrintMan, String FStorage, String FWaveHouse, String FSaveIn, String FCheck, String FDate,
             String FMaterialid, String FAuxSign, String FActualModel, String FLevel, String FYmLenght, String FYmDiameter, String FBLenght,
-            String FBWide, String FBThick, String FVolume, String FCeng, String FWidth, String FProject, String F_TypeID, String F_Plies) {
+            String FBWide, String FBThick, String FVolume, String FCeng, String FWidth, String FProject, String F_TypeID, String F_Plies,
+            String FPlanType) {
         this.id = id;
         this.FTitle = FTitle;
         this.FBarCode = FBarCode;
@@ -95,6 +98,7 @@ public class PrintHistory {
         this.FProject = FProject;
         this.F_TypeID = F_TypeID;
         this.F_Plies = F_Plies;
+        this.FPlanType = FPlanType;
     }
     @Generated(hash = 915761306)
     public PrintHistory() {
@@ -341,6 +345,12 @@ public class PrintHistory {
     }
     public void setTag(String tag) {
         this.tag = tag;
+    }
+    public String getFPlanType() {
+        return this.FPlanType;
+    }
+    public void setFPlanType(String FPlanType) {
+        this.FPlanType = FPlanType;
     }
 
 

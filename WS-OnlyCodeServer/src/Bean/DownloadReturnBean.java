@@ -45,6 +45,7 @@ public class DownloadReturnBean {
         public String FNum;
         public String FSupplier;
         public String tag;
+        public String FPlanType;
 
     }
     public class CheckResult {

@@ -80,6 +80,7 @@ public class WwOrder2SLTZActivityUpload extends HttpServlet {
 							cBean.FModel					=rs.getString("规格型号");
 							cBean.FNum					=rs.getString("报检数量");
 							cBean.FSupplier					=rs.getString("供应商");
+							cBean.FPlanType					=rs.getString("计划类别");
 							cBean.tag					="30";//所属单据的tag标识
 							list.add(cBean);
 						}

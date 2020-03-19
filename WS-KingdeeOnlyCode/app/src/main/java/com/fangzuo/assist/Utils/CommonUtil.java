@@ -294,6 +294,7 @@ public class CommonUtil {
 //            zpSDK.drawBox(1,1,1,668,888);
                 zpSDK.drawText(0, 1, "__________________________________________________________________", 2, 0, 0, false, false);
                 zpSDK.drawText(290, 34, "收料通知请检单", size2, 0, 1, false, false);
+                zpSDK.drawText(560, 34, "类别:"+beanTop.FPlanType, size2, 0, 1, false, false);
                 zpSDK.drawText(0, 50, "__________________________________________________________________", 2, 0, 0, false, false);
                 zpSDK.drawBarCode(100, 78,  beanTop.FBarCode, 128, false, 4, 66);
                 zpSDK.drawText(20, 142,"               "+beanTop.FBarCode, size3, 0, 0, false, false);

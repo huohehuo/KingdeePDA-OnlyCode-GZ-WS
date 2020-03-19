@@ -10,652 +10,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c314ea08-6d77-469a-9858-6948002aef46" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/PostTestActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/res/layout/activity_post_test.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/CodeCheck4PdIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/CodeCheckAndInsert4CqPdIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/CodeCheckAndInsert4PdIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/CodeInsert4PdIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/SearchIO/GetCqPdPlanIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/SearchIO/GetPDSubIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/SearchIO/GetPdPlanIO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/UploadIO/WebCqPdUpload.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/WebIO/UploadIO/WebPdUpload.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/caches/build_file_checksums.ser" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/codeStyles/Project.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/gradle.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/runConfigurations.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/gradle-mvn-push.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/gradle.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/proguard-rules.pro" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/src/main/java/com/daimajia/numberprogressbar/NumberProgressBar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/src/main/java/com/daimajia/numberprogressbar/OnProgressBarListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/src/main/res/values/attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/NumberProgressBar-master/src/main/res/values/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/android-async-http-1.4.8.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/httpcore-4.0-alpha5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/nineoldandroids-2.4.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/platform_sdk_v2.3.706.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/scanSDK.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/libs/xUtils-2.6.14.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/proguard-rules.pro" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/release/app-release.apk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/release/output.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/androidTest/java/com/fangzuo/assist/ExampleInstrumentedTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/ABase/BaseActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/ABase/BaseFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/BulkPdActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/CGDDPDSLTZDActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ChangePriceActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/CodeStateCheck.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/CommonActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/Crash/App.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/Crash/CrashHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/DBActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/DbCheckGoodsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/FHTZDDBActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/GyYhActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/GyYhRedActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/HBDPDCPRKActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/InCheckGoodsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/IpPortActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/LoginActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/LoginNewActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/MenuActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/MenuP2Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/MiddleActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OtherInStoreActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OtherOutStore4RedActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OtherOutStoreActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OutCheckGoodsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OutsourcingOrdersISActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/OutsourcingOrdersOSActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CheckLogActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CheckLogShow2Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CheckLogShowActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CheckStoreActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CheckStoreShowActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CreateSaleOutActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/CreateSaleOutRedActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/P2/ScanCheckActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PDActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PackageActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PdBackMsg2SaleOutRedActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProduceAndGetActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProducePushInStoreActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProductInCheckGoodsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProductInStorageActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProductInStorageRedActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ProductSearchActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PurchaseInStorageActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PurchaseOrderActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PushDownActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PushDownMTActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PushDownPOActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PushDownPagerActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/PushDownSNActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ReView4ScanCheckActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ReViewForOnlyCodeActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SCRWDPDSCHBDActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SaleOrderActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SearchDataActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SettingActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SettingMenuActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ShengchanrenwudanxiatuilingliaoActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/ShouLiaoTongZhiActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SoldOutActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/SplashActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/StorageCheckActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/Table2Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/Table3Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/Table4Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/TableActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/TestActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Activity/XSDDPDFLTZDActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/AlertLvAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/AutoTVAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/BackOrderProductListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/BatchNoSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/CarNoScAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/CheckFirstInOutAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/ClientSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/DepartmentSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/EmployeeSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/FidNoAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/FidNoShowAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/GProductSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/GetGoodsDepartmentSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/GridViewAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/InStoreTypeSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/LogSearch2RyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/LogSearchRyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/LoginSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/MenuFragmentAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PDListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PDMainSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PayMethodSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PayTypeSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PiciSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PiciSpForSubAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/ProductAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/ProductselectAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/ProductselectAdapter1.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PurchaseMethodSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PurchaseScopeSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PushDownListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/PushDownSubListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/ReView1Adapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchClientAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchDbTypeAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchDepartmentAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchManAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchStorageAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SearchSupplierAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SendOrderBeanListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SendOrderProductListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SendOrderRedBeanListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SettingListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/StorageCheckRyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/StorageSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/StoreSearch2RyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/StoreSearchRyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/StripAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/SupplierSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/Table4Adapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/TableAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/TableAdapter1.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/TableAdapter4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/UnitSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/WLKMSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/WaveHouseSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Adapter/YuandanSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/BackOrderQuery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/BackOrderResult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/BasePush.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CheckInOutBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CheckLogBackBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CheckLogSearchBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CodeCheckBackDataBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CodeCheckBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CodeStateCheckBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CommonBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CommonResponse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/CommonSpAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/ConnectResponseBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/ConnectSQLBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/DeleteOutCheckBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/DownLoadSubListBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/DownloadReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/EventBusEvent/ClassEvent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/FidNoShowBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/GetBatchNoBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/InOutBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/InStorageNumListBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/InStoreNumBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/NewVersionBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/OrderQuery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/OrderQueryResult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PDListReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PDSubRequestBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PDsubReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/ProductReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PurchaseInStoreUploadBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PushDownDLBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PushDownListRequestBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/PushDownListReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/ScanDLReturnBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/SendOrderListBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/SendOrderQuery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/SendOrderResult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/SettingList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Beans/TimeBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/BarCode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Bibie.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/BibieTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Client.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/DbType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Department.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Employee.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/GProduct.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/GetGoodsDepartment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/InStorageNum.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/InStoreType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/MainLockData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PDMain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PDSub.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PayType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PriceMethod.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Product.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PurchaseMethod.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PushDownMain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/PushDownSub.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Storage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Suppliers.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Suppliers4P2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/T_Detail.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/T_main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Unit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/User.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/Wanglaikemu.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/WaveHouse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Dao/YuandanType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/Purchase4P2Fragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/PurchaseFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/SaleFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/SettingFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/StorageFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/pushdown/ChooseFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Fragment/pushdown/DownLoadPushFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/ScreenList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/base/IPresenter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/base/IView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/presenter/DataPresenter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/presenter/TestPresenter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/view/DataView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/MVContract/view/TestView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Receiver/BootReceiver.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Receiver/UpdateReceiver.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/RxSerivce/CloudService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/RxSerivce/MySubscribe.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/RxSerivce/RService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/RxSerivce/ServiceRequest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/RxSerivce/ToSubscribe.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Server/WebAPI.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Service/DataService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Service/DisposeService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Service/SetLastUseTime.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/AnimUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Asynchttp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/BasicShareUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/CallBack.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/CommonMethod.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/CommonMethod_backup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/CommonUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Config.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/DataBaseAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/DataModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/DoubleUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/DownLoadData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/DropEditText.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/EventBusInfoCode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/EventBusUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/GetSettingList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/GreenDaoManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Info.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/JsonCreater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Lg.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/LocDataUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/MD5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/MathUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/MediaPlayer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Mthods.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/PagerSlidingTabStrip.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/PopUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Popwindow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/RetrofitUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/SQLUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/ScanApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/ShareUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/SnackBarUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Synchttp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/Toast.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/UpgradeUtil/AppStatisticalUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/UpgradeUtil/AppVersionUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/UpgradeUtil/PhoneInfoUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/UpgradeUtil/StatisticalBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/UpgradeUtil/UpgradeBean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/VibratorUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/Utils/WebApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/CarNoSearch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/LoadingUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/MySpinner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/MyWaveHouseSpinner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerCommon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerGProduct.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerPeople.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerPeople2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerStorage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerUnit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/SpinnerWaveHouse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/TextViewCard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/widget/TextViewTitle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/CustomCaptureActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/CustomViewfinderView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/RGBLuminanceSource.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/ScanManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/activity/CaptureActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/AutoFocusCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/CameraConfigurationManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/CameraManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/FlashlightManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/PlanarYUVLuminanceSource.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/camera/PreviewCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/CaptureActivityHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/DecodeFormatManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/DecodeHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/DecodeThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/FinishListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/InactivityTimer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/decoding/Intents.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/encoding/EncodingHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/view/ViewfinderResultPointCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/assist/zxing/view/ViewfinderView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/BarCodeDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/BibieDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/BibieTableDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/ClientDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/DaoMaster.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/DaoSession.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/DepartmentDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/EmployeeDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/GProductDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/GetGoodsDepartmentDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/InStorageNumDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/InStoreTypeDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/MainLockDataDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PDMainDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PDSubDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PayTypeDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PriceMethodDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/ProductDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PurchaseMethodDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PushDownMainDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/PushDownSubDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/SendOrderListBeanDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/StorageDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/Suppliers4P2Dao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/SuppliersDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/T_DetailDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/T_mainDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/UnitDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/UserDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/WanglaikemuDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/WaveHouseDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/java/com/fangzuo/greendao/gen/YuandanTypeDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_fade_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_fade_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_hold.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_open.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_left_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_left_in_part.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_left_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_left_out_part.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_right_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_right_in_part.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_right_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/activity_slide_right_out_part.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/bottom_end.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/dialog_enter.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/dialog_exit.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/push_bottom_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/push_bottom_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/push_top_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/push_top_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/reverse_anim.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/rotating.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/slide_in_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/anim/slide_out_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/background_tab.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/bg_edittext_selector.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btn_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btn_login.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btn_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btn_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btn_setting.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btncheckclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btncheckunclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnloginclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnloginunclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnredclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnredunclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/btnunclick.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/clear.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/dialog_loading.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/dialog_loading_img.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/ed_bg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/ed_focus.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/ed_unfocus.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/edittext_focused.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/edittext_normal.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/et_phone_number_bg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/loading_bg.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/login_edit_shape.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/nodata.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/progress.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/setting_click.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/setting_unclick.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/drawable/tv_bg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_bulk_pd.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_cgddsltzd.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_change_price.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_check_log.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_check_log_show.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_check_log_show2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_check_store.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_check_store_show.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_code_state_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_common.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_cprk.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_create_sale_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_create_sale_out_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_db.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_db_check_goods.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_fhtzddb.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_gy_yh.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_gy_yh_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_in_check_goods.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_ip_port.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_login.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_login_new.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_menu_p2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_middle.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_other_in_store.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_other_out_store.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_other_out_store4_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_out_check_goods.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_outsourcing_orders_is.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_outsourcing_orders_os.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_package.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_pd.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_pd_back_msg2_sale_out_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_produce_and_get.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_produce_push_in_store.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_product_in_check_goods.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_product_in_storage.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_product_in_storage_red.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_product_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_purchase_in_storage.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_purchase_order.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down_mt.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down_pager.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down_po.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down_scrwdscll.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_push_down_sn.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_re_view4_scan_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_re_view_for_only_code.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_sale_order.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_scan_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_scrwdpdschbd.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_search_data.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_setting.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_setting_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_shou_liao_tong_zhi.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_sold_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_splash.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_storage_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_table.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_table2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_table3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_table4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_test.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_test2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_xsddpdfltzd.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/activity_zxing_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/autolayout.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/bottom_bar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/bottom_bar4p2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/custom_barcode_scanner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/dialog_loading.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fixalertitems.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_choose.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_down_load_push.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_purchase.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_sale.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_setting.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/fragment_storage.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/gvitems.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/ipport.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_billno_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_check_first_inout.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_common_text.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_fidshow.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_log_2_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_log_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_log_search222.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_search_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_storage_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_storage_check_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_store2_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/item_store_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/items_pd_alert_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/items_pdlist.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/itemtext.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/line_heng.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/line_shu.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/list_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/list_review1_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/list_table4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/lv_database_items.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/pd_alert.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/poplist.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/popview.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/producselect.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/pushdown_main_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/pushdown_sublist.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/selectdownload.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/send_order_product_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/send_order_red_product_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/setting_lv_items.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/top_bar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_car_no_search.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_common_spinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_my_people_spinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_my_textview.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_my_unit_spinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_my_wave_spinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_myspinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/view_textview_title.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/layout/zxing_camera.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-hdpi/pass.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-hdpi/user.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/back.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/backarror.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/check.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/chuku.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/delete.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/delete1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/diaobo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/down.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/download.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/fix.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/getnewversion.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/gettry.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/nocheck.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/pandian.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/purchase.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/purchaseinstorage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/purchaseomstorage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/purchaseorback.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/purchaseorder.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/ruku.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/sale.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/saleorder.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/scan.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/sellinout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/sellout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/setting.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/setting_bottom.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/setting_focus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/sound.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/spinnerbg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/storage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/unpurchase.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/unsale.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/unsetting.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/unstorage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/up.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-mdpi/wifi.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxhdpi/database.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxhdpi/test.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxhdpi/tomcat.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/beep.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/error.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/mag.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/ok.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/raw/beep.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/raw/error.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/raw/mag.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/raw/raw/ok.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values-en/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/attr.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/colors.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/ids.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/values/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/main/res/xml/file_paths.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/app/src/test/java/com/fangzuo/assist/ExampleUnitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/gradle.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/gradle/wrapper/gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/gradle/wrapper/gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/gradlew" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/settings.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode - 副本 (3)/版本备份说明.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Debug/配置文件/DBSetFile.db" afterPath="$PROJECT_DIR$/Debug/配置文件/DBSetFile.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/DBActivity.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/DBActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/LoginActivity.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/PushDownSNActivity.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/PushDownSNActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/Shengchanrenwudanxiatuilingliao2Activity.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Activity/Shengchanrenwudanxiatuilingliao2Activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Beans/PostBean.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Beans/PostBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/DataModel.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/DataModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$BarCode.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$BarCode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CheckResult.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CheckResult.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CheckType.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CheckType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Client.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Client.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CodeCheckBackDataBean.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$CodeCheckBackDataBean.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$DbType.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$DbType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$GProduct.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$GProduct.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$GetGoodsDepartment.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$GetGoodsDepartment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$InStorageType.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$InStorageType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$InstorageNum.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$InstorageNum.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$PriceMethod.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$PriceMethod.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$PrintHistory.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$PrintHistory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Suppliers4P2.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Suppliers4P2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Unit.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$Unit.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$User.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$bibiezhong.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$bibiezhong.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$department.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$department.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$employee.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$employee.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$payType.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$payType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$product.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$product.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$purchaseMethod.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$purchaseMethod.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$storage.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$storage.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$suppliers.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$suppliers.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$wanglaikemu.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$wanglaikemu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$wavehouse.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$wavehouse.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$yuandanType.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Bean/DownloadReturnBean$yuandanType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Server/upload/CGDDPDSLTZDUpload.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Server/upload/CGDDPDSLTZDUpload.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Server/upload/WwOrder2SLTZActivityUpload.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/Server/upload/WwOrder2SLTZActivityUpload.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/WebIO/SearchIO/GetPDSubIO.class" afterPath="$PROJECT_DIR$/out/artifacts/Assist/WEB-INF/classes/WebIO/SearchIO/GetPDSubIO.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$BarCode.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$BarCode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CheckResult.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CheckResult.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CheckType.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CheckType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Client.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Client.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CodeCheckBackDataBean.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$CodeCheckBackDataBean.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$DbType.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$DbType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$GProduct.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$GProduct.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$GetGoodsDepartment.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$GetGoodsDepartment.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$InStorageType.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$InStorageType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$InstorageNum.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$InstorageNum.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$PriceMethod.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$PriceMethod.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$PrintHistory.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$PrintHistory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Suppliers4P2.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Suppliers4P2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Unit.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$Unit.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$User.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$bibiezhong.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$bibiezhong.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$department.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$department.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$employee.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$employee.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$payType.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$payType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$product.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$product.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$purchaseMethod.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$purchaseMethod.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$storage.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$storage.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$suppliers.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$suppliers.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$wanglaikemu.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$wanglaikemu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$wavehouse.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$wavehouse.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$yuandanType.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Bean/DownloadReturnBean$yuandanType.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Server/upload/CGDDPDSLTZDUpload.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Server/upload/CGDDPDSLTZDUpload.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/Server/upload/WwOrder2SLTZActivityUpload.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/Server/upload/WwOrder2SLTZActivityUpload.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/classes/WebIO/SearchIO/GetPDSubIO.class" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/WebIO/SearchIO/GetPDSubIO.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/build.gradle" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Dao/PrintHistory.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Dao/PrintHistory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/CommonUtil.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/CommonUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/Info.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/assist/Utils/Info.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/res/layout/activity_shengchanrenwudanxiatuilingliao2.xml" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/res/layout/activity_shengchanrenwudanxiatuilingliao2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/greendao/gen/DaoMaster.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/greendao/gen/DaoMaster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/greendao/gen/PrintHistoryDao.java" afterPath="$PROJECT_DIR$/../WS-KingdeeOnlyCode/app/src/main/java/com/fangzuo/greendao/gen/PrintHistoryDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WebIO/CodeDeleteAllIO.java" afterPath="$PROJECT_DIR$/src/WebIO/CodeDeleteAllIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WebIO/CodeDeleteIO.java" afterPath="$PROJECT_DIR$/src/WebIO/CodeDeleteIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WebIO/SoldOutSortCheckIO.java" afterPath="$PROJECT_DIR$/src/WebIO/SoldOutSortCheckIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/WebIO/WebResponse.java" afterPath="$PROJECT_DIR$/src/WebIO/WebResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Debug/版本/800105/0000初期盘点回单.sql" afterPath="$PROJECT_DIR$/Debug/版本/800105/0000初期盘点回单.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Debug/版本/800105/3委外订单下推收料通知单.sql" afterPath="$PROJECT_DIR$/Debug/版本/800105/3委外订单下推收料通知单.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Debug/版本/800105/3采购订单下推收料通知单.sql" afterPath="$PROJECT_DIR$/Debug/版本/800105/3采购订单下推收料通知单.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bean/DownloadReturnBean.java" afterPath="$PROJECT_DIR$/src/Bean/DownloadReturnBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java" afterPath="$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java" afterPath="$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/web/WEB-INF/classes/" />
@@ -725,11 +151,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JDBCUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Utils/JDBCUtil.java">
+      <file leaf-file-name="WebPdUpload.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/WebIO/UploadIO/WebPdUpload.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1474">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state relative-caret-position="792">
+              <caret line="51" column="37" lean-forward="false" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -737,14 +163,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebPdUpload.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/WebIO/UploadIO/WebPdUpload.java">
+      <file leaf-file-name="CGDDPDSLTZDUpload.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+            <state relative-caret-position="176">
+              <caret line="78" column="82" lean-forward="false" selection-start-line="78" selection-start-column="82" selection-end-line="78" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WwOrder2SLTZActivityUpload.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="968">
+              <caret line="64" column="41" lean-forward="false" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="false" />
+                <element signature="e#923#924#0" expanded="false" />
+                <element signature="e#946#947#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DownloadReturnBean.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Bean/DownloadReturnBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="990">
+              <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -797,39 +245,6 @@
               <caret line="54" column="30" lean-forward="false" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GetPDSubIO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/WebIO/SearchIO/GetPDSubIO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1232">
-              <caret line="71" column="49" lean-forward="false" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#6239#6259#0" expanded="false" />
-                <marker date="1579169653185" expanded="true" signature="1905:2002" ph="update t_PDA... " />
-                <marker date="1579169653185" expanded="true" signature="2215:2267" ph="delete from " />
-                <marker date="1579169653185" expanded="true" signature="3506:3988" ph="select t1.FI... t_PDABarCodeCheckEntry" />
-                <marker date="1579169653185" expanded="true" signature="6307:7242" ph="Select a.* F... FInterID" />
-                <marker date="1579169653185" expanded="true" signature="6325:7179" ph="Select t1.FI... ICInvBackup" />
-                <marker date="1579169653185" expanded="true" signature="8761:8854" ph="Update ICInv... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InsertForPd.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Server/Check/InsertForPd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#806#807#0" expanded="false" />
-                <element signature="e#829#830#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -919,15 +334,12 @@
         <option value="$PROJECT_DIR$/src/Server/ProductSearch/SearchStorage.java" />
         <option value="$PROJECT_DIR$/src/Server/upload/HBDPDCPRKUpload.java" />
         <option value="$PROJECT_DIR$/src/Server/PushDown/PushDownList.java" />
-        <option value="$PROJECT_DIR$/src/Bean/DownloadReturnBean.java" />
-        <option value="$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java" />
         <option value="$PROJECT_DIR$/src/Server/PushDown/PushDownloadList.java" />
         <option value="$PROJECT_DIR$/src/Bean/PushDownDLBean.java" />
         <option value="$PROJECT_DIR$/src/Bean/ScanPDReturnBean.java" />
         <option value="$PROJECT_DIR$/src/Server/PushDown/ScanToDLPDlist.java" />
         <option value="$PROJECT_DIR$/src/Server/prop/RegisterCode.java" />
         <option value="$PROJECT_DIR$/src/Server/Check/CodeCheckForOut4DB.java" />
-        <option value="$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java" />
         <option value="$PROJECT_DIR$/src/Server/upload/UnBoxUpload.java" />
         <option value="$PROJECT_DIR$/src/Server/prop/ConnectDataBase.java" />
         <option value="$PROJECT_DIR$/src/WebIO/SoldOutSortCheckIO.java" />
@@ -946,6 +358,9 @@
         <option value="$PROJECT_DIR$/src/WebIO/UploadIO/WebPdUpload.java" />
         <option value="$PROJECT_DIR$/src/Utils/JDBCUtil.java" />
         <option value="$PROJECT_DIR$/src/WebIO/SearchIO/GetPDSubIO.java" />
+        <option value="$PROJECT_DIR$/src/Bean/DownloadReturnBean.java" />
+        <option value="$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java" />
+        <option value="$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java" />
       </list>
     </option>
   </component>
@@ -989,7 +404,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1193,11 +610,13 @@
               <option name="myItemId" value="artifacts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Assist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -1208,7 +627,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15429688" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../KingdeePDA-OnlyCode-SZ-WDFE/WDFE-OnlyCodeServer" />
+    <property name="last_opened_file_path" value="D:/Linspace/0501STGL/STGLserver" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="SQL Server (Microsoft)" />
     <property name="SearchEverywhereHistoryKey" value="ProductSearchLike&#9;FILE&#9;file://E:/FZ-kingdee/KingdeeServer/Asist/src/Server/ProductSearch/ProductSearchLike.java" />
@@ -2203,11 +1622,15 @@
       <workItem from="1582015440084" duration="625000" />
       <workItem from="1582081113230" duration="682000" />
       <workItem from="1582250353119" duration="601000" />
+      <workItem from="1583977390841" duration="758000" />
+      <workItem from="1584006209120" duration="1332000" />
+      <workItem from="1584062443664" duration="1920000" />
+      <workItem from="1584411767791" duration="1889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1511223000" />
+    <option name="totallyTimeSpent" value="1517122000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2220,11 +1643,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46637744" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2237,7 +1661,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1332611" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20255864" sideWeight="0.7120419" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21108742" sideWeight="0.7120419" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1380597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.04904051" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2250,7 +1674,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46637744" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="2081" y="100" width="1736" height="866" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.4978678" order="11" side_tool="false" content_ui="tabs" />
@@ -2375,13 +1798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="86" column="17" lean-forward="false" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Check/CodeCheckForOut.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -2393,13 +1809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="62" column="39" lean-forward="false" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -2644,13 +2053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bean/DownloadReturnBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="89" column="31" lean-forward="true" selection-start-line="89" selection-start-column="31" selection-end-line="89" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/WebIO/CodeCheckAndInsert4PdIO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1452">
@@ -2679,11 +2081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#806#807#0" expanded="false" />
-            <element signature="e#829#830#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2744,18 +2141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/WebIO/SearchIO/GetPdPlanIO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1579142881238" expanded="true" signature="1562:1753" ph="select t1.FN... t_PDABarCodeCheckFirst" />
-            <marker date="1579142881238" expanded="true" signature="1775:1947" ph="select a.FID... t_PDABarCodeCheck" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/WebIO/WebResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-726">
@@ -2799,11 +2184,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/WebIO/UploadIO/WebPdUpload.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+        <state relative-caret-position="792">
+          <caret line="51" column="37" lean-forward="false" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WebIO/SearchIO/GetPdPlanIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <marker date="1579142881238" expanded="true" signature="1562:1753" ph="select t1.FN... t_PDABarCodeCheckFirst" />
+            <marker date="1579142881238" expanded="true" signature="1775:1947" ph="select a.FID... t_PDABarCodeCheck" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bean/DownloadReturnBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server/upload/WwOrder2SLTZActivityUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="64" column="41" lean-forward="false" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#923#924#0" expanded="false" />
+            <element signature="e#946#947#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server/upload/CGDDPDSLTZDUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="78" column="82" lean-forward="false" selection-start-line="78" selection-start-column="82" selection-end-line="78" selection-end-column="82" />
+          <folding />
         </state>
       </provider>
     </entry>

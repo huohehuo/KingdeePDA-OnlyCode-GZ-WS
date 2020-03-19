@@ -39,6 +39,7 @@ declare @FInterID varchar(20),     --单号id
         @FExplanation varchar(200),--摘要 
         @FMarketingStyle varchar(20),--销售业务类型
         @FExchangeRate float,
+      
         @FSelTranType varchar(20)  --源单类型
 set @FBillerID = dbo.getString(@mainStr,'|',1) --操作员  
 set @Fdate =dbo.getString(@mainStr,'|',2)      --日期  
@@ -180,8 +181,11 @@ end
 set @detailqty=@detailqty+1
 end
 EXEC p_UpdateBillRelateData 72,@FInterID,'POInstock','POInstockEntry' 
-select @FDeptID=FDeptID,@FEmpID =FEmpID   from Poorder where FInterID = @FSourceInterId
-	update POInStock set  FPOStyle=@FPOStyle,FDeptID=@FDeptID,FEmpID =@FEmpID where FInterID =@FInterID
+declare @FHeadSelfP0342 varchar(255), -- 计划类别名
+         @FPlanCategory int--计划类别
+select @FDeptID=FDeptID,@FEmpID =FEmpID ,@FPlanCategory=FPlanCategory  from Poorder where FInterID = @FSourceInterId
+select @FHeadSelfP0342 = FName from v_ICPlanCategoryEntry where FID = @FPlanCategory
+	update POInStock set  FPOStyle=@FPOStyle,FDeptID=@FDeptID,FEmpID =@FEmpID,FHeadSelfP0342=@FHeadSelfP0342 where FInterID =@FInterID
 	
  UPDATE pn SET FCommitQty=ISNULL(pn.FCommitQty,0)+ISNULL(t.FQty,0),FAuxCommitQty=ISNULL(pn.FAuxCommitQty,0)+ISNULL(t.FQty,0)/ISNULL(m.FCoefficient,1)
 ,FSecCommitQty=ISNULL(pn.FSecCommitQty,0)+t.FSecQty
@@ -393,9 +397,8 @@ FROM ICSampleReqEntry t1 INNER JOIN t_MeasureUnit M1 ON T1.FUNITID=M1.FMEASUREUN
 INNER Join (select FSourceInterId,FSourceEntryID,FQty from POInstockEntry where FInterID = @FInterID and FSourceTranType=1007304 ) t2 ON t1.FID=t2.FSourceInterId AND t1.FEntryID=t2.FSourceEntryID 
 --
 
-select t1.FBillNo as 单据编号,t5.FName as 供应商,t4.FName as 报检人,t3.FNumber as 物料代码,t3.FName as 物料名称,t3.FModel as 规格型号,convert(float,SUM( t2.FAuxQty)) as 报检数量 from  POInstock t1 left join POInstockEntry t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t2.FItemID = t3.FItemID left join t_user t4 on t1.FBillerID=t4.FUserID left join t_Supplier t5 on t1.FSupplyID = t5.FItemID where t1.FInterID=@FInterID  group by t1.FBillNo,t5.FName,t4.FName,t3.FNumber,t3.FName,t3.FModel,t1.FInterID
- --select t1.FBillNo as 单据编号,t4.FName as 报检人,t3.FNumber as 物料代码,t3.FName as 物料名称,t3.FName as 规格型号,convert(float, t2.FAuxQty) as 报检数量 from  POInstock t1 left join POInstockEntry t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t2.FItemID = t3.FItemID left join t_user t4 on t1.FBillerID=t4.FUserID  where t2.FInterID =@FInterID
-
+select isnull(@FHeadSelfP0342,'') as 计划类别,t1.FBillNo as 单据编号,t5.FName as 供应商,t4.FName as 报检人,t3.FNumber as 物料代码,t3.FName as 物料名称,t3.FModel as 规格型号,convert(float,SUM( t2.FAuxQty)) as 报检数量 from  POInstock t1 left join POInstockEntry t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t2.FItemID = t3.FItemID left join t_user t4 on t1.FBillerID=t4.FUserID left join t_Supplier t5 on t1.FSupplyID = t5.FItemID where t1.FInterID=@FInterID  group by t1.FBillNo,t5.FName,t4.FName,t3.FNumber,t3.FName,t3.FModel,t1.FInterID
+ 
 commit tran 
 return;
 --------------存在错误

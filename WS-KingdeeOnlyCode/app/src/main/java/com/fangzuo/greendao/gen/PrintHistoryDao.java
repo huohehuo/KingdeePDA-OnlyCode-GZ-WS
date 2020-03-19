@@ -63,6 +63,7 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
         public final static Property FProject = new Property(36, String.class, "FProject", false, "FPROJECT");
         public final static Property F_TypeID = new Property(37, String.class, "F_TypeID", false, "F__TYPE_ID");
         public final static Property F_Plies = new Property(38, String.class, "F_Plies", false, "F__PLIES");
+        public final static Property FPlanType = new Property(39, String.class, "FPlanType", false, "FPLAN_TYPE");
     }
 
 
@@ -116,7 +117,8 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
                 "\"FWIDTH\" TEXT," + // 35: FWidth
                 "\"FPROJECT\" TEXT," + // 36: FProject
                 "\"F__TYPE_ID\" TEXT," + // 37: F_TypeID
-                "\"F__PLIES\" TEXT);"); // 38: F_Plies
+                "\"F__PLIES\" TEXT," + // 38: F_Plies
+                "\"FPLAN_TYPE\" TEXT);"); // 39: FPlanType
     }
 
     /** Drops the underlying database table. */
@@ -323,6 +325,11 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
         if (F_Plies != null) {
             stmt.bindString(39, F_Plies);
         }
+ 
+        String FPlanType = entity.getFPlanType();
+        if (FPlanType != null) {
+            stmt.bindString(40, FPlanType);
+        }
     }
 
     @Override
@@ -523,6 +530,11 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
         if (F_Plies != null) {
             stmt.bindString(39, F_Plies);
         }
+ 
+        String FPlanType = entity.getFPlanType();
+        if (FPlanType != null) {
+            stmt.bindString(40, FPlanType);
+        }
     }
 
     @Override
@@ -571,7 +583,8 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
             cursor.isNull(offset + 35) ? null : cursor.getString(offset + 35), // FWidth
             cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // FProject
             cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37), // F_TypeID
-            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38) // F_Plies
+            cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38), // F_Plies
+            cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39) // FPlanType
         );
         return entity;
     }
@@ -617,6 +630,7 @@ public class PrintHistoryDao extends AbstractDao<PrintHistory, Long> {
         entity.setFProject(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
         entity.setF_TypeID(cursor.isNull(offset + 37) ? null : cursor.getString(offset + 37));
         entity.setF_Plies(cursor.isNull(offset + 38) ? null : cursor.getString(offset + 38));
+        entity.setFPlanType(cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39));
      }
     
     @Override

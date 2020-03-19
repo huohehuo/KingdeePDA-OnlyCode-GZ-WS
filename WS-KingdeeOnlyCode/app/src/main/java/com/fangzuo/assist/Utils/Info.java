@@ -10,7 +10,7 @@ public class Info {
 
     public static String getAppNo(){
         if ("1".equals(Hawk.get(Config.PDA_Project_Type,"1"))){
-            return "1.900";
+            return "1.901";
         }else{
             return "1.4";
         }
