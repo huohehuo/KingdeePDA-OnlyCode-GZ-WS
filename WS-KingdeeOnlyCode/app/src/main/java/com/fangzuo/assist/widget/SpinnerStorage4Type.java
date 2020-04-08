@@ -151,13 +151,19 @@ public class SpinnerStorage4Type extends RelativeLayout {
         saveKeyString =saveKeyStr;
         autoString = string;
         Lg.e("自动"+T+autoString);
-        if ("".equals(string)){
+        if ("".equals(string) || "0".equals(string)){
             autoString = Hawk.get(saveKeyString,"");
         }
         List<Storage> storages=new ArrayList<Storage>();
         if (type==0){
             Lg.e("仓库"+type,"500");
             storages = storageDao.queryBuilder().where(StorageDao.Properties.FTypeID.eq("500")).build().list();
+        }else if (type==2){
+            Lg.e("仓库"+type,"LW");
+            storages = storageDao.queryBuilder().where(
+//                    StorageDao.Properties.FTypeID.eq("500"),
+                    StorageDao.Properties.FNumber.like("LW%")
+            ).build().list();
         }else{
             Lg.e("仓库"+type,"500/501");
             storages = storageDao.queryBuilder().where(
@@ -165,6 +171,7 @@ public class SpinnerStorage4Type extends RelativeLayout {
                     StorageDao.Properties.FTypeID.eq("501")
             ).build().list();
         }
+
         tempList.addAll(storages);
         container.addAll(storages);
         mSp.setAdapter(adapter);

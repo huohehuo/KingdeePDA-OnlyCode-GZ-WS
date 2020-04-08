@@ -49,9 +49,17 @@ public class PushDownList extends HttpServlet {
                 }
 
             }
-            if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
-                condition += " and  FBillNo like \'%" + pushDownListRequestBean.code + "%\'";
+            if (pushDownListRequestBean.id == 31){
+                if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
+                    condition += " and  t1.FBillNo like \'%" + pushDownListRequestBean.code + "%\'";
+                }
+            }else{
+                if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
+                    condition += " and  FBillNo like \'%" + pushDownListRequestBean.code + "%\'";
+                }
             }
+
+
             if (pushDownListRequestBean.id == 9 || pushDownListRequestBean.id == 25 ){
                 if (pushDownListRequestBean.StartTime != null && !pushDownListRequestBean.StartTime.equals("") && pushDownListRequestBean.endTime != null && !pushDownListRequestBean.endTime.equals("")) {
                     condition += " and  FPlanCommitDate between " + "\'" + pushDownListRequestBean.StartTime + "\'" + "and" + "\'" + pushDownListRequestBean.endTime + "\'";
@@ -60,6 +68,8 @@ public class PushDownList extends HttpServlet {
                 if (pushDownListRequestBean.StartTime != null && !pushDownListRequestBean.StartTime.equals("") && pushDownListRequestBean.endTime != null && !pushDownListRequestBean.endTime.equals("")) {
                     if (pushDownListRequestBean.id == 24){
                         condition += " and  FDate between " + "\'" + pushDownListRequestBean.StartTime + "\'" + "and" + "\'" + pushDownListRequestBean.endTime + "\'";
+                    }else  if (pushDownListRequestBean.id == 29 ||pushDownListRequestBean.id == 31){
+                        condition += " and  t1.FDate between " + "\'" + pushDownListRequestBean.StartTime + "\'" + "and" + "\'" + pushDownListRequestBean.endTime + "\'";
                     }else{
                         condition += " and  t.FDate between " + "\'" + pushDownListRequestBean.StartTime + "\'" + "and" + "\'" + pushDownListRequestBean.endTime + "\'";
                     }
@@ -263,6 +273,17 @@ public class PushDownList extends HttpServlet {
                     //下载发货通知
 //                    SQL = "select FBillNo,'' FName,FDate,FSupplyID ,FDeptID,FEmpID,'' as FMangerID,FInterID from ICStockBill t1    where (t1.FTranType=41 AND (not exists(select 1 from t_PDABarCodeCheckBillNo where FInterID=t1.FInterID) and t1.FStatus in(0)  and t1.FCancellation = 0 ))"+ condition;
                     SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+                    break;
+                case 29:
+                    //生产领料单验货
+//                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+                    SQL = "select distinct(t1.FBillNo),t2.FName,t1.FDate,FDeptID as FSupplyID ,FDeptID,FEmpID,0 as FMangerID,t1.FInterID from ICStockBill t1 left join t_Department t2 on t1.FDeptID=t2.FItemID left join ICStockBillEntry t3 on t1.FInterID=t3.FInterID where (t1.FTranType=24 AND  ((t1.FCheckerID<=0 OR t1.FCheckerID  IS NULL)  AND  t1.FCancellation = 0) and t3.FAuxQty-ISNULL(t3.FEntrySelfB0456,0)>0)  "+ condition +" ORDER BY t1.FBillNo ASC";
+                    break;
+                case 31:
+                    //收料通知单下推委外入库单
+//                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+//                    SQL = "select distinct(t1.FBillNo),t2.FName,t1.FDate,FDeptID as FSupplyID ,FDeptID,FEmpID,0 as FMangerID,t1.FInterID from ICStockBill t1 left join t_Department t2 on t1.FDeptID=t2.FItemID left join ICStockBillEntry t3 on t1.FInterID=t3.FInterID where (t1.FTranType=24 AND  ((t1.FCheckerID<=0 OR t1.FCheckerID  IS NULL)  AND  t1.FCancellation = 0) and t3.FAuxQty-ISNULL(t3.FEntrySelfB0456,0)>0)  "+ condition +" ORDER BY t1.FBillNo ASC";
+                    SQL = "select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'' FDeptID,'0' FEmpID,'0' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID where   ((t1.FWWType=14190 OR ISNULL(t1.FWWType,0)=0)  AND (t1.FTranType = 72  And (t1.FPOMode=36680 OR ISNULL(t1.FPOMode,0)=0) AND t1.FStatus in(1, 2) And t1.FAreaPS = 20302 AND t1.FBizType = 12511 AND ( ((t3.FCheckMethod = 352 OR (t3.FCheckMethod <> 352 AND t3.FDischarged = 1058)) AND t3.FQty -t3.FConCommitQty - (CASE WHEN (SELECT FVALUE FROM t_SystemProfile WHERE FCategory = 'IC' AND FKey = 'MaterialReturnDirect') = '1' THEN t3.FBackQty ELSE 0 END)>0) OR (t3.FCheckMethod <> 352 AND t3.FDischarged = 1059 AND  ( t3.FQtyPass + t3.FConPassQty-t3.FConCommitQty >0 OR t3.FScrapQty+t3.FSampleBreakQty-t3.FScrapInCommitQty >0)))) AND t1.FTranType=72)  "+ condition +" ORDER BY t1.FBillNo ASC";
                     break;
 
 

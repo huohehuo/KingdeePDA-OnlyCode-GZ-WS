@@ -35,6 +35,7 @@ import com.fangzuo.assist.Activity.OutsourcingOrdersIS2Activity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersISActivity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersOSActivity;
 import com.fangzuo.assist.Activity.PdBackMsg2SaleOutRedActivity;
+import com.fangzuo.assist.Activity.PdProductGetCheckActivity;
 import com.fangzuo.assist.Activity.PdShouLiao2LLCheckActivity;
 import com.fangzuo.assist.Activity.ProducePushInStore2Activity;
 import com.fangzuo.assist.Activity.ProducePushInStoreActivity;
@@ -47,6 +48,7 @@ import com.fangzuo.assist.Activity.PushDownSNActivity;
 import com.fangzuo.assist.Activity.SCRWDPDSCHBDActivity;
 import com.fangzuo.assist.Activity.Shengchanrenwudanxiatuilingliao2Activity;
 import com.fangzuo.assist.Activity.ShengchanrenwudanxiatuilingliaoActivity;
+import com.fangzuo.assist.Activity.ShouLiaoOrder2WwrkActivity;
 import com.fangzuo.assist.Activity.ShouLiaoTongZhiActivity;
 import com.fangzuo.assist.Activity.WwOrder2SLTZActivity;
 import com.fangzuo.assist.Activity.XSDDPDFLTZDActivity;
@@ -348,6 +350,12 @@ private int searchType;
                     break;
                 case 28://收料通知单下推来料检验单
                     intent = new Intent(mContext, PdShouLiao2LLCheckActivity.class);
+                    break;
+                case 29://生产领料单验货
+                    intent = new Intent(mContext, PdProductGetCheckActivity.class);
+                    break;
+                case 31://收料通知单下推委外入库（原材料）
+                    intent = new Intent(mContext, ShouLiaoOrder2WwrkActivity.class);
                     break;
 //                case 7://销售出库单验货
 //                    intent = new Intent(mContext, OutCheckGoodsActivity.class);

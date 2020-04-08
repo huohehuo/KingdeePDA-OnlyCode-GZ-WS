@@ -47,15 +47,12 @@ public class CommonUtil {
                     list.add(split[1]);
                     list.add(split[2]);
                     list.add(split[3]);
-                    return list;
                 } catch (Exception e) {
                     Toast.showText(App.getContext(), "条码有误");
-                    return new ArrayList<>();
                 }
 
             } else {
                 Toast.showText(App.getContext(), "条码有误,截取数量有误");
-                return new ArrayList<>();
             }
         }else{
 //            try {
@@ -63,9 +60,10 @@ public class CommonUtil {
 //                return list;
 //            } catch (Exception e) {
                 Toast.showText(App.getContext(), "条码有误,不存在指定符号");
-                return new ArrayList<>();
 //            }
         }
+        Lg.e("解析：",list);
+        return list;
 
 //
 //        if (code.length()>22){

@@ -100,6 +100,8 @@ public class Config {
     public static final int DbCheckGoodsActivity                    =10026;
     public static final int ProductInCheckGoodsActivity             =10027;
     public static final int PdShouLiao2LLCheckActivity              =10032;
+    public static final int PdProductGetCheckActivity              =10033;
+    public static final int ShouLiaoOrder2WwrkActivity              =10034;
     //p2
     public static final int ScanCheckActivity                       =10028;
     public static final int CreateSaleOutActivity                   =10029;

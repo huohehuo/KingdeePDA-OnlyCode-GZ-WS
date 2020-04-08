@@ -35,6 +35,7 @@ import com.fangzuo.assist.Activity.OutsourcingOrdersIS2Activity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersISActivity;
 import com.fangzuo.assist.Activity.OutsourcingOrdersOSActivity;
 import com.fangzuo.assist.Activity.PdBackMsg2SaleOutRedActivity;
+import com.fangzuo.assist.Activity.PdProductGetCheckActivity;
 import com.fangzuo.assist.Activity.PdShouLiao2LLCheckActivity;
 import com.fangzuo.assist.Activity.ProducePushInStore2Activity;
 import com.fangzuo.assist.Activity.ProducePushInStoreActivity;
@@ -45,6 +46,7 @@ import com.fangzuo.assist.Activity.PushDownPagerActivity;
 import com.fangzuo.assist.Activity.PushDownSNActivity;
 import com.fangzuo.assist.Activity.SCRWDPDSCHBDActivity;
 import com.fangzuo.assist.Activity.ShengchanrenwudanxiatuilingliaoActivity;
+import com.fangzuo.assist.Activity.ShouLiaoOrder2WwrkActivity;
 import com.fangzuo.assist.Activity.ShouLiaoTongZhiActivity;
 import com.fangzuo.assist.Activity.WwOrder2SLTZActivity;
 import com.fangzuo.assist.Activity.XSDDPDFLTZDActivity;
@@ -270,7 +272,7 @@ public class DownLoadPushFragment extends BaseFragment {
     @Override
     protected void OnReceive(String barCode) {
         Log.e("Fragment-code:", barCode);
-        if (tag == 23 || tag == 3 || tag == 28 ){
+        if (tag == 23 || tag == 3 || tag == 28 || tag == 29 || tag == 31  || tag == 4 ){
 //            if (checkHasBarCode().size() > 0) {
 //                ArrayList<String> list = new ArrayList<>();
 //                list.add(checkHasBarCode().get(0).FInterID);
@@ -463,6 +465,12 @@ public class DownLoadPushFragment extends BaseFragment {
                                                 break;
                                             case 28://退货通知单下推销售出库红字
                                                 intent = new Intent(mContext, PdShouLiao2LLCheckActivity.class);
+                                                break;
+                                            case 29://生产领料单验货
+                                                intent = new Intent(mContext, PdProductGetCheckActivity.class);
+                                                break;
+                                            case 31://收料通知单下推委外入库（原材料）
+                                                intent = new Intent(mContext, ShouLiaoOrder2WwrkActivity.class);
                                                 break;
 //                            case 8:
 //                                intent = new Intent(mContext, GetGoodsCheckActivity.class);

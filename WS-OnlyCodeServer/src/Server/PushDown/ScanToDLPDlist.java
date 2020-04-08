@@ -44,9 +44,16 @@ public class ScanToDLPDlist extends HttpServlet {
                 System.out.println(request.getParameter("sqlip") + " "
                         + request.getParameter("sqlport") + " " + request.getParameter("sqlname")
                         + " " + request.getParameter("sqlpass") + " " + request.getParameter("sqluser"));
-                if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
-                    condition += "and  FBillNo ='" + pushDownListRequestBean.code+"'";
+                if (pushDownListRequestBean.id == 31){
+                    if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
+                        condition += "and  t1.FBillNo ='" + pushDownListRequestBean.code+"'";
+                    }
+                }else{
+                    if (pushDownListRequestBean.code != null && !pushDownListRequestBean.code.equals("")) {
+                        condition += "and  FBillNo ='" + pushDownListRequestBean.code+"'";
+                    }
                 }
+
                 System.out.println("查询条件:" + condition);
                 switch (pushDownListRequestBean.id) {
                     case 1:
@@ -174,6 +181,16 @@ public class ScanToDLPDlist extends HttpServlet {
                     case 30://采购订单下推收料通知单
                         SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'''' FDeptID,'''' FEmpID,FMangerID,t1.FInterID from ICSubContract t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join ICSubContractEntry t3 on t1.FInterID=t3.FInterID where t3.FAuxQty-t3.FAuxCommitQty>0 and t1.FCancellation=0   and (t1.FInvStyle=14190 OR ISNULL(t1.FInvStyle,0)=0) AND (CASE WHEN EXISTS(SELECT TOP 1 1 FROM t_SystemProfile WHERE FCategory='IC' AND FKey='EnableSupplierCooperation' AND FValue>0) THEN (SELECT TOP 1 1 FROM t_Supplier WHERE (FSupplierCoroutineFlag=0 OR (FSupplierCoroutineFlag=1 AND t3.FSupConfirm = 'Y')) AND FItemID=t1.FSupplyID) ELSE 1 END)=1 AND t1.FStatus >0 AND t3.FMrpClosed<>1 AND t3.FInHighLimitQty>t3.FAuxCommitQty AND t1.FClassTypeID=1007105) t where 1=1 " + condition + " order by " +
                                 "t.FBillNo desc";
+                        break;
+                    case 29:
+                        //生产领料单验货
+//                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+                        SQL = "select distinct(t1.FBillNo),t2.FName,t1.FDate,FDeptID as FSupplyID ,FDeptID,FEmpID,0 as FMangerID,t1.FInterID from ICStockBill t1 left join t_Department t2 on t1.FDeptID=t2.FItemID left join ICStockBillEntry t3 on t1.FInterID=t3.FInterID where (t1.FTranType=24 AND  ((t1.FCheckerID<=0 OR t1.FCheckerID  IS NULL)  AND  t1.FCancellation = 0) and t3.FAuxQty-ISNULL(t3.FEntrySelfB0456,0)>0)  "+ condition +" ORDER BY t1.FBillNo ASC";
+                        break;
+                    case 31:
+                        //收料通知单下推委外入库单
+//                    SQL = "select * from(select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,FDeptID,FEmpID,'' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID  where ISNULL(t3.FAuxQty,0) -ISNULL(t3.FAuxRelateQty, 0)>0 and t3.FCheckMethod<>352  and (t1.FStatus=1 or t1.FStatus=2) and t1.FClosed=0 and FCancellation=0 and  t1.FTranType=72) t WHERE 1=1 "+ condition;
+                        SQL = "select distinct  t1.FBillNo,t2.FName,t1.FDate,FSupplyID ,'' FDeptID,'0' FEmpID,'0' FMangerID,t1.FInterID from POInstock t1 left join t_Supplier t2 on t1.FSupplyID=t2.FItemID left join POInstockEntry t3 on t1.FInterID=t3.FInterID where   ((t1.FWWType=14190 OR ISNULL(t1.FWWType,0)=0)  AND (t1.FTranType = 72  And (t1.FPOMode=36680 OR ISNULL(t1.FPOMode,0)=0) AND t1.FStatus in(1, 2) And t1.FAreaPS = 20302 AND t1.FBizType = 12511 AND ( ((t3.FCheckMethod = 352 OR (t3.FCheckMethod <> 352 AND t3.FDischarged = 1058)) AND t3.FQty -t3.FConCommitQty - (CASE WHEN (SELECT FVALUE FROM t_SystemProfile WHERE FCategory = 'IC' AND FKey = 'MaterialReturnDirect') = '1' THEN t3.FBackQty ELSE 0 END)>0) OR (t3.FCheckMethod <> 352 AND t3.FDischarged = 1059 AND  ( t3.FQtyPass + t3.FConPassQty-t3.FConCommitQty >0 OR t3.FScrapQty+t3.FSampleBreakQty-t3.FScrapInCommitQty >0)))) AND t1.FTranType=72)  "+ condition +" ORDER BY t1.FBillNo ASC";
                         break;
                 }
                 ArrayList<ScanPDReturnBean.PushDownListBean> container1 = new ArrayList<>();
@@ -328,6 +345,14 @@ public class ScanToDLPDlist extends HttpServlet {
                         case 30:
                             SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,convert(float,FAuxQty-FAuxCommitQty) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,0 as FQtying from ICSubContractEntry t1 left join ICSubContract t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and t1.FAuxQty-t1.FAuxCommitQty>0 and t1.FInterID=" + pushDownListBean.FInterID;
                             break;
+                        case 29://生产领料单验货
+//                SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,ISNULL(t1.FAuxQty, 0)-ISNULL(t1.FAuxRelateQty, 0) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and  t2.FTranType=72 and ISNULL(t1.FAuxQty,0) -ISNULL(t1.FAuxRelateQty, 0) >0 and t1.FInterID=" + dBean.interID;
+                            SQL =   "select t11.FName AS FStoctName,t12.FName AS FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID, t1.FUnitID,convert(float,FAuxQty-ISNULL(t1.FEntrySelfB0456,0)) as FAuxQty,convert(float,FAuxPrice) as  FAuxPrice,'0' as FQtying,t1.FSCStockID as FDCStockID,t1.FDCSPID,t1.FBatchNo from ICStockBillEntry   t1 left join ICStockBill t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on  t1.FItemID=t3.FItemID left join t_Stock t11 on t1.FSCStockID=t11.FItemID left join t_StockPlace t12 on t1.FDCSPID = t12.FSPID where (t2.FTranType=24 AND  t2.FCancellation = 0) and t1.FAuxQty-ISNULL(t1.FEntrySelfB0456,0)>0 and t1.FInterID=" + pushDownListBean.FInterID;
+                            break;
+                        case 31://收料通知单下推委外入库单
+//                SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,ISNULL(t1.FAuxQty, 0)-ISNULL(t1.FAuxRelateQty, 0) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and  t2.FTranType=72 and ISNULL(t1.FAuxQty,0) -ISNULL(t1.FAuxRelateQty, 0) >0 and t1.FInterID=" + dBean.interID;
+                            SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,convert(float,t1.FAuxQtyPass-t1.FAuxConCommitQty) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where    t1.FAuxQtyPass-t1.FAuxConCommitQty>0 and t1.FInterID=" + pushDownListBean.FInterID;
+                            break;
                     }
                     ArrayList<ScanPDReturnBean.DLbean> container = new ArrayList<>();
                     sta = conn.prepareStatement(SQL);
@@ -365,6 +390,17 @@ public class ScanToDLPDlist extends HttpServlet {
                             dLbean.FDCStockName = rs.getString("FStoctName");
                             dLbean.FDCSPName = rs.getString("FSPName");
                         }else if (pushDownListRequestBean.id == 30){
+                            dLbean.FDCStockName = rs.getString("FStoctName");
+                            dLbean.FDCSPName = rs.getString("FSPName");
+                        }
+                        if (pushDownListRequestBean.id == 29){
+                            dLbean.FDCStockName = rs.getString("FStoctName");
+                            dLbean.FDCSPName = rs.getString("FSPName");
+                            dLbean.FDCStockID = rs.getString("FDCStockID");
+                            dLbean.FDCSPID = rs.getString("FDCSPID");
+                            dLbean.FBatchNo = rs.getString("FBatchNo");
+                        }
+                        if (pushDownListRequestBean.id == 31){
                             dLbean.FDCStockName = rs.getString("FStoctName");
                             dLbean.FDCSPName = rs.getString("FSPName");
                         }

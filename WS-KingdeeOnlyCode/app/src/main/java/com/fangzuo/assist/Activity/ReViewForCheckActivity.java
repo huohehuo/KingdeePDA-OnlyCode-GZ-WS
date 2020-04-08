@@ -26,6 +26,7 @@ import com.fangzuo.assist.Dao.T_main;
 import com.fangzuo.assist.Dao.Unit;
 import com.fangzuo.assist.R;
 import com.fangzuo.assist.RxSerivce.MySubscribe;
+import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.GreenDaoManager;
 import com.fangzuo.assist.Utils.Lg;
 import com.fangzuo.assist.Utils.MathUtil;
@@ -213,7 +214,11 @@ public class ReViewForCheckActivity extends BaseActivity implements ReView4Check
                             if (pushDownSubs.size() > 0) {
                                 //删除后，更新数据里面的已验收数
                                 double result=(MathUtil.toD(t_detail.FCheckNum));
-                                pushDownSubs.get(0).FQtying = doubleSub(Double.valueOf(pushDownSubs.get(0).FQtying),result) +"";
+                                if (activity == Config.PdProductGetCheckActivity){
+                                    pushDownSubs.get(0).FQtying = doubleSub(MathUtil.toD(pushDownSubs.get(0).FQtying),(result * t_detail.unitrate)/getUnitrateSub(pushDownSubs.get(0))) +"";
+                                }else{
+                                    pushDownSubs.get(0).FQtying = doubleSub(MathUtil.toD(pushDownSubs.get(0).FQtying),result) +"";
+                                }
                                 pushDownSubDao.update(pushDownSubs.get(0));
                             }
                         }
@@ -274,7 +279,7 @@ public class ReViewForCheckActivity extends BaseActivity implements ReView4Check
 //                                    if (pushDownSubs.size() > 0) {
 //                                        //删除后，更新数据里面的已验收数
 ////                                        Lg.e( "获取到pushDownSubs:" + pushDownSubs);
-//                                        double result=(Double.valueOf(t_detail.FQuantity) * t_detail.unitrate) / getUnitrateSub(pushDownSubs.get(0));
+//                                        double result=(MathUtil.toD(t_detail.FQuantity) * t_detail.unitrate) / getUnitrateSub(pushDownSubs.get(0));
 ////                                        Lg.e("result:"+result);
 //                                        pushDownSubs.get(0).FQtying = doubleSub(Double.valueOf(pushDownSubs.get(0).FQtying),result) +"";
 ////                                        Lg.e("unitrate:"+t_detail.unitrate+"  getUnitrateSub："+getUnitrateSub(pushDownSubs.get(0)));
@@ -353,7 +358,7 @@ public class ReViewForCheckActivity extends BaseActivity implements ReView4Check
                 UnitDao.Properties.FMeasureUnitID.eq(pushDownSub.FUnitID)
         ).build().list();
         if (units.size() > 0) {
-            return Double.valueOf(units.get(0).FCoefficient);
+            return MathUtil.toD(units.get(0).FCoefficient);
 //            Lg.e("获得明细换算率：" + unitrateSub);
         } else {
             return  1;

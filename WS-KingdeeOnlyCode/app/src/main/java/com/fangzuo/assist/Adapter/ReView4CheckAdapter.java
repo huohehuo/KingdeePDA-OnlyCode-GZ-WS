@@ -69,11 +69,20 @@ public class ReView4CheckAdapter extends BaseAdapter implements View.OnClickList
 
         viewHolder.tvItme1.setText("物料名称："+detail.get(i).FProductName);
         viewHolder.tvItme2.setText("物料规格："+detail.get(i).model);
-        viewHolder.tvItme3.setText("检验数量："+detail.get(i).FCheckNum);
-        viewHolder.tvItme4.setText("合格数量："+detail.get(i).FCheckPassNum);
-        viewHolder.tvItme5.setText("样品破坏数："+detail.get(i).FCheckBrokenNum);
-        viewHolder.tvItme6.setText("质检方案："+detail.get(i).FCheckTypeName);
-        viewHolder.tvItme7.setText("质检结果："+detail.get(i).FCheckResultName);
+        if (detail.get(i).activity == Config.PdProductGetCheckActivity){
+            viewHolder.tvItme3.setText("批次："+detail.get(i).FBatch);
+            viewHolder.tvItme4.setText("已验数量："+detail.get(i).FCheckNum);
+            viewHolder.tvItme5.setVisibility(View.GONE);
+            viewHolder.tvItme6.setVisibility(View.GONE);
+            viewHolder.tvItme7.setVisibility(View.GONE);
+        }else{
+            viewHolder.tvItme3.setText("检验数量："+detail.get(i).FCheckNum);
+            viewHolder.tvItme4.setText("合格数量："+detail.get(i).FCheckPassNum);
+            viewHolder.tvItme5.setText("样品破坏数："+detail.get(i).FCheckBrokenNum);
+            viewHolder.tvItme6.setText("质检方案："+detail.get(i).FCheckTypeName);
+            viewHolder.tvItme7.setText("质检结果："+detail.get(i).FCheckResultName);
+        }
+
 
 
             viewHolder.delete.setOnClickListener(this);

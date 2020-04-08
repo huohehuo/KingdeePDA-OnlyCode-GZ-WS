@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.fangzuo.assist.Activity.PdProductGetCheckActivity;
+import com.fangzuo.assist.Activity.PdShouLiao2LLCheckActivity;
 import com.fangzuo.assist.Activity.PushDownSNActivity;
 import com.fangzuo.assist.Dao.Product;
 import com.fangzuo.assist.Dao.PushDownSub;
@@ -88,13 +90,25 @@ public class PushDownSubListAdapter extends BaseAdapter {
 
         viewHolder.billNo.setText("订单号:"+items.get(i).FBillNo);
         viewHolder.numyanshou.setText("订单数量:"+items.get(i).FAuxQty);
-        viewHolder.productId.setText("物料名称:"+ productName);
-        viewHolder.tvNumber.setText("物料代码:"+ items.get(i).FNumber);
+        if (context instanceof PdShouLiao2LLCheckActivity){
+            viewHolder.productId.setText("物料规格:"+  items.get(i).FModel);
+            viewHolder.tvNumber.setTextSize(18);
+            viewHolder.tvNumber.setText("物料代码:"+ items.get(i).FNumber);
+        }else{
+            viewHolder.productId.setText("物料名称:"+ productName);
+            viewHolder.tvNumber.setText("物料代码:"+ items.get(i).FNumber);
+        }
         viewHolder.numyanshouing.setText("已验数量:"+items.get(i).FQtying);
 //        viewHolder.unit.setText("单位:"+unit);
         if (context instanceof PushDownSNActivity){
             viewHolder.tvStorage.setVisibility(View.VISIBLE);
             viewHolder.tvStorage.setText("仓库:"+items.get(i).FDCStockName);
+        }
+        if (context instanceof PdProductGetCheckActivity){
+            viewHolder.tvStorage.setVisibility(View.VISIBLE);
+            viewHolder.tvWave.setVisibility(View.VISIBLE);
+            viewHolder.tvStorage.setText("仓库:"+items.get(i).FDCStockName);
+            viewHolder.tvWave.setText("仓位:"+items.get(i).FDCSPName);
         }
         viewHolder.pg.setProgress((int) (Double.parseDouble(items.get(i).FQtying)/Double.parseDouble(items.get(i).FAuxQty)*100));
         return view;
@@ -110,6 +124,8 @@ public class PushDownSubListAdapter extends BaseAdapter {
         TextView tvNumber;
         @BindView(R.id.tv_storage)
         TextView tvStorage;
+        @BindView(R.id.tv_wave)
+        TextView tvWave;
         @BindView(R.id.numyanshou)
         TextView numyanshou;
         @BindView(R.id.numyanshouing)

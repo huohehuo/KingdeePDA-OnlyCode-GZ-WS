@@ -58,6 +58,7 @@ import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.BasicShareUtil;
 import com.fangzuo.assist.Utils.CommonMethod;
+import com.fangzuo.assist.Utils.CommonUtil;
 import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.DataModel;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
@@ -249,7 +250,7 @@ public class OtherOutStoreActivity extends BaseActivity {
                 break;
             case EventBusInfoCode.CodeCheck_OK://检测条码成功
                 codeCheckBackDataBean = (CodeCheckBackDataBean)event.postEvent;
-                Lg.e("条码检查："+codeCheckBackDataBean.toString());
+                Lg.e("条码检查：",codeCheckBackDataBean);
                 edPihao.setText(codeCheckBackDataBean.FBatchNo);
                 edNum.setText(codeCheckBackDataBean.FQty);
                 LoadingUtil.dismiss();
@@ -504,17 +505,36 @@ public class OtherOutStoreActivity extends BaseActivity {
     }
     
     private String barcode = "";
+    private boolean code4Plan=false;
     @Override
     protected void OnReceive(String code) {
 //        edCode.setText(code);
 //        setDATA(code, false);
         Lg.e("扫码："+code);
-        barcode = code;
-        edNum.setEnabled(!barcode.contains("ZZ"));
-        LoadingUtil.showDialog(mContext,"正在查找...");
-        //查询条码唯一表
-        CodeCheckBean bean = new CodeCheckBean(barcode);
-        DataModel.codeCheckForOut(gson.toJson(bean));
+        if (code.contains("^")){
+            List<String> list = CommonUtil.ScanBack(code);
+            if (list.size()>0){
+                code4Plan=true;
+                edNum.setEnabled(true);
+                codeCheckBackDataBean=null;
+//                edNum.setText(list.get(3));
+                edPihao.setText(list.get(1));
+                barcode = list.get(0);
+                edCode.setText(barcode);
+                setDATA(barcode, false);
+            }else{
+                lockScan(0);
+            }
+        }else {
+                code4Plan=false;
+            barcode = code;
+            edNum.setEnabled(!barcode.contains("ZZ"));
+            LoadingUtil.showDialog(mContext,"正在查找...");
+            //查询条码唯一表
+            CodeCheckBean bean = new CodeCheckBean(barcode);
+            DataModel.codeCheckForOut(gson.toJson(bean));
+        }
+
     }
 
     private void LoadBasicData() {
@@ -699,17 +719,17 @@ public class OtherOutStoreActivity extends BaseActivity {
     }
 
     private void tvorisAuto(final Product product) {
-        Log.e(TAG,"tvorisAuto获取product："+product.toString());
+        Lg.e("tvorisAuto获取product：",product);
         edCode.setText(product.FNumber);
         tvModel.setText(product.FModel);
 //        wavehouseAutoString=product.FSPID;
-        wavehouseAutoString=codeCheckBackDataBean.FStockPlaceID;
+        wavehouseAutoString=code4Plan?product.FSPID:codeCheckBackDataBean.FStockPlaceID;
         edPricesingle.setText(df.format(Double.parseDouble(product.FSalePrice)));
         tvGoodName.setText(product.FName);
         fBatchManager = (product.FBatchManager) != null && (product.FBatchManager).equals("1");
         if (true) {
 //            for (int j = 0; j < spWhichStorage.getAdapter().getCount(); j++) {
-                spWhichStorage.setAutoSelection("", codeCheckBackDataBean.FStockID);
+                spWhichStorage.setAutoSelection(Config.Storage+activity, code4Plan?product.FDefaultLoc:codeCheckBackDataBean.FStockID);
 //                if (((Storage)storageSpAdapter.getItem(j)).FItemID.equals(codeCheckBackDataBean.FStockID)) {
 //                    spWhichStorage.setSelection(j);
 //                    break;
@@ -786,7 +806,8 @@ public class OtherOutStoreActivity extends BaseActivity {
             tvorisAuto(product);
         } else {
             if (BasicShareUtil.getInstance(mContext).getIsOL()) {
-                App.getRService().getProductForId(codeCheckBackDataBean.FItemID, new MySubscribe<CommonResponse>() {
+//                App.getRService().getProductForId(codeCheckBackDataBean.FItemID, new MySubscribe<CommonResponse>() {
+                App.getRService().doIOAction(code4Plan?WebApi.SEARCHPRODUCTS:WebApi.PRPDUCTSEARCHWHERE,code4Plan?fnumber:codeCheckBackDataBean.FItemID, new MySubscribe<CommonResponse>() {
                     @Override
                     public void onNext(CommonResponse commonResponse) {
                         LoadingUtil.dismiss();
@@ -903,7 +924,7 @@ public class OtherOutStoreActivity extends BaseActivity {
     }
     private void getProductOL(DownloadReturnBean dBean, int j) {
         product = dBean.products.get(j);
-        spUnit.setAuto(mContext,product.FUnitGroupID,codeCheckBackDataBean.FUnitID,SpinnerUnit.Id);
+        spUnit.setAuto(mContext,product.FUnitGroupID,code4Plan?product.FUnitID:codeCheckBackDataBean.FUnitID,SpinnerUnit.Id);
         tvorisAuto(product);
     }
 
@@ -1038,23 +1059,28 @@ public class OtherOutStoreActivity extends BaseActivity {
                 return;
             }
         }
-        if (null == codeCheckBackDataBean){
+        if (!code4Plan && null == codeCheckBackDataBean){
             return;
         }
-        if (Double.parseDouble(codeCheckBackDataBean.FQty)<Double.parseDouble(edNum.getText().toString())){
+        if (!code4Plan && Double.parseDouble(codeCheckBackDataBean.FQty)<Double.parseDouble(edNum.getText().toString())){
             Toast.showText(mContext, "修改的数量不能大于扫码数量");
             MediaPlayer.getInstance(mContext).error();
             lockScan(0);
             return;
         }
-        if (LocDataUtil.checkHasBarcode(mContext,barcode)){
+        if (!code4Plan && LocDataUtil.checkHasBarcode(mContext,barcode)){
             Toast.showText(mContext,"本地已存在该条码信息，请重新扫码添加");
             lockScan(0);
             return;
         }
-        //插入条码唯一临时表
-        CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",num,BasicShareUtil.getInstance(mContext).getIMIE());
-        DataModel.codeInsertForOut(gson.toJson(bean));
+        if (code4Plan){
+            Addorder();
+        }else{
+            //插入条码唯一临时表
+            CodeCheckBean bean = new CodeCheckBean(barcode,ordercode + "",num,BasicShareUtil.getInstance(mContext).getIMIE());
+            DataModel.codeInsertForOut(gson.toJson(bean));
+        }
+
 
     }
     
@@ -1092,24 +1118,24 @@ public class OtherOutStoreActivity extends BaseActivity {
 //            }
 //        }
 //
-//                if (isHebing) {
-//                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
-//                            T_DetailDao.Properties.Activity.eq(activity),
-//                            T_DetailDao.Properties.FOrderId.eq(ordercode),
-//                            T_DetailDao.Properties.FProductId.eq(product.FItemID),
-//                            T_DetailDao.Properties.FBatch.eq(pihao == null ? "" : pihao),
-//                            T_DetailDao.Properties.FUnitId.eq(unitId),
-//                            T_DetailDao.Properties.FStorageId.eq(storageId),
-//                            T_DetailDao.Properties.FPositionId.eq(wavehouseID),
-//                            T_DetailDao.Properties.FDiscount.eq(discount)
-//                    ).build().list();
-//                    if (detailhebing.size() > 0) {
-//                        for (int i = 0; i < detailhebing.size(); i++) {
-//                            num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
-//                            t_detailDao.delete(detailhebing.get(i));
-//                        }
-//                    }
-//                }
+                if (code4Plan) {
+                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.Activity.eq(activity),
+                            T_DetailDao.Properties.FOrderId.eq(ordercode),
+                            T_DetailDao.Properties.FProductId.eq(product.FItemID),
+                            T_DetailDao.Properties.FBatch.eq(pihao == null ? "" : pihao),
+                            T_DetailDao.Properties.FUnitId.eq(unitId),
+                            T_DetailDao.Properties.FStorageId.eq(storageId),
+                            T_DetailDao.Properties.FPositionId.eq(wavehouseID),
+                            T_DetailDao.Properties.FDiscount.eq(discount)
+                    ).build().list();
+                    if (detailhebing.size() > 0) {
+                        for (int i = 0; i < detailhebing.size(); i++) {
+                            num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
+                            t_detailDao.delete(detailhebing.get(i));
+                        }
+                    }
+                }
 //                List<T_main> dewlete = t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(ordercode)).build().list();
 //                t_mainDao.deleteInTx(dewlete);
                 String second = getTimesecond();

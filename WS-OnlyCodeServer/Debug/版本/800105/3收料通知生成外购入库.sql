@@ -27,6 +27,9 @@ declare @FInterID varchar(20),     --单号id
         @FCurrencyID nvarchar(20),--币别id 
         @FSaleStyle varchar(20),  --销售方式id 
         @FPOStyle varchar(20),    --采购方式
+        @FPOMode int,--采购模式
+        @FPayCondition int,-- 付款方式
+        @FHeadSelfA0143 varchar(128),-- 制单日期
         @FFetchAdd varchar(100),  --交货地点名
         @FCheckDate varchar(50),  --审核日期 
         @FFManagerID varchar(20), --发货
@@ -70,9 +73,9 @@ set @FExplanation='' --备注
 INSERT INTO ICStockBill(FInterID,FBillNo,FBrNo,FTranType,FCancellation,FStatus,FUpStockWhenSave,FVchInterID,FROB,FHookStatus,Fdate,
 FSupplyID,FCheckDate,FFManagerID,FSManagerID,FBillerID,FPOStyle,FMultiCheckDate1,FMultiCheckDate2,FMultiCheckDate3,FMultiCheckDate4,
 FMultiCheckDate5,FMultiCheckDate6,FRelateBrID,FPOOrdBillNo,FOrgBillInterID,FSelTranType,FBrID,FExplanation,FDeptID,FManagerID,FEmpID,
-FCussentAcctID,FManageType,FSettleDate,FPrintCount,FHeadSelfA0145) 
+FCussentAcctID,FManageType,FSettleDate,FPrintCount,FHeadSelfA0145,FHeadSelfA0146,FHeadSelfA0149,FHeadSelfA0147,FHeadSelfA0143) 
 VALUES (@FInterID,@FBillNo,'0',1,0,0,@value,0,1,0,@Fdate,@FSupplyID,@FCheckDate,@FFManagerID,@FSManagerID,@FBillerID,@FPOStyle,Null,
-Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0,@FHeadSelfA0145)
+Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0,@FHeadSelfA0145,'','','',CONVERT(varchar(128),GETDATE(),20))
 update ICStockBill set FUUID=newid() where FInterID=@FInterID
 
 declare @FEntryID varchar(20),       --新的明细序号
@@ -147,7 +150,7 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FSourceEntryID=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+7) --下推的明细id
 	set @FSourceInterId=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+8) --下推的明FInterID
 	set @FBatchNo=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)
-	select @FSourceBillNo=FBillNo,@FPOStyle = FPOStyle,@FDeptID=FDeptID,@FEmpID=FEmpID,@FFetchAdd=FFetchAdd,@FExplanation=FExplanation  from POInstock where FInterID=@FSourceInterId --下推的单据编号
+	select @FPOMode = FPOMode,@FSourceBillNo=FBillNo,@FPOStyle = FPOStyle,@FDeptID=FDeptID,@FEmpID=FEmpID,@FFetchAdd=FFetchAdd,@FExplanation=FExplanation  from POInstock where FInterID=@FSourceInterId --下推的单据编号
 	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderBillNo=FOrderBillNo,@FOrderInterID=FOrderInterID,@FOrderEntryID=FOrderEntryID,@FPurchasePrice=FAuxPrice from POInstockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
 	if(@FOrderInterID>0)
 	begin
@@ -201,10 +204,18 @@ VALUES (@FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQtyMust,@FQty,@FUni
 end
 set @detailqty=@detailqty+1
 end
-update ICStockBill set FPOStyle = @FPOStyle,FDeptID=@FDeptID,FEmpID=@FEmpID,FFetchAdd=@FFetchAdd,FExplanation=@FExplanation where FInterID=@FInterID
+
 
 EXEC p_UpdateBillRelateData 1,@FInterID,'ICStockBill','ICStockBillEntry' 
-update ICStockBill set FEmpID=@FEmpID,FDeptID=@FDeptID where FInterID=@FInterID
+ if(@FOrderInterID>0)
+ begin
+ if exists(select 1 from POOrder where FInterID=@FOrderInterID)
+ select @FSettleDate = FSettleDate from POOrder where FInterID=@FOrderInterID
+ end
+ select @FPayCondition=FCreditDays from t_supplier t1 where FItemID = @FSupplyID
+update ICStockBill set FSettleDate = @FSettleDate, FPayCondition = @FPayCondition,FPOMode=@FPOMode,FPOStyle = @FPOStyle,FDeptID=@FDeptID,FEmpID=@FEmpID,FFetchAdd=@FFetchAdd,FExplanation=@FExplanation where FInterID=@FInterID
+
+ 
 set nocount on
 declare @fcheck_fail int
 declare @fsrccommitfield_prevalue decimal(28,13)

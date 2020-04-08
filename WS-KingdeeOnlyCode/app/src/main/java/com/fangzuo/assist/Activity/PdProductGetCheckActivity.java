@@ -1,21 +1,15 @@
 package com.fangzuo.assist.Activity;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatTextView;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -31,7 +25,6 @@ import com.fangzuo.assist.Adapter.PushDownSubListAdapter;
 import com.fangzuo.assist.Adapter.StorageSpAdapter;
 import com.fangzuo.assist.Adapter.UnitSpAdapter;
 import com.fangzuo.assist.Adapter.WaveHouseSpAdapter;
-import com.fangzuo.assist.Beans.CodeCheckBackDataBean;
 import com.fangzuo.assist.Beans.CommonResponse;
 import com.fangzuo.assist.Beans.DownloadReturnBean;
 import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
@@ -61,6 +54,7 @@ import com.fangzuo.assist.Utils.DataModel;
 import com.fangzuo.assist.Utils.DoubleUtil;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
 import com.fangzuo.assist.Utils.GreenDaoManager;
+import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.Lg;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
@@ -68,8 +62,9 @@ import com.fangzuo.assist.Utils.Toast;
 import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.MyWaveHouseSpinner;
-import com.fangzuo.assist.widget.SpinnerCheckType;
 import com.fangzuo.assist.widget.SpinnerGProduct;
+import com.fangzuo.assist.widget.SpinnerStorage;
+import com.fangzuo.assist.widget.SpinnerUnit;
 import com.fangzuo.greendao.gen.BarCodeDao;
 import com.fangzuo.greendao.gen.DaoSession;
 import com.fangzuo.greendao.gen.InStorageNumDao;
@@ -94,22 +89,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PdShouLiao2LLCheckActivity extends BaseActivity {
-    private int tag =28;
-    private int activity = Config.PdShouLiao2LLCheckActivity;
+public class PdProductGetCheckActivity extends BaseActivity {
+    private int tag =29;
+    private int activity = Config.PdProductGetCheckActivity;
 
     @BindView(R.id.lv_pushsub)
     ListView lvPushsub;
     @BindView(R.id.sp_storage)
-    Spinner spStorage;
+    SpinnerStorage spStorage;
     @BindView(R.id.sp_wavehouse)
     MyWaveHouseSpinner spWavehouse;
     @BindView(R.id.productName)
-    AppCompatTextView productName;
+    TextView productName;
     @BindView(R.id.tv_model)
-    AppCompatTextView tvModel;
-//    @BindView(R.id.sp_unit)
-//    Spinner spUnit;
+    TextView tvModel;
+    @BindView(R.id.sp_unit)
+    SpinnerUnit spUnit;
     @BindView(R.id.sp_batchNo)
     Spinner spBatchNo;
     @BindView(R.id.ed_num)
@@ -120,54 +115,54 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
     Button btnBackorder;
     @BindView(R.id.btn_checkorder)
     Button btnCheckorder;
-    @BindView(R.id.cb_isStorage)
-    CheckBox cbIsStorage;
+//    @BindView(R.id.cb_isStorage)
+//    CheckBox cbIsStorage;
     @BindView(R.id.cb_isAuto)
     CheckBox cbIsAuto;
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.tv_date_pay)
-    TextView tvDatePay;
-    @BindView(R.id.sp_purchaseMethod)
-    Spinner spPurchaseMethod;
-    @BindView(R.id.sp_capture_person)
-    Spinner spCapturePerson;
-    @BindView(R.id.sp_sign_person)
-    Spinner spSignPerson;
-    @BindView(R.id.sp_manager)
-    Spinner spManager;
-    @BindView(R.id.sp_wanglaikemu)
-    Spinner spWanglaikemu;
-    @BindView(R.id.ed_zhaiyao)
-    EditText edZhaiyao;
-    @BindView(R.id.sp_capture)
-    Spinner spCapture;
+//    @BindView(R.id.tv_date)
+//    TextView tvDate;
+//    @BindView(R.id.tv_date_pay)
+//    TextView tvDatePay;
+//    @BindView(R.id.sp_purchaseMethod)
+//    Spinner spPurchaseMethod;
+//    @BindView(R.id.sp_capture_person)
+//    Spinner spCapturePerson;
+//    @BindView(R.id.sp_sign_person)
+//    Spinner spSignPerson;
+//    @BindView(R.id.sp_manager)
+//    Spinner spManager;
+//    @BindView(R.id.sp_wanglaikemu)
+//    Spinner spWanglaikemu;
+//    @BindView(R.id.ed_zhaiyao)
+//    EditText edZhaiyao;
+//    @BindView(R.id.sp_capture)
+//    Spinner spCapture;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.ed_pihao)
     EditText edPihao;
-    @BindView(R.id.sp_gproduct)
-    SpinnerGProduct spGproduct;
+//    @BindView(R.id.sp_gproduct)
+//    SpinnerGProduct spGproduct;
     private DaoSession daosession;
     private CommonMethod method;
-    private int year;
-    private int month;
-    private int day;
+//    private int year;
+//    private int month;
+//    private int day;
     private ArrayList<PushDownSub> container;
     private ArrayList<String> fidcontainer;
-    private StorageSpAdapter storageSpinner;
-    private EmployeeSpAdapter employeeAdapter;
+//    private StorageSpAdapter storageSpinner;
+//    private EmployeeSpAdapter employeeAdapter;
     private PushDownSubDao pushDownSubDao;
     private PushDownMainDao pushDownMainDao;
     private String fwanglaiUnit;
     private String employeeId;
     private String departmentId;
     private PushDownSubListAdapter pushDownSubListAdapter;
-    private PayMethodSpAdapter payMethodSpAdapter;
-    private EmployeeSpAdapter employeeSpAdapter;
+//    private PayMethodSpAdapter payMethodSpAdapter;
+//    private EmployeeSpAdapter employeeSpAdapter;
     private List<Wanglaikemu> wanglaikemuList;
-    private boolean isGetDefaultStorage;
-    private boolean isAuto;
+//    private boolean isGetDefaultStorage;
+//    private boolean isAuto;
     private PushDownSub pushDownSub;
     private List<Product> products;
     private String ManagerId;
@@ -178,16 +173,16 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
     private String fentryid;
     private String fprice;
     private UnitSpAdapter unitAdapter;
-    private String storageID;
-    private String storageName;
+    private String storageID="";
+    private String storageName="";
     private WaveHouseSpAdapter waveHouseAdapter;
-//    private String unitId;
-//    private String unitName;
-//    private double unitrate;
+    private String unitId;
+    private String unitName;
+    private double unitrate;
     private double unitrateSub;
     private String waveHouseID;
     private String waveHouseName;
-    private String batchNo;
+    private String batchNo="";
     private String wanglaikemuId;
     private String wanglaikemuName;
     private String datePay;
@@ -266,16 +261,16 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
     }
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_pd_shou_liao2_llcheck);
+        setContentView(R.layout.activity_pd_product_get_check);
         ButterKnife.bind(this);
         mContext = this;
         daosession = GreenDaoManager.getmInstance(mContext).getDaoSession();
         method = CommonMethod.getMethod(mContext);
-        year = Calendar.getInstance().get(Calendar.YEAR);
-        month = Calendar.getInstance().get(Calendar.MONTH);
-        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        cbIsAuto.setChecked(share.getSLTZisAuto());
-        isAuto = share.getSLTZisAuto();
+//        year = Calendar.getInstance().get(Calendar.YEAR);
+//        month = Calendar.getInstance().get(Calendar.MONTH);
+//        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        cbIsAuto.setChecked(Hawk.get(Config.autoAdd+activity,false));
+//        isAuto = share.getSLTZisAuto();
         edPihao.setEnabled(false);
     }
 
@@ -293,7 +288,6 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
             billNo = list1.get(0).FBillNo;
         }
         ordercode = DataModel.findOrderCode(mContext,activity,fidcontainer);
-        Hawk.put("PdShouLiao2LLCheckActivity_employeeId",employeeId);
     }
 
     private void getList() {
@@ -317,21 +311,19 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
     }
 
     private void LoadBasicData() {
-        tvDate.setText(getTime(true));
-        tvDatePay.setText(getTime(true));
-
-        storageSpinner = method.getStorageSpinner(spStorage);
-        payMethodSpAdapter = CommonMethod.getMethod(mContext).getPayMethodSpinner(spPurchaseMethod);
-        employeeSpAdapter = CommonMethod.getMethod(mContext).getEmployeeAdapter(spCapturePerson);
-        wanglaikemuList = CommonMethod.getMethod(mContext).getwlkmAdapter(spWanglaikemu);
-        spSignPerson.setAdapter(employeeSpAdapter);
-        spManager.setAdapter(employeeSpAdapter);
-        employeeSpAdapter.notifyDataSetChanged();
-        employeeAdapter = method.getEmployeeAdapter(spManager);
-        spCapture.setAdapter(employeeAdapter);
-
-
-        spGproduct.setAutoSelection(Config.People5 + activity, "");
+//        tvDate.setText(getTime(true));
+//        tvDatePay.setText(getTime(true));
+        spStorage.setAutoSelection(Config.Storage+activity,"");
+//        storageSpinner = method.getStorageSpinner(spStorage);
+//        payMethodSpAdapter = CommonMethod.getMethod(mContext).getPayMethodSpinner(spPurchaseMethod);
+//        employeeSpAdapter = CommonMethod.getMethod(mContext).getEmployeeAdapter(spCapturePerson);
+//        wanglaikemuList = CommonMethod.getMethod(mContext).getwlkmAdapter(spWanglaikemu);
+//        spSignPerson.setAdapter(employeeSpAdapter);
+//        spManager.setAdapter(employeeSpAdapter);
+//        employeeSpAdapter.notifyDataSetChanged();
+//        employeeAdapter = method.getEmployeeAdapter(spManager);
+//        spCapture.setAdapter(employeeAdapter);
+//        spGproduct.setAutoSelection(Config.People5 + activity, "");
 
 
 //        spPurchaseMethod.setSelection(share.getSLTZpurchaseMethod());
@@ -347,16 +339,15 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
         cbIsAuto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                isAuto = b;
-                share.setSLTZisAuto(b);
+                Hawk.put(Config.autoAdd+activity,b);
             }
         });
-        cbIsStorage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                isGetDefaultStorage = b;
-            }
-        });
+//        cbIsStorage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                isGetDefaultStorage = b;
+//            }
+//        });
 
         //批号输入监听
         edPihao.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -371,151 +362,22 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
             }
         });
 
-        spCapture.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Employee capture = (Employee) employeeAdapter.getItem(i);
-                captureID = capture.FItemID;
-                captureName = capture.FName;
-                if (isFirst){
-                    share.setSLTZCapture(i);
-                    spCapture.setSelection(i);
-                }
-                else{
-                    spCapture.setSelection(share.getSLTZCapture());
-                    isFirst=true;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spPurchaseMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                PurchaseMethod item = payMethodSpAdapter.getChild(i);
-                PurchaseMethodId = item.FItemID;
-                purchaseMethodName = item.FName;
-//                share.setSLTZpurchaseMethod(i);
-                if (isFirst2){
-                    share.setSLTZpurchaseMethod(i);
-                    spPurchaseMethod.setSelection(i);
-                }
-                else{
-                    spPurchaseMethod.setSelection(share.getSLTZpurchaseMethod());
-                    isFirst2=true;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        spCapturePerson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Employee employee = (Employee) employeeSpAdapter.getItem(i);
-                capturePersonId = employee.FItemID;
-                capyurePersonName = employee.FName;
-//                share.setSLTZcapturePerson(i);
-                if (isFirst3){
-                    share.setSLTZcapturePerson(i);
-                    spCapturePerson.setSelection(i);
-                }
-                else{
-                    spCapturePerson.setSelection(share.getSLTZcapturePerson());
-                    isFirst3=true;
-                }
-                Log.e("capyurePersonName", capyurePersonName);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spSignPerson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Employee employee = (Employee) employeeSpAdapter.getItem(i);
-                signPersonId = employee.FItemID;
-                signPersonName = employee.FName;
-//                share.setSLTZSignPerson(i);
-                if (isFirst4){
-                    share.setSLTZSignPerson(i);
-                    spSignPerson.setSelection(i);
-                }
-                else{
-                    spSignPerson.setSelection(share.getSLTZSignPerson());
-                    isFirst4=true;
-                }
-                Log.e("signPersonName", signPersonName);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        spWanglaikemu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                share.setSLTZwlkm(i);
-                if (wanglaikemuList.size() > 0) {
-                    wanglaikemuId = wanglaikemuList.get(i).FAccountID;
-                    wanglaikemuName = wanglaikemuList.get(i).FFullName;
-                } else {
-                    wanglaikemuId = "";
-                    wanglaikemuName = "";
-                }
-//                Log.e("1111", unitName + "");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        spManager.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Employee employee = (Employee) employeeAdapter.getItem(i);
-                ManagerId = employee.FItemID;
-                ManagerName = employee.FName;
-//                share.setSLTZManager(i);
-                if (isFirst5){
-                    share.setSLTZManager(i);
-                    spManager.setSelection(i);
-                }
-                else{
-                    spManager.setSelection(share.getSLTZManager());
-                    isFirst5=true;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-//        spUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//        spPurchaseMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                Unit unit = (Unit) unitAdapter.getItem(i);
-//                if (unit != null) {
-//                    unitId = unit.FMeasureUnitID;
-//                    unitName = unit.FName;
-//                    unitrate = Double.parseDouble(unit.FCoefficient);
-//                    Log.e("1111", unitrate + "");
+//                PurchaseMethod item = payMethodSpAdapter.getChild(i);
+//                PurchaseMethodId = item.FItemID;
+//                purchaseMethodName = item.FName;
+////                share.setSLTZpurchaseMethod(i);
+//                if (isFirst2){
+//                    share.setSLTZpurchaseMethod(i);
+//                    spPurchaseMethod.setSelection(i);
 //                }
-//
+//                else{
+//                    spPurchaseMethod.setSelection(share.getSLTZpurchaseMethod());
+//                    isFirst2=true;
+//                }
 //            }
 //
 //            @Override
@@ -523,41 +385,62 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 //
 //            }
 //        });
-//        spStorage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                storage = (Storage) storageSpinner.getItem(i);
-//                waveHouseID="0";
-//                storageID = storage.FItemID;
-//                storageName = storage.FName;
-////                waveHouseAdapter = CommonMethod.getMethod(mContext).getWaveHouseAdapter(storage, spWavehouse);
-//                spWavehouse.setAuto(mContext,storage,wavehouseAutoString);
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//        spWavehouse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                WaveHouse waveHouse = (WaveHouse) spWavehouse.getAdapter().getItem(i);
-//                waveHouseID = waveHouse.FSPID;
-//                waveHouseName = waveHouse.FName;
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+
+
+
+        spUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Unit unit = (Unit) spUnit.getAdapter().getItem(i);
+                if (unit != null) {
+                    unitId = unit.FMeasureUnitID;
+                    unitName = unit.FName;
+                    unitrate = MathUtil.toD(unit.FCoefficient);
+                    Log.e("1111", unitrate + "");
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spStorage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                storage = (Storage) spStorage.getAdapter().getItem(i);
+                waveHouseID="0";
+                storageID = storage.FItemID;
+                storageName = storage.FName;
+//                waveHouseAdapter = CommonMethod.getMethod(mContext).getWaveHouseAdapter(storage, spWavehouse);
+                spWavehouse.setAuto(mContext,storage,wavehouseAutoString);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spWavehouse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                WaveHouse waveHouse = (WaveHouse) spWavehouse.getAdapter().getItem(i);
+                waveHouseID = waveHouse.FSPID;
+                waveHouseName = waveHouse.FName;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         lvPushsub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 pushDownSub = (PushDownSub) pushDownSubListAdapter.getItem(i);
-//                getUnitrateSub(pushDownSub);
+                getUnitrateSub(pushDownSub);
                 ProductDao productDao = daosession.getProductDao();
                 if (BasicShareUtil.getInstance(mContext).getIsOL()) {
                     Asynchttp.post(mContext, getBaseUrl() + WebApi.PRPDUCTSEARCHWHERE, pushDownSub.FItemID, new Asynchttp.Response() {
@@ -618,34 +501,37 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 //            }
 //        });
     }
-//    //获取明细里面的单位的换算率
-//    private void getUnitrateSub(PushDownSub pushDownSub){
-//        UnitDao unitDao = daosession.getUnitDao();
-//        List<Unit> units = unitDao.queryBuilder().where(
-//                UnitDao.Properties.FMeasureUnitID.eq(pushDownSub.FUnitID)
-//        ).build().list();
-//        if (units.size()>0){
-//            unitrateSub=Double.parseDouble(units.get(0).FCoefficient);
-//            Lg.e("获得明细换算率："+unitrateSub);
-//        }else{
-//            unitrateSub=1;
-//            Lg.e("获得明细换算率失败："+unitrateSub);
-//        }
-//    }
+    //获取明细里面的单位的换算率
+    private void getUnitrateSub(PushDownSub pushDownSub){
+        UnitDao unitDao = daosession.getUnitDao();
+        List<Unit> units = unitDao.queryBuilder().where(
+                UnitDao.Properties.FMeasureUnitID.eq(pushDownSub.FUnitID)
+        ).build().list();
+        if (units.size()>0){
+            unitrateSub=MathUtil.toD(units.get(0).FCoefficient);
+            Lg.e("获得明细换算率："+unitrateSub);
+        }else{
+            unitrateSub=1;
+            Lg.e("获得明细换算率失败："+unitrateSub);
+        }
+    }
     private void clickList(final Product product) {
-        productName.setText(product.FNumber);
+        productName.setText(product.FName);
         tvModel.setText(product.FModel);
         productID = pushDownSub.FItemID;
 //        wavehouseAutoString=product.FSPID;
-//        if ((product.FBatchManager) != null && (product.FBatchManager).equals("1")) {
-//            fBatchManager = true;
-//            spBatchNo.setEnabled(true);
+        if ((product.FBatchManager) != null && (product.FBatchManager).equals("1")) {
+            fBatchManager = true;
+            spBatchNo.setEnabled(true);
 //            edPihao.setEnabled(true);
-//        } else {
-//            edPihao.setEnabled(false);
+            edPihao.setHint("请输入批次");
+        } else {
+            edPihao.setHint("未开启批次");
+            edPihao.setText("");
+            edPihao.setEnabled(false);
 //            spBatchNo.setEnabled(false);
-//            fBatchManager = false;
-//        }
+            fBatchManager = false;
+        }
 //        if (isGetDefaultStorage) {
 //            for (int j = 0; j < storageSpinner.getCount(); j++) {
 //                if (((Storage)storageSpinner.getItem(j)).FItemID.equals(product.FDefaultLoc)) {
@@ -670,6 +556,7 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
         fid = pushDownSub.FInterID;
         fentryid = pushDownSub.FEntryID;
         fprice = pushDownSub.FAuxPrice;
+        spUnit.setAuto(mContext, product.FUnitGroupID,product.FUnitID, SpinnerUnit.Id);
 //        unitAdapter = CommonMethod.getMethod(mContext).getUnitAdapter(product.FUnitGroupID, spUnit);
 //
 //        if (fromScan){
@@ -680,16 +567,18 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 //        fromScan = false;
 //
 //        getBatchNo();
-//        if (isAuto) {
-////            edNum.setText("1.0");
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Addorder();
-//
-//                }
-//            }, 100);
-//        }
+        if (cbIsAuto.isChecked()) {
+            if ("".equals(edNum.getText().toString()))edNum.setText("1.0");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Addorder();
+
+                }
+            }, 100);
+        }else{
+            lockScan(0);
+        }
     }
 //    private void chooseUnit(String str){
 //        if (str!=null){
@@ -707,8 +596,8 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
     protected void OnReceive(String code) {
         List<String> list = CommonUtil.ScanBack(code);
         if (list.size()>0){
-//            edNum.setText(list.get(3));
-//            edPihao.setText(list.get(1));
+            edNum.setText(list.get(3));
+            edPihao.setText(list.get(1));
             ScanBarCode(list.get(0));
         }else{
             lockScan(0);
@@ -722,21 +611,11 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
         getList();
     }
 
-    @OnClick({R.id.btn_add, R.id.btn_backorder, R.id.btn_checkorder, R.id.tv_date, R.id.tv_date_pay})
+    @OnClick({R.id.btn_add, R.id.btn_backorder, R.id.btn_checkorder})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_add:
-                if (null!= pushDownSub){
-                    if (MathUtil.toD(pushDownSub.FQtying)>0){
-                        Toast.showText(mContext,"该明细数据已被检验，无法再次检验");
-                    }else{
-                        AddCheckActivity.start(mContext,ordercode,pushDownSub.FInterID,pushDownSub.FEntryID,tag);
-                    }
-                }else{
-                    Toast.showText(mContext,"请先确认明细数据");
-                }
-
-//                Addorder();
+                Addorder();
                 break;
             case R.id.btn_backorder:
                 btnBackorder.setClickable(false);
@@ -747,12 +626,6 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                 Bundle b = new Bundle();
                 b.putInt("activity", activity);
                 startNewActivity(ReViewForCheckActivity.class, 0, 0, false, b);
-                break;
-            case R.id.tv_date:
-                datePicker(tvDate);
-                break;
-            case R.id.tv_date_pay:
-                datePicker(tvDatePay);
                 break;
         }
     }
@@ -774,6 +647,7 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                         fromScan = true;
                         setProduct(product);
                     }else{
+                        Toast.showText(mContext,"无法找到相关物料数据");
                         lockScan(0);
                     }
                 }
@@ -809,30 +683,46 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
         if (product != null) {
             boolean flag = true;
             boolean hasUnit = false;
+            boolean errorStorage = false;
+            boolean errorWave = false;
+            boolean errorBatch = false;
             for (int j = 0; j < pushDownSubListAdapter.getCount(); j++) {
                 PushDownSub pushDownSub1 = (PushDownSub) pushDownSubListAdapter.getItem(j);
                 if (product.FItemID.equals(pushDownSub1.FItemID)) {
-                    if (Double.parseDouble(pushDownSub1.FAuxQty) == Double.parseDouble(pushDownSub1.FQtying)) {
+                    if (MathUtil.toD(pushDownSub1.FAuxQty) == MathUtil.toD(pushDownSub1.FQtying)) {
                         flag = true;
                         continue;
                     } else {
 //                        for (int i = 0; i < pushDownSubListAdapter.getCount(); i++) {
 //                            PushDownSub pushDownSub = (PushDownSub) pushDownSubListAdapter.getItem(i);
-                        if (!"".equals(default_unitID)){
-                            if (default_unitID.equals(pushDownSub1.FUnitID)){
-                                flag = false;
-                                hasUnit = true;
-                                lvPushsub.setSelection(j);
-                                lvPushsub.performItemClick(lvPushsub.getChildAt(j), j, lvPushsub.getItemIdAtPosition(j));
-                                break;
-                            }
-                        }else{
-                            flag = false;
-                            hasUnit = true;
-                            lvPushsub.setSelection(j);
-                            lvPushsub.performItemClick(lvPushsub.getChildAt(j), j, lvPushsub.getItemIdAtPosition(j));
-                            break;
-                        }
+//                        if (!"".equals(default_unitID)){
+//                            if (default_unitID.equals(pushDownSub1.FUnitID)){
+//                                flag = false;
+//                                hasUnit = true;
+//                                lvPushsub.setSelection(j);
+//                                lvPushsub.performItemClick(lvPushsub.getChildAt(j), j, lvPushsub.getItemIdAtPosition(j));
+//                                break;
+//                            }
+//                        }else{
+//                            if (storageID.equals(pushDownSub1.FDCStockID)){
+//                                if (waveHouseID.equals(pushDownSub1.FDCSPID)){
+                                    if (edPihao.getText().toString().equals(pushDownSub1.FBatchNo)){
+                                        flag = false;
+                                        hasUnit = true;
+                                        lvPushsub.setSelection(j);
+                                        lvPushsub.performItemClick(lvPushsub.getChildAt(j), j, lvPushsub.getItemIdAtPosition(j));
+                                        break;
+                                    }else{
+                                        errorBatch = true;
+                                    }
+//                                }else{
+//                                    errorWave = true;
+//                                }
+//                            }else{
+//                                errorStorage = true;
+//                            }
+
+//                        }
 //                        }
 //                        if (!hasUnit){
 //                            lvPushsub.setSelection(j);
@@ -847,7 +737,9 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 
             if (flag) {
                 lockScan(0);
-                Toast.showText(mContext, "商品不存在");
+//                if (errorStorage)Toast.showText(mContext, "商品不存在,请检查仓库是否正确");
+//                if (errorWave)Toast.showText(mContext, "商品不存在,请检查仓位是否正确");
+                if (errorBatch)Toast.showText(mContext, "商品不存在,请检查批号是否正确");
                 MediaPlayer.getInstance(mContext).error();
 
             }
@@ -871,6 +763,11 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                 lockScan(0);
                 return;
             }
+            if (!pushDownSub.FBatchNo.equals(batchNo)){
+                Toast.showText(mContext, "批次不符，请重新检查");
+                lockScan(0);
+                return;
+            }
 
             if (edNum.getText().toString().equals("")||edNum.getText().toString().equals("0")) {
                 MediaPlayer.getInstance(mContext).error();
@@ -884,82 +781,78 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                 lockScan(0);
                 return;
             }
-            if (Double.parseDouble(pushDownSub.FAuxQty) < (Double.parseDouble(num) + Double.parseDouble(pushDownSub.FQtying))) {
+            if (MathUtil.toD(pushDownSub.FAuxQty) < ((MathUtil.toD(num)*unitrate)/unitrateSub + MathUtil.toD(pushDownSub.FQtying))) {
                 MediaPlayer.getInstance(mContext).error();
                 Toast.showText(mContext, "大兄弟,您的数量超过我的想象");
                 lockScan(0);
                 return;
             }
-            ProgressDialog pg = new ProgressDialog(mContext);
-            pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pg.setMessage("请稍后...");
-            pg.setCancelable(false);
-            pg.show();
+            LoadingUtil.showDialog(mContext,"正在添加...");
 
 
-//            boolean isHebing = true;
-//            if (isHebing) {
-//                List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
-//                        T_DetailDao.Properties.Activity.eq(activity),
-//                        T_DetailDao.Properties.FInterID.eq(fid),
-////                        T_DetailDao.Properties.FUnitId.eq(unitId),
-//                        T_DetailDao.Properties.FProductId.eq(product.FItemID),
+            boolean isHebing = true;
+            if (isHebing) {
+                List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
+                        T_DetailDao.Properties.Activity.eq(activity),
+                        T_DetailDao.Properties.FInterID.eq(fid),
+//                        T_DetailDao.Properties.FUnitId.eq(unitId),
+                        T_DetailDao.Properties.FProductId.eq(product.FItemID),
 //                        T_DetailDao.Properties.FStorageId.eq(storageID),
 //                        T_DetailDao.Properties.FPositionId.eq(waveHouseID==null?"0":waveHouseID),
-//                        T_DetailDao.Properties.FEntryID.eq(fentryid),
-//                        T_DetailDao.Properties.FBatch.eq(batchNo == null ? "" : batchNo)
-//                ).build().list();
-//                if (detailhebing.size() > 0) {
-//                    for (int i = 0; i < detailhebing.size(); i++) {
-//                        num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
+                        T_DetailDao.Properties.FEntryID.eq(fentryid),
+                        T_DetailDao.Properties.FBatch.eq(batchNo == null ? "" : batchNo)
+                ).build().list();
+                if (detailhebing.size() > 0) {
+                    for (int i = 0; i < detailhebing.size(); i++) {
+                        num = (MathUtil.toD(num) + MathUtil.toD(detailhebing.get(i).FCheckNum)) + "";
 //                        List<T_main> t_mainList = t_mainDao.queryBuilder().where(T_mainDao.Properties.FIndex.eq(detailhebing.get(i).FIndex)).build().list();
 //                        if (t_mainList.size() > 0) {
 //                            t_mainDao.delete(t_mainList.get(0));
 //                        }
-//                        t_detailDao.delete(detailhebing.get(i));
-//                    }
-//                }
-//            }
+                        t_detailDao.delete(detailhebing.get(i));
+                    }
+                }
+            }
+
+//            T_main t_main = new T_main();
+//            t_main.FDepartment = departmentName == null ? "" : departmentName;
+//            t_main.FDepartmentId = departmentId == null ? "" : departmentId;
+//            t_main.tag = tag;
+//            t_main.FIndex = second;
+//            t_main.FPaymentDate = tvDatePay.getText().toString();
+//            t_main.orderId = 0;
+//            t_main.orderDate = tvDate.getText().toString();
+//            t_main.FPurchaseUnit = "";
+//            t_main.FSalesMan = employeeName == null ? "" : employeeName;
+//            t_main.FSalesManId = employeeId == null ? "" : employeeId;
+//            t_main.FMaker = share.getUserName();
+//            Log.e("AFMaker", share.getUserName());
+//            t_main.FMakerId = share.getsetUserID();
+//            Log.e("AFMakerId", share.getsetUserID());
+//            t_main.FDirector = ManagerName == null ? "" : ManagerName;
+//            t_main.FDirectorId = ManagerId == null ? "" : ManagerId;
+//            t_main.FPaymentType = signPersonName == null ? "" : signPersonName;
+//            t_main.FPaymentTypeId = signPersonId == null ? "" : signPersonId;
+//            t_main.saleWayId = capturePersonId == null ? "" : capturePersonId;
+//            t_main.saleWay = capyurePersonName == null ? "" : capyurePersonName;
+//            t_main.FDeliveryAddress = "";
+//            t_main.FRemark = PurchaseMethodId == null ? "" : PurchaseMethodId;
+//            t_main.FCustody = ManagerName == null ? "" : ManagerName;
+//            t_main.FCustodyId = ManagerId == null ? "" : ManagerId;
+//            t_main.FAcount = wanglaikemuName == null ? "" : wanglaikemuName;
+//            t_main.FAcountID = wanglaikemuId == null ? "" : wanglaikemuId;
+//            t_main.Rem = spGproduct.getEmployeeId();
+//            t_main.supplier = captureID == null ? "" : captureID;
+//            Log.e("captureID", captureID == null ? "" : captureID);
+//            t_main.supplierId = fwanglaiUnit == null ? "" : fwanglaiUnit;
+//            t_main.FSendOutId = "";
+//            t_main.FDeliveryType = fid == null ? "" : fid;
+//            t_main.activity = activity;
+//            t_main.sourceOrderTypeId = "";
+//            t_main.IMIE =  getIMIE();
+//            long insert1 = t_mainDao.insert(t_main);
 
             String second = getTimesecond();
-            T_main t_main = new T_main();
-            t_main.FDepartment = departmentName == null ? "" : departmentName;
-            t_main.FDepartmentId = departmentId == null ? "" : departmentId;
-            t_main.tag = tag;
-            t_main.FIndex = second;
-            t_main.FPaymentDate = tvDatePay.getText().toString();
-            t_main.orderId = 0;
-            t_main.orderDate = tvDate.getText().toString();
-            t_main.FPurchaseUnit = "";
-            t_main.FSalesMan = employeeName == null ? "" : employeeName;
-            t_main.FSalesManId = employeeId == null ? "" : employeeId;
-            t_main.FMaker = share.getUserName();
-            Log.e("AFMaker", share.getUserName());
-            t_main.FMakerId = share.getsetUserID();
-            Log.e("AFMakerId", share.getsetUserID());
-            t_main.FDirector = ManagerName == null ? "" : ManagerName;
-            t_main.FDirectorId = ManagerId == null ? "" : ManagerId;
-            t_main.FPaymentType = signPersonName == null ? "" : signPersonName;
-            t_main.FPaymentTypeId = signPersonId == null ? "" : signPersonId;
-            t_main.saleWayId = capturePersonId == null ? "" : capturePersonId;
-            t_main.saleWay = capyurePersonName == null ? "" : capyurePersonName;
-            t_main.FDeliveryAddress = "";
-            t_main.FRemark = PurchaseMethodId == null ? "" : PurchaseMethodId;
-            t_main.FCustody = ManagerName == null ? "" : ManagerName;
-            t_main.FCustodyId = ManagerId == null ? "" : ManagerId;
-            t_main.FAcount = wanglaikemuName == null ? "" : wanglaikemuName;
-            t_main.FAcountID = wanglaikemuId == null ? "" : wanglaikemuId;
-            t_main.Rem = spGproduct.getEmployeeId();
-            t_main.supplier = captureID == null ? "" : captureID;
-            Log.e("captureID", captureID == null ? "" : captureID);
-            t_main.supplierId = fwanglaiUnit == null ? "" : fwanglaiUnit;
-            t_main.FSendOutId = "";
-            t_main.FDeliveryType = fid == null ? "" : fid;
-            t_main.activity = activity;
-            t_main.sourceOrderTypeId = "";
-            t_main.IMIE =  getIMIE();
-            long insert1 = t_mainDao.insert(t_main);
-
             T_Detail t_detail = new T_Detail();
             t_detail.tag = tag;
             t_detail.FBillNo = billNo;
@@ -969,35 +862,37 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
             t_detail.FProductName = product.FName;
             t_detail.FProductCode = product.FNumber;
             t_detail.FIndex = second;
-//            t_detail.FUnitId = unitId == null ? "" : unitId;
-//            t_detail.FUnit = unitName == null ? "" : unitName;
+            t_detail.FUnitId = unitId == null ? "" : unitId;
+            t_detail.FUnit = unitName == null ? "" : unitName;
             t_detail.FStorage = storageName == null ? "" : storageName;
             t_detail.FStorageId = storageID == null ? "" : storageID;
             t_detail.FPosition = waveHouseName == null ? "" : waveHouseName;
             t_detail.FPositionId = waveHouseID == null ? "0" : waveHouseID;
             t_detail.activity = activity;
+            t_detail.model = product.FModel==null?"":product.FModel;
             t_detail.FDiscount = discount;
             t_detail.FQuantity = num;
-//            t_detail.unitrate = unitrate;
+            t_detail.FCheckNum = num;
+            t_detail.unitrate = unitrate;
             t_detail.FTaxUnitPrice = fprice == null ? "" : fprice;
             t_detail.FEntryID = fentryid == null ? "" : fentryid;
             t_detail.FInterID = fid == null ? "" : fid;
             long insert = t_detailDao.insert(t_detail);
 
             lockScan(0);
-            if (insert1 > 0 && insert > 0) {
-                pushDownSub.FQtying = DoubleUtil.sum(Double.parseDouble(pushDownSub.FQtying) , Double.parseDouble(edNum.getText().toString()) ) + "";
+            if (insert > 0) {
+                pushDownSub.FQtying = DoubleUtil.sum(MathUtil.toD(pushDownSub.FQtying) , (MathUtil.toD(edNum.getText().toString())*unitrate)/unitrateSub ) + "";
                 pushDownSubDao.update(pushDownSub);
                 Toast.showText(mContext, "添加成功");
                 MediaPlayer.getInstance(mContext).ok();
                 edNum.setText("");
                 pushDownSubListAdapter.notifyDataSetChanged();
                 resetAll();
-                pg.dismiss();
+                LoadingUtil.dismiss();
             } else {
                 Toast.showText(mContext, "添加失败，请重试");
                 MediaPlayer.getInstance(mContext).error();
-                pg.dismiss();
+                LoadingUtil.dismiss();
             }
 
         }else{
@@ -1036,7 +931,7 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 //                    if(dBean.InstorageNum!=null){
 //                        for (int i = 0; i < dBean.InstorageNum.size(); i++) {
 //                            if (dBean.InstorageNum.get(i).FQty != null
-//                                    && Double.parseDouble(dBean.InstorageNum.get(i).FQty) > 0) {
+//                                    && MathUtil.toD(dBean.InstorageNum.get(i).FQty) > 0) {
 //                                Log.e(TAG,"有库存的批次："+dBean.InstorageNum.get(i).toString());
 //                                container.add(dBean.InstorageNum.get(i));
 //                            }
@@ -1081,78 +976,61 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
         t_mainDao = daosession.getT_mainDao();
         t_detailDao = daosession.getT_DetailDao();
         fidc = new ArrayList<>();
+        fidc.add(fid);
         ArrayList<PurchaseInStoreUploadBean.purchaseInStore> data = new ArrayList<>();
-        List<T_main> mainsTemp = t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list();
-        Lg.e(mainsTemp.size()+"");
-        TreeSet<String> getFids=new TreeSet<>();
-        for (int i = 0; i < mainsTemp.size(); i++) {
-            getFids.add(mainsTemp.get(i).FDeliveryType);
-        }
-        for (String str:getFids) {
-            List<T_main> mains = t_mainDao.queryBuilder().where(
-                    T_mainDao.Properties.Activity.eq(activity),
-                    T_mainDao.Properties.FDeliveryType.eq(str)
-            ).build().list();
-            for (int i = 0; i < mains.size(); i++) {
-                if (i > 0 && mains.get(i).FDeliveryType.equals(mains.get(i - 1).FDeliveryType)) {
+//        List<T_main> mainsTemp = t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list();
+//        Lg.e(mainsTemp.size()+"");
+//        TreeSet<String> getFids=new TreeSet<>();
+//        for (int i = 0; i < mainsTemp.size(); i++) {
+//            getFids.add(mainsTemp.get(i).FDeliveryType);
+//        }
+//        for (String str:getFids) {
+//            List<T_main> mains = t_mainDao.queryBuilder().where(
+//                    T_mainDao.Properties.Activity.eq(activity),
+//                    T_mainDao.Properties.FDeliveryType.eq(str)
+//            ).build().list();
+//            for (int i = 0; i < mains.size(); i++) {
+//                if (i > 0 && mains.get(i).FDeliveryType.equals(mains.get(i - 1).FDeliveryType)) {
 
-                } else {
+//                } else {
                     PurchaseInStoreUploadBean.purchaseInStore puBean = pBean.new purchaseInStore();
                     detailContainer = new ArrayList<>();
                     String main;
                     String detail = "";
-                    T_main t_main = mains.get(i);
-                    fidc.add(t_main.FDeliveryType);
-                    main = t_main.FMakerId + "|" +
-                            t_main.orderId + "|" +
-                            t_main.IMIE + "|" ;
-//                            t_main.orderDate + "|" +
-//                            t_main.FPaymentDate + "|" +
-//                            t_main.supplierId + "|" +
-//                            t_main.FRemark + "|" +
-//                            t_main.FDepartmentId + "|" +
-//                            t_main.FSalesManId + "|" +
-//                            t_main.FDirectorId + "|" +
-//                            t_main.FPaymentTypeId + "|" +
-//                            t_main.supplier + "|"+
-//                            t_main.Rem + "|";
+//                    T_main t_main = mains.get(i);
+//                    fidc.add(t_main.FDeliveryType);
+                    main = share.getsetUserID() + "|" +
+                            getTime(true) + "|" ;
                     puBean.main = main;
-                    List<T_Detail> details = t_detailDao.queryBuilder().where(
-                            T_DetailDao.Properties.FInterID.eq(t_main.FDeliveryType),
-                            T_DetailDao.Properties.Activity.eq(activity)
-                    ).build().list();
-                    for (int j = 0; j < details.size(); j++) {
+//                    List<T_Detail> details = t_detailDao.queryBuilder().where(
+//                            T_DetailDao.Properties.FInterID.eq(t_main.FDeliveryType),
+//                            T_DetailDao.Properties.Activity.eq(activity)
+//                    ).build().list();
+
+                    for (int j = 0; j < container.size(); j++) {
                         if (j != 0 && j % 49 == 0) {
                             Log.e("j%49", j % 49 + "");
-                            T_Detail t_detail = details.get(j);
-                            detail = detail +
-                                    t_detail.FInterID + "|" +
-                                    t_detail.FEntryID + "|" +
-                                    t_detail.FCheckTypeID + "|" +
-                                    t_detail.FCheckResultID + "|" +
-                                    t_detail.FMan1 + "|" +
-                                    t_detail.FMan2 + "|" +
-                                    t_detail.FCheckNum + "|" +
-                                    t_detail.FCheckBrokenNum + "|" +
-                                    t_detail.FCheckPassNum + "|";
-                            detail = detail.subSequence(0, detail.length() - 1).toString();
+                            PushDownSub t_detail = container.get(j);
+                            if (MathUtil.toD(t_detail.FQtying)!=0){
+                                detail = detail +
+                                        t_detail.FInterID + "|" +
+                                        t_detail.FEntryID + "|" +
+                                        t_detail.FQtying + "|" ;
+                                detail = detail.subSequence(0, detail.length() - 1).toString();
+                            }
                             detailContainer.add(detail);
                             detail = "";
                         } else {
                             Log.e("j", j + "");
-                            Log.e("details.size()", details.size() + "");
-                            T_Detail t_detail = details.get(j);
-                            detail = detail +
-                                    t_detail.FInterID + "|" +
-                                    t_detail.FEntryID + "|" +
-                                    t_detail.FCheckTypeID + "|" +
-                                    t_detail.FCheckResultID + "|" +
-                                    t_detail.FMan1 + "|" +
-                                    t_detail.FMan2 + "|" +
-                                    t_detail.FCheckNum + "|" +
-                                    t_detail.FCheckBrokenNum + "|" +
-                                    t_detail.FCheckPassNum + "|";
-                            Log.e("detail1", detail);
+//                            Log.e("details.size()", details.size() + "");
+                            PushDownSub t_detail = container.get(j);
+                            if (MathUtil.toD(t_detail.FQtying)!=0) {
+                                detail = detail +
+                                        t_detail.FInterID + "|" +
+                                        t_detail.FEntryID + "|" +
+                                        t_detail.FQtying + "|" ;
+                                Log.e("detail1", detail);
+                            }
                         }
 
                     }
@@ -1164,33 +1042,39 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                     detailContainer.add(detail);
                     puBean.detail = detailContainer;
                     data.add(puBean);
-                }
+//                }
 
-            }
+//            }
+//        }
+        if (detailContainer.size()<=0 || "".equals(detailContainer.get(0))){
+            Toast.showText(mContext,"不存在验货数据");
+            btnBackorder.setClickable(true);
+            LoadingUtil.dismiss();
+        }else{
+            postToServer(data);
         }
-        postToServer(data);
     }
 
     private void postToServer(ArrayList<PurchaseInStoreUploadBean.purchaseInStore> data) {
         PurchaseInStoreUploadBean pBean = new PurchaseInStoreUploadBean();
         pBean.list = data;
         Gson gson = new Gson();
-        App.getRService().doIOAction(WebApi.PdShouLiao2LLCheckActivityUpload, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
+        App.getRService().doIOAction(WebApi.PdProductGetCheckActivityUpload, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
             @Override
             public void onNext(CommonResponse commonResponse) {
                 super.onNext(commonResponse);
                 if (!commonResponse.state)return;
-                MediaPlayer.getInstance(mContext).ok();
                 Toast.showText(mContext, "上传成功");
-                List<T_Detail> list = t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity)).build().list();
-                List<T_main> list1 = t_mainDao.queryBuilder().where(T_mainDao.Properties.Activity.eq(activity)).build().list();
-                for (int i = 0; i < list.size(); i++) {
-                    t_detailDao.delete(list.get(i));
-                }
-                for (int i = 0; i < list1.size(); i++) {
-                    t_mainDao.delete(list1.get(i));
-                }
+
+
                 for (int i = 0; i < fidc.size(); i++) {
+                    t_detailDao.deleteInTx(t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.Activity.eq(activity),
+                            T_DetailDao.Properties.FInterID.eq(fidc.get(i))
+                    ).build().list());
+//                    t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(
+//                            T_mainDao.Properties.Activity.eq(activity)
+//                    ).build().list());
                     List<PushDownSub> pushDownSubs = pushDownSubDao.queryBuilder().where(
                             PushDownSubDao.Properties.Tag.eq(tag),
                             PushDownSubDao.Properties.FInterID.eq(fidc.get(i))
@@ -1202,6 +1086,7 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
                     ).build().list();
                     pushDownMainDao.deleteInTx(pushDownMains);
                 }
+                MediaPlayer.getInstance(mContext).ok();
                 btnBackorder.setClickable(true);
                 LoadingUtil.dismiss();
                 Bundle b = new Bundle();
@@ -1211,24 +1096,14 @@ public class PdShouLiao2LLCheckActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-                super.onError(e);
+//                super.onError(e);
                 Toast.showText(mContext, e.getMessage());
                 btnBackorder.setClickable(true);
                 MediaPlayer.getInstance(mContext).error();
                 LoadingUtil.dismiss();
             }
         });
-//        Asynchttp.post(mContext, getBaseUrl() + WebApi.PdShouLiao2LLCheckActivityUpload, gson.toJson(pBean), new Asynchttp.Response() {
-//            @Override
-//            public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
-//
-//            }
-//
-//            @Override
-//            public void onFailed(String Msg, AsyncHttpClient client) {
-//
-//            }
-//        });
+
     }
     @Override
     public void onBackPressed() {

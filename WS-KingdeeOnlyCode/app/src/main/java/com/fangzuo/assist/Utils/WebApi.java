@@ -27,6 +27,7 @@ public class WebApi {
     public static final String PDSUBLIST = "GetPDSubList";
     public static final String PushDownOCOSUpload = "PushDownOCOSUpload";
     public static final String PushDownOCISUpload = "PushDownOCISUpload";
+    public static final String ShouLiaoOrder2WwrkActivityUpload = "ShouLiaoOrder2WwrkActivityUpload";
     public static final String PDUPLOAD = "PDUpload";
     public static final String PD2UPLOAD = "PD2UPLOAD";
     public static final String PUSHDOWNLIST = "PushDownList";
@@ -34,6 +35,7 @@ public class WebApi {
     public static final String PUSHDOWNSOUPLOAD = "PushDownSOUpload";
     public static final String PUSHDOWNSLUPLOAD = "PushDownSLUpload";
     public static final String PdShouLiao2LLCheckActivityUpload = "PdShouLiao2LLCheckActivityUpload";
+    public static final String PdProductGetCheckActivityUpload = "PdProductGetCheckActivityUpload";
     public static final String PUSHDOWNPOUPLOAD = "PushDownPOUpload";
     public static final String SCRWDPDCPRKUpload = "SCRWDPDCPRKUpload";
     public static final String HBDPDCPRKUpload = "HBDPDCPRKUpload";

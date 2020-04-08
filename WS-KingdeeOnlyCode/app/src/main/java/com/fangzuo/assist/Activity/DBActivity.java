@@ -548,6 +548,7 @@ public class DBActivity extends BaseActivity {
     }
 
     private String barcode = "";
+    private boolean code4Plan=false;
     @Override
     protected void OnReceive(String code) {
 //        if (edNum.getText().toString().equals("")){
@@ -571,15 +572,33 @@ public class DBActivity extends BaseActivity {
 //            edCode.setText(code);
 //            setDATA(code, false);
 //        }
-
-
-        barcode = code;
+        if (code.contains("^")){
+            List<String> list = CommonUtil.ScanBack(code);
+            if (list.size()>0){
+                code4Plan=true;
+                headDone = true;
+                edNum.setEnabled(true);
+                codeCheckBackDataBean=null;
+//                edNum.setText(list.get(3));
+                edPihao.setText(list.get(1));
+                barcode = list.get(0);
+                edCode.setText(barcode);
+                setDATA(barcode, false);
+            }else{
+                lockScan(0);
+            }
+        }else{
+            code4Plan =false;
+            barcode = code;
 //        edNum.setEnabled(!barcode.contains("ZZ"));
-        LoadingUtil.showDialog(mContext,"正在查找...");
-        //查询条码唯一表
-        CodeCheckBean bean = new CodeCheckBean(barcode);
-        DataModel.codeCheck4DB("CodeCheckForOut4DB",gson.toJson(bean));
+            LoadingUtil.showDialog(mContext,"正在查找...");
+            //查询条码唯一表
+            CodeCheckBean bean = new CodeCheckBean(barcode);
+            DataModel.codeCheck4DB("CodeCheckForOut4DB",gson.toJson(bean));
 //        DataModel.codeCheckForOut(gson.toJson(bean));
+        }
+
+
     }
 
 
@@ -691,14 +710,14 @@ public class DBActivity extends BaseActivity {
             BarCodeDao barCodeDao = daoSession.getBarCodeDao();
             final ProductDao productDao = daoSession.getProductDao();
             if (BasicShareUtil.getInstance(mContext).getIsOL()) {
-                App.getRService().getProductForId(codeCheckBackDataBean.FItemID, new MySubscribe<CommonResponse>() {
+                App.getRService().doIOAction(code4Plan?WebApi.SEARCHPRODUCTS:WebApi.PRPDUCTSEARCHWHERE,code4Plan?fnumber:codeCheckBackDataBean.FItemID, new MySubscribe<CommonResponse>() {
                     @Override
                     public void onNext(CommonResponse commonResponse) {
                         LoadingUtil.dismiss();
                         final DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
                         if (dBean.products.size() > 0) {
                             product = dBean.products.get(0);
-                            Lg.e("获得物料："+product.toString());
+                            Lg.e("获得物料：",product);
                             getProductOL(dBean, 0);
                         } else {
                             lockScan(0);
@@ -1230,57 +1249,28 @@ public class DBActivity extends BaseActivity {
         pihao = edPihao.getText().toString();
         String num = edNum.getText().toString();
         String num1 = edNum.getText().toString();
-//        if ("".equals(edCode.getText().toString())){
-//            Toast.showText(mContext, "请输入物料编号");
-//            MediaPlayer.getInstance(mContext).error();
-//            return;
-//        }
-//        if ("".equals(edNum.getText().toString())){
-//            Toast.showText(mContext, "请输入数量");
-//            MediaPlayer.getInstance(mContext).error();
-//            return;
-//        }
-//        if (fBatchManager && pihao.equals("")) {
-//            Toast.showText(mContext, "请输入批次号");
-//            MediaPlayer.getInstance(mContext).error();
-//            return;
-//        }
-//
-//        if (outstorageId.equals(instorageId)) {
-//            Toast.showText(mContext, "大兄弟，你太闲了，搬进去搬出来不累么");
-//            MediaPlayer.getInstance(mContext).error();
-//            return;
-//        }
-//
-//        //是否开启库存管理 true，开启允许负库存
-//        if (!checkStorage) {
-//            if (qty < Double.parseDouble(num)) {
-//                MediaPlayer.getInstance(mContext).error();
-//                Toast.showText(mContext, "大兄弟 库存不够了");
-//                return;
-//            }
-//        }
-//                if (isHebing) {
-//                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
-//                            T_DetailDao.Properties.Activity.eq(activity),
-//                            T_DetailDao.Properties.FOrderId.eq(ordercode),
-//                            T_DetailDao.Properties.FProductId.eq(product.FItemID),
-////                            T_DetailDao.Properties.FBatch.eq(edPihao.getText().toString()),
-//                            T_DetailDao.Properties.FBatch.eq(pihao),
-//                            T_DetailDao.Properties.FUnitId.eq(unitId),
-//                            T_DetailDao.Properties.FStorageId.eq(instorageId),
-//                            T_DetailDao.Properties.FPositionId.eq(inwavehouseID),
-//                            T_DetailDao.Properties.FDiscount.eq(discount),
-//                            T_DetailDao.Properties.FoutStorageid.eq(outstorageId),
-//                            T_DetailDao.Properties.Foutwavehouseid.eq(outwavehouseID)
-//                    ).build().list();
-//                    if (detailhebing.size() > 0) {
-//                        for (int i = 0; i < detailhebing.size(); i++) {
-//                            num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
-//                            t_detailDao.delete(detailhebing.get(i));
-//                        }
-//                    }
-//                }
+
+                if (code4Plan) {
+                    List<T_Detail> detailhebing = t_detailDao.queryBuilder().where(
+                            T_DetailDao.Properties.Activity.eq(activity),
+                            T_DetailDao.Properties.FOrderId.eq(ordercode),
+                            T_DetailDao.Properties.FProductId.eq(product.FItemID),
+//                            T_DetailDao.Properties.FBatch.eq(edPihao.getText().toString()),
+                            T_DetailDao.Properties.FBatch.eq(pihao),
+                            T_DetailDao.Properties.FUnitId.eq(unitId),
+                            T_DetailDao.Properties.FStorageId.eq(instorageId),
+                            T_DetailDao.Properties.FPositionId.eq(inwavehouseID),
+                            T_DetailDao.Properties.FDiscount.eq(discount),
+                            T_DetailDao.Properties.FoutStorageid.eq(outstorageId),
+                            T_DetailDao.Properties.Foutwavehouseid.eq(outwavehouseID)
+                    ).build().list();
+                    if (detailhebing.size() > 0) {
+                        for (int i = 0; i < detailhebing.size(); i++) {
+                            num = (Double.parseDouble(num) + Double.parseDouble(detailhebing.get(i).FQuantity)) + "";
+                            t_detailDao.delete(detailhebing.get(i));
+                        }
+                    }
+                }
 //                List<T_main> dewlete = t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(ordercode)).build().list();
                 t_mainDao.deleteInTx(t_mainDao.queryBuilder().where(T_mainDao.Properties.OrderId.eq(ordercode)).build().list());
                 String second = getTimesecond();

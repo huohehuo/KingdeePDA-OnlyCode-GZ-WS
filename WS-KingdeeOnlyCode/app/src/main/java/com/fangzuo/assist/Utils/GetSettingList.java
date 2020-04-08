@@ -46,6 +46,8 @@ public class GetSettingList {
 
 
     }
+
+    //成品
     public static ArrayList<SettingList> getPurchaseList(String[] ary) {
         ArrayList<SettingList> items = new ArrayList<>();
         //最终返回的选项
@@ -93,7 +95,7 @@ public class GetSettingList {
 
 
     }
-
+    //下推
     public static ArrayList<SettingList> getSaleList(String[] ary) {
         ArrayList<SettingList> items = new ArrayList<>();
         //最终返回的选项
@@ -153,6 +155,8 @@ public class GetSettingList {
         items.add(new SettingList("27",R.mipmap.pandian,"生产任务单下推生产领料"));
         items.add(new SettingList("28",R.mipmap.pandian,"收料通知单下推来料检验单"));
         items.add(new SettingList("30",R.mipmap.pandian,"委外订单下推收料通知单"));
+        items.add(new SettingList("32",R.mipmap.pandian,"生产领料单验货"));
+        items.add(new SettingList("33",R.mipmap.pandian,"收料通知单下推委外入库"));
         items.add(new SettingList("29",R.mipmap.pandian,"库存查询"));
 
 //        for (int i=0; i<items.size();i++){

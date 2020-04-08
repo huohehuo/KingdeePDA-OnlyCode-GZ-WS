@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
+import com.fangzuo.assist.Activity.Crash.App;
+import com.fangzuo.assist.Adapter.SearchCheckResultAdapter;
+import com.fangzuo.assist.Beans.CommonResponse;
+import com.fangzuo.assist.Beans.DownloadReturnBean;
 import com.fangzuo.assist.Beans.EventBusEvent.ClassEvent;
 import com.fangzuo.assist.Dao.CheckResult;
 import com.fangzuo.assist.Dao.PushDownMain;
@@ -19,13 +23,17 @@ import com.fangzuo.assist.Dao.PushDownSub;
 import com.fangzuo.assist.Dao.T_Detail;
 import com.fangzuo.assist.Dao.T_main;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.RxSerivce.MySubscribe;
+import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.Config;
 import com.fangzuo.assist.Utils.DoubleUtil;
 import com.fangzuo.assist.Utils.EventBusInfoCode;
+import com.fangzuo.assist.Utils.EventBusUtil;
 import com.fangzuo.assist.Utils.Info;
 import com.fangzuo.assist.Utils.MathUtil;
 import com.fangzuo.assist.Utils.MediaPlayer;
 import com.fangzuo.assist.Utils.Toast;
+import com.fangzuo.assist.Utils.WebApi;
 import com.fangzuo.assist.widget.LoadingUtil;
 import com.fangzuo.assist.widget.SpinnerCheckType;
 import com.fangzuo.assist.widget.SpinnerPeople;
@@ -34,6 +42,9 @@ import com.fangzuo.greendao.gen.PushDownMainDao;
 import com.fangzuo.greendao.gen.PushDownSubDao;
 import com.fangzuo.greendao.gen.T_DetailDao;
 import com.fangzuo.greendao.gen.T_mainDao;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.List;
 
@@ -151,12 +162,33 @@ public class AddCheckActivity extends BaseActivity {
     protected void initData() {
 
         spSendMan.setAutoSelection("", share.getUserName());
-        spCheckMan.setAutoSelection("", "荔湾工厂");
+        spCheckMan.setAutoSelection("", Hawk.get("PdShouLiao2LLCheckActivity_employeeId",""));
         spCheckType.setAutoSelection(Config.People3 + activity, "");
         if (null != pushDownSub) {
             edNumCheck.setText(pushDownSub.FAuxQty);
+            edNumPass.setText(pushDownSub.FAuxQty);
             edNumBroken.setText("0");
         }
+
+        App.getRService().doIOAction(WebApi.ResultSearchLike, "合格", new MySubscribe<CommonResponse>() {
+            @Override
+            public void onNext(CommonResponse commonResponse) {
+                super.onNext(commonResponse);
+                if (!commonResponse.state)return;
+                DownloadReturnBean dBean = new Gson().fromJson(commonResponse.returnJson, DownloadReturnBean.class);
+                if (dBean.checkResults.size()>0){
+                    EventBusUtil.sendEvent(new ClassEvent(EventBusInfoCode.Search_CheckResult,dBean.checkResults.get(0)));
+                }else{
+                    Toast.showText(mContext,"未查到检验结果为合格的相关数据");
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+//                super.onError(e);
+                Toast.showText(mContext,"带出默认结果失败"+e.getMessage());
+            }
+        });
     }
 
     @Override
@@ -218,7 +250,7 @@ public class AddCheckActivity extends BaseActivity {
         }
         if (MathUtil.sum(edNumBroken.getText().toString(),edNumPass.getText().toString())>MathUtil.toD(edNumCheck.getText().toString())) {
             MediaPlayer.getInstance(mContext).error();
-            Toast.showText(mContext, "合格数量+ 样品破坏数的和不能大于检验数量");
+            Toast.showText(mContext, "合格数量不能大于检验数量");
             lockScan(0);
             return;
         }

@@ -92,10 +92,10 @@ declare @FEntryID varchar(20),       --新的明细序号
         @FDCSPID varchar(20), --仓位id
         @FBatchNo varchar(50),--批号
         @FCoefficient varchar(20),   --换算率
-          @FSecCoefficient float, --辅助单位换算率
+        @FSecCoefficient float, --辅助单位换算率
         @FSecQty decimal(28,10),   --辅助单位数量
-          @FSecUnitID  varchar(50),  
-          @FDischarged int,--采购检验方式
+        @FSecUnitID  varchar(50),  
+        @FDischarged int,--采购检验方式
        @FDetailID int,
            @FEntrySelfP0377 decimal(28,8),--函税单价 
         @FEntrySelfP0378  decimal(28,8),

@@ -132,8 +132,16 @@ public class StorageFragment extends BaseFragment {
                         b.putInt("123", 28);
                         startNewActivity(PushDownPagerActivity.class, b);
                         break;
+                    case "32"://生产领料单验货
+                        b.putInt("123", 29);
+                        startNewActivity(PushDownPagerActivity.class, b);
+                        break;
                     case "29"://库存查询
                         startNewActivity(StorageCheck4YCLActivity.class,null);
+                        break;
+                    case "33"://收料通知单下推委外入库单
+                        b.putInt("123", 31);
+                        startNewActivity(PushDownPagerActivity.class, b);
                         break;
 //                    case 0://盘点
 //                        startNewActivity(PDActivity.class,null);

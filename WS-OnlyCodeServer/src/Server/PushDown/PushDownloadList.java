@@ -219,8 +219,15 @@ public class PushDownloadList extends HttpServlet {
 //                SQL =   "select isnull(t3.F_115,'配件') as 物料类型,'' as FStoctName,''as FSPName, t1.FSCStockID,FSCSPID,t4.FName as 入库仓库,t5.FName as 出库仓库,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,convert(float,AbS(FAuxQty)) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying,t1.FDCStockID,t1.FDCSPID,t1.FBatchNo from ICStockBillEntry t1 left join ICStockBill t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t4 on t1.FDCStockID=t4.FItemID left join t_Stock t5 on t1.FSCStockID=t5.FItemID where t2.FCancellation = 0 and t2.FTranType=41 and t2.FROB=1  and t1.FInterID=" + dBean.interID;
                 SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,ISNULL(t1.FAuxQty, 0)-ISNULL(t1.FAuxRelateQty, 0) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and  t2.FTranType=72 and ISNULL(t1.FAuxQty,0) -ISNULL(t1.FAuxRelateQty, 0) >0 and t1.FInterID=" + dBean.interID;
                 break;
-
-
+            case 29://生产领料单验货
+//                SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,ISNULL(t1.FAuxQty, 0)-ISNULL(t1.FAuxRelateQty, 0) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and  t2.FTranType=72 and ISNULL(t1.FAuxQty,0) -ISNULL(t1.FAuxRelateQty, 0) >0 and t1.FInterID=" + dBean.interID;
+                SQL =   "select t11.FName AS FStoctName,t12.FName AS FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID, t1.FUnitID,convert(float,FAuxQty-ISNULL(t1.FEntrySelfB0456,0)) as FAuxQty,convert(float,FAuxPrice) as  FAuxPrice,'0' as FQtying,t1.FSCStockID as FDCStockID,t1.FDCSPID,t1.FBatchNo from ICStockBillEntry   t1 left join ICStockBill t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on  t1.FItemID=t3.FItemID left join t_Stock t11 on t1.FSCStockID=t11.FItemID left join t_StockPlace t12 on t1.FDCSPID = t12.FSPID where (t2.FTranType=24 AND  t2.FCancellation = 0) and t1.FAuxQty-ISNULL(t1.FEntrySelfB0456,0)>0 and t1.FInterID=" + dBean.interID;
+                break;
+            case 31://收料通知单下推委外入库单
+//                SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,ISNULL(t1.FAuxQty, 0)-ISNULL(t1.FAuxRelateQty, 0) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where t2.FClosed=0 and (t2.FStatus=1 or t2.FStatus=2) and  t2.FTranType=72 and ISNULL(t1.FAuxQty,0) -ISNULL(t1.FAuxRelateQty, 0) >0 and t1.FInterID=" + dBean.interID;
+//                SQL =   "select t11.FName AS FStoctName,t12.FName AS FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID, t1.FUnitID,convert(float,FAuxQty-ISNULL(t1.FEntrySelfB0456,0)) as FAuxQty,convert(float,FAuxPrice) as  FAuxPrice,'0' as FQtying,t1.FSCStockID as FDCStockID,t1.FDCSPID,t1.FBatchNo from ICStockBillEntry   t1 left join ICStockBill t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on  t1.FItemID=t3.FItemID left join t_Stock t11 on t1.FSCStockID=t11.FItemID left join t_StockPlace t12 on t1.FDCSPID = t12.FSPID where (t2.FTranType=24 AND  t2.FCancellation = 0) and t1.FAuxQty-ISNULL(t1.FEntrySelfB0456,0)>0 and t1.FInterID=" + dBean.interID;
+                SQL =   "select t11.FName as FStoctName,t12.FName as FSPName,t3.FName,t3.FNumber,t3.FModel,t2.FBillNo,t1.FInterID,FEntryID,t1.FItemID,t1.FUnitID,convert(float,t1.FAuxQtyPass-t1.FAuxConCommitQty) as FAuxQty,convert(float,FAuxPrice) as FAuxPrice,'0' as FQtying from POInstockEntry t1 left join POInstock t2 on t1.FInterID=t2.FInterID left join t_ICItem t3 on t1.FItemID=t3.FItemID left join t_Stock t11 on t11.FItemID = t3.FDefaultLoc left join t_StockPlace t12 on t3.FSPID = t12.FSPID where    t1.FAuxQtyPass-t1.FAuxConCommitQty>0 and t1.FInterID=" + dBean.interID;
+                break;
         }
         try {
             System.out.println("下载ID：" + dBean.interID);
@@ -288,6 +295,11 @@ public class PushDownloadList extends HttpServlet {
                         dLbean.FBatchNo = rs.getString("FBatchNo");
                         dLbean.FStorageIn = rs.getString("入库仓库");
                         dLbean.FStorageOut = rs.getString("出库仓库");
+                    }
+                    if (dBean.tag == 29){
+                        dLbean.FDCStockID = rs.getString("FDCStockID");
+                        dLbean.FDCSPID = rs.getString("FDCSPID");
+                        dLbean.FBatchNo = rs.getString("FBatchNo");
                     }
                     dLbean.tag = dBean.tag;
 

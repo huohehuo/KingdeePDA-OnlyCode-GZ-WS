@@ -85,6 +85,7 @@
         </LinearLayout>
         <include layout="@layout/line_heng"/>
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_margin="4dp"
             android:layout_width="match_parent"
@@ -168,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp">
             <TextView
-                android:text="送检人"
+                android:text="检验员"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:textSize="18sp"
@@ -188,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp">
             <TextView
-                android:text="检验员"
+                android:text="送检人"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:textSize="18sp"

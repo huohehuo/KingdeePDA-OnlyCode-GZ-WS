@@ -32,6 +32,13 @@
             android:text="仓库:"
             android:maxLines="1"
             android:id="@+id/tv_storage"/>
+        <TextView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="仓位:"
+            android:maxLines="1"
+            android:id="@+id/tv_wave"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
