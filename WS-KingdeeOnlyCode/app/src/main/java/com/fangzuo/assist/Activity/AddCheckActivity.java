@@ -221,11 +221,10 @@ public class AddCheckActivity extends BaseActivity {
     }
 
     private void addCheck() {
-        if (MathUtil.toD(edNumCheck.getText().toString()) <=0 ||
-            MathUtil.toD(edNumPass.getText().toString()) <=0
-                ) {
+        if (MathUtil.toD(edNumCheck.getText().toString()) <=0 ) {
             MediaPlayer.getInstance(mContext).error();
-            Toast.showText(mContext, "检验数量、样品破坏数 或 合格数 不能为空");
+//            Toast.showText(mContext, "检验数量、样品破坏数 或 合格数 不能为空");
+            Toast.showText(mContext, "检验数量 不能为零");
             lockScan(0);
             return;
         }

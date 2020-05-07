@@ -1048,9 +1048,11 @@ public class OutsourcingOrdersIS2Activity extends BaseActivity {
         PurchaseInStoreUploadBean pBean = new PurchaseInStoreUploadBean();
         pBean.list = data;
         Gson gson = new Gson();
-        Asynchttp.post(mContext, getBaseUrl() + WebApi.PushDownOCISUpload, gson.toJson(pBean), new Asynchttp.Response() {
+        App.getRService().doIOAction(WebApi.PushDownOCISUpload, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
             @Override
-            public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
+            public void onNext(CommonResponse commonResponse) {
+                super.onNext(commonResponse);
+                if (!commonResponse.state)return;
                 MediaPlayer.getInstance(mContext).ok();
                 Toast.showText(mContext, "上传成功");
                 List<T_Detail> list = t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity)).build().list();
@@ -1081,8 +1083,9 @@ public class OutsourcingOrdersIS2Activity extends BaseActivity {
             }
 
             @Override
-            public void onFailed(String Msg, AsyncHttpClient client) {
-                Toast.showText(mContext, Msg);
+            public void onError(Throwable e) {
+                super.onError(e);
+                Toast.showText(mContext, e.getMessage());
                 btnBackorder.setClickable(true);
                 MediaPlayer.getInstance(mContext).error();
                 LoadingUtil.dismiss();

@@ -20,37 +20,29 @@ import java.util.ArrayList;
 /**
  * Created by NB on 2017/8/7.
  */
-@WebServlet(urlPatterns = "/StorageIO")
-public class StorageIO extends HttpServlet {
+@WebServlet(urlPatterns = "/WaveHouseIO")
+public class WaveHouseIO extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         Gson gson = new Gson();
-        String fid = request.getParameter("fid");
-        if (null ==fid ||"".equals(fid)){
-            response.getWriter().write(gson.toJson(new WebResponse(false,"用户ID为空，查询失败")));
-            return;
-        }
+        String fid = request.getParameter("FSPGroupID");
+//        if (null ==fid ||"".equals(fid)){
+//            response.getWriter().write(gson.toJson(new WebResponse(false,"用户ID为空，查询失败")));
+//            return;
+//        }
 //        String version = request.getParameter("version");
         String SQL = "";
         String con = "";
         Connection conn = null;
         PreparedStatement sta = null;
         ResultSet rs = null;
-        ArrayList<WebResponse.Storage> container = new ArrayList<>();
-//        System.out.println(parameter);
-//        if (parameter != null) {
-//        List<TestB> testBS = new ArrayList<>();
-//        testBS.add(new TestB("one","A"));
-//        testBS.add(new TestB("one2","B"));
-//        testBS.add(new TestB("one3","C"));
-//        Lg.e("列表",testBS);
-        if (!"000000".equals(fid)){
-            con = " AND FItemID in( select FStockID from t_UserPDASupplyStock where FID = '"+fid+"')";
-        }
+        ArrayList<WebResponse.wavehouse> container = new ArrayList<>();
             try {
                 conn = JDBCUtil.getConn4Web();
-                SQL = "select FItemID,FNumber,FName,FSPGroupID from t_Stock where 1=1 "+con;
+                SQL = "select a.FSPID,a.FSPGroupID,a.FNumber,a.FName,a.FFullName,a.FLevel,a.FDetail,a.FParentID,"
+                        + "'' as FClassTypeID,ISNULL(b.FDefaultSPID,0) as FDefaultSPID from t_StockPlace a left join "
+                        + "t_StockPlaceGroup b on a.FSPID=b.FDefaultSPID where a.FDetail=1  AND a.FSPGroupID ='"+fid+"'";
                 sta = conn.prepareStatement(SQL);
                 System.out.println("SQL:"+SQL);
                 rs = sta.executeQuery();
@@ -58,16 +50,22 @@ public class StorageIO extends HttpServlet {
                 if(rs!=null){
                     int i = rs.getRow();
                     while (rs.next()) {
-                        WebResponse.Storage bean = webResponse.new Storage();
-                        bean.FItemID = rs.getString("FItemID");
-                        bean.FName = rs.getString("FName");
-                        bean.FNumber = rs.getString("FNumber");
+                        WebResponse.wavehouse bean = webResponse.new wavehouse();
+                        bean.FSPID = rs.getString("FSPID");
                         bean.FSPGroupID = rs.getString("FSPGroupID");
+                        bean.FNumber = rs.getString("FNumber");
+                        bean.FName = rs.getString("FName");
+                        bean.FFullName = rs.getString("FFullName");
+                        bean.FLevel = rs.getString("FLevel");
+                        bean.FDetail = rs.getString("FDetail");
+                        bean.FParentID = rs.getString("FParentID");
+                        bean.FClassTypeID = rs.getString("FClassTypeID");
+                        bean.FDefaultSPID = rs.getString("FDefaultSPID");
                         container.add(bean);
                     }
                     webResponse.state=true;
                     webResponse.size = container.size();
-                    webResponse.storages = container;
+                    webResponse.wavehouses = container;
                     Lg.e("返回数据：",webResponse);
                     response.getWriter().write(gson.toJson(webResponse));
 //                    response.getWriter().write(CommonJson.getCommonJson(true,"{answer:123}"));

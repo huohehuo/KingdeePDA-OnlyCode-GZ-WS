@@ -75,7 +75,7 @@ FSupplyID,FCheckDate,FFManagerID,FSManagerID,FBillerID,FPOStyle,FMultiCheckDate1
 FMultiCheckDate5,FMultiCheckDate6,FRelateBrID,FPOOrdBillNo,FOrgBillInterID,FSelTranType,FBrID,FExplanation,FDeptID,FManagerID,FEmpID,
 FCussentAcctID,FManageType,FSettleDate,FPrintCount,FHeadSelfA0145,FHeadSelfA0146,FHeadSelfA0149,FHeadSelfA0147,FHeadSelfA0143) 
 VALUES (@FInterID,@FBillNo,'0',1,0,0,@value,0,1,0,@Fdate,@FSupplyID,@FCheckDate,@FFManagerID,@FSManagerID,@FBillerID,@FPOStyle,Null,
-Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0,@FHeadSelfA0145,'','','',CONVERT(varchar(128),GETDATE(),20))
+Null,Null,Null,Null,Null,0,'',0,72,0,@FExplanation,@FDeptID,@FManagerID,@FEmpID,0,0,@FSettleDate,0,@FHeadSelfA0145,'','PDA制单','',CONVERT(varchar(128),GETDATE(),20))
 update ICStockBill set FUUID=newid() where FInterID=@FInterID
 
 declare @FEntryID varchar(20),       --新的明细序号
@@ -106,6 +106,7 @@ declare @FEntryID varchar(20),       --新的明细序号
         @FDCSPID varchar(20), --仓位id
         @FBatchNo varchar(50),--批次
         @FCoefficient varchar(20),   --换算率
+        @FNote varchar(255),--备注
           @FSecCoefficient float, --辅助单位换算率
         @FSecQty decimal(28,10),   --辅助单位数量
           @FSecUnitID  varchar(50), 
@@ -151,7 +152,7 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FSourceInterId=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+8) --下推的明FInterID
 	set @FBatchNo=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)
 	select @FPOMode = FPOMode,@FSourceBillNo=FBillNo,@FPOStyle = FPOStyle,@FDeptID=FDeptID,@FEmpID=FEmpID,@FFetchAdd=FFetchAdd,@FExplanation=FExplanation  from POInstock where FInterID=@FSourceInterId --下推的单据编号
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderBillNo=FOrderBillNo,@FOrderInterID=FOrderInterID,@FOrderEntryID=FOrderEntryID,@FPurchasePrice=FAuxPrice from POInstockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	select @FNote=FNote,@FAuxQtyMust = FAuxQty-FAuxCommitQty,@FOrderBillNo=FOrderBillNo,@FOrderInterID=FOrderInterID,@FOrderEntryID=FOrderEntryID,@FPurchasePrice=FAuxPrice from POInstockEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
 	if(@FOrderInterID>0)
 	begin
 	select @Fauxprice=FAuxPrice from POOrderEntry where FInterID=@FOrderInterID  and FEntryID = @FOrderEntryID
@@ -198,7 +199,7 @@ FOrgBillEntryID,FSNListID,FSourceBillNo,FSourceTranType,FSourceInterId,FSourceEn
 FOrderBillNo,FOrderInterID,FOrderEntryID,FAllHookQTY,FAllHookAmount,FCurrentHookQTY,FCurrentHookAmount,FAuxQtyInvoice,FSecInvoiceQty,
 FQtyInvoice,FPlanMode,FMTONo,FChkPassItem,FPurchasePrice,FPurchaseAmount,FPrice) 
 VALUES (@FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQtyMust,@FQty,@FUnitID,@FAuxQtyMust,@Fauxqty,@FSecCoefficient,@FSecQty,@FAuxPlanPrice,@FPlanAmount,
-@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,0,0,@FSourceBillNo,72,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,0,0,0,0,0,14036,'',1058,@FPurchasePrice,@FPurchaseAmount,@FPrice) 
+@Fauxprice,@Famount,@FNote,Null,0,Null,@FDCStockID,@FDCSPID,0,0,@FSourceBillNo,72,@FSourceInterId,@FSourceEntryID,'',0,0,@FOrderBillNo,@FOrderInterID,@FOrderEntryID,0,0,0,0,0,0,0,14036,'',1058,@FPurchasePrice,@FPurchaseAmount,@FPrice) 
 
 
 end

@@ -11,7 +11,8 @@ public class JDBCUtil {
 	public static Connection getConn4Web() throws SQLException, ClassNotFoundException{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //		return DriverManager.getConnection(getDataBaseUrl.getUrl("47.106.218.38", "8089", "AIS20191023113151"), "sa", "OnyxBoox2018");
-		return DriverManager.getConnection(getDataBaseUrl.getUrl("47.106.218.38", "8089", "AIS20200103100958"), "sa", "OnyxBoox2018");
+		return DriverManager.getConnection(getDataBaseUrl.getUrl("47.106.218.38", "8089", "AIS20200103100958"), "sa", "OnyxBoox2018");//测试账套
+//		return DriverManager.getConnection(getDataBaseUrl.getUrl("47.106.218.38", "8089", "AIS20181224181636"), "sa", "OnyxBoox2018");//正式账套
 
 	}
 	public static Connection getConn(String url,String password,String user) throws SQLException, ClassNotFoundException{

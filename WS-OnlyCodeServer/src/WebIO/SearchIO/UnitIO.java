@@ -20,24 +20,24 @@ import java.util.ArrayList;
 /**
  * Created by NB on 2017/8/7.
  */
-@WebServlet(urlPatterns = "/StorageIO")
-public class StorageIO extends HttpServlet {
+@WebServlet(urlPatterns = "/UnitIO")
+public class UnitIO extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         Gson gson = new Gson();
-        String fid = request.getParameter("fid");
-        if (null ==fid ||"".equals(fid)){
-            response.getWriter().write(gson.toJson(new WebResponse(false,"用户ID为空，查询失败")));
-            return;
-        }
+//        String fid = request.getParameter("fid");
+//        if (null ==fid ||"".equals(fid)){
+//            response.getWriter().write(gson.toJson(new WebResponse(false,"用户ID为空，查询失败")));
+//            return;
+//        }
 //        String version = request.getParameter("version");
         String SQL = "";
         String con = "";
         Connection conn = null;
         PreparedStatement sta = null;
         ResultSet rs = null;
-        ArrayList<WebResponse.Storage> container = new ArrayList<>();
+        ArrayList<WebResponse.Unit> container = new ArrayList<>();
 //        System.out.println(parameter);
 //        if (parameter != null) {
 //        List<TestB> testBS = new ArrayList<>();
@@ -45,12 +45,10 @@ public class StorageIO extends HttpServlet {
 //        testBS.add(new TestB("one2","B"));
 //        testBS.add(new TestB("one3","C"));
 //        Lg.e("列表",testBS);
-        if (!"000000".equals(fid)){
-            con = " AND FItemID in( select FStockID from t_UserPDASupplyStock where FID = '"+fid+"')";
-        }
+
             try {
                 conn = JDBCUtil.getConn4Web();
-                SQL = "select FItemID,FNumber,FName,FSPGroupID from t_Stock where 1=1 "+con;
+                SQL = "select FMeasureUnitID,FUnitGroupID,FNumber,FName,FCoefficient from t_Measureunit where FMeasureUnitID!=0"+con;
                 sta = conn.prepareStatement(SQL);
                 System.out.println("SQL:"+SQL);
                 rs = sta.executeQuery();
@@ -58,16 +56,17 @@ public class StorageIO extends HttpServlet {
                 if(rs!=null){
                     int i = rs.getRow();
                     while (rs.next()) {
-                        WebResponse.Storage bean = webResponse.new Storage();
-                        bean.FItemID = rs.getString("FItemID");
-                        bean.FName = rs.getString("FName");
+                        WebResponse.Unit bean = webResponse.new Unit();
+                        bean.FMeasureUnitID = rs.getString("FMeasureUnitID");
+                        bean.FUnitGroupID = rs.getString("FUnitGroupID");
                         bean.FNumber = rs.getString("FNumber");
-                        bean.FSPGroupID = rs.getString("FSPGroupID");
+                        bean.FName = rs.getString("FName");
+                        bean.FCoefficient = rs.getString("FCoefficient");
                         container.add(bean);
                     }
                     webResponse.state=true;
                     webResponse.size = container.size();
-                    webResponse.storages = container;
+                    webResponse.units = container;
                     Lg.e("返回数据：",webResponse);
                     response.getWriter().write(gson.toJson(webResponse));
 //                    response.getWriter().write(CommonJson.getCommonJson(true,"{answer:123}"));

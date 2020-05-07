@@ -99,7 +99,7 @@ declare @FEntryID varchar(20),       --新的明细序号
           @FDischarged int,--采购检验方式
         @FEntrySelfP0377 decimal(28,8),--函税单价 
         @FEntrySelfP0378  decimal(28,8),
-          
+          @FNote varchar(255),--备注
         @detailqty int,               --明细参数的个数
         @detailcount int,             --明细每行数据的长度 
         @detailIndex int,            --明细每行下标
@@ -143,7 +143,7 @@ declare @FEntryID varchar(20),       --新的明细序号
 	set @FBatchNo=dbo.getString(@detailStr1,'|',@detailcount*@detailIndex+9)
 	select @FExchangeRate=isnull(FExchangeRate,1),@FSourceBillNo=FBillNo,@FPOStyle=FPOStyle from POOrder where FInterID=@FSourceInterId --下推的单据编号
 		
-	select @FAuxQtyMust = FAuxQty-FAuxCommitQty,@FRateOrder = ISNULL(FCess,0),@Fauxprice=FAuxTaxPrice  from POOrderEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
+	select @FNote=FNote,@FAuxQtyMust = FAuxQty-FAuxCommitQty,@FRateOrder = ISNULL(FCess,0),@Fauxprice=FAuxTaxPrice  from POOrderEntry where FInterID=@FSourceInterId and FEntryID=@FSourceEntryID
 	 set @Fauxprice = @Fauxprice * @FExchangeRate 
 	 set @FEntrySelfP0377 = @Fauxprice
 	 set @FEntrySelfP0378=@FEntrySelfP0377*@Fauxqty
@@ -175,7 +175,7 @@ declare @FEntryID varchar(20),       --新的明细序号
   FConPassQty,FSecConPassQty,FAuxNotPassQty,FNotPassQty,FSecNotPassQty,FAuxSampleBreakQty,FSampleBreakQty,FSecSampleBreakQty,FScrapQty,FAuxScrapQty,
   FSecScrapQty,FAuxRelateQty,FRelateQty,FSecRelateQty,FAuxQCheckQty,FQCheckQty,FSecQCheckQty,FAuxBackQty,FBackQty,FSecBackQty,FScrapInCommitQty,
   FAuxScrapInCommitQty,FSecScrapInCommitQty,FDeliveryNoticeFID,FDeliveryNoticeEntryID,FTime,FSamBillNo,FSamInterID,FSamEntryID, FEntrySelfP0377,FEntrySelfP0378)  
-  SELECT @FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQty,@FUnitID,@Fauxqty,@FSecCoefficient,@FSecQty,1059,353,@Fauxprice,@Famount,'',Null,0,Null,@FDCStockID,@FDCSPID,
+  SELECT @FInterID,@FEntryID,'0','','',@FItemID,0,@FBatchNo,@FQty,@FUnitID,@Fauxqty,@FSecCoefficient,@FSecQty,1059,353,@Fauxprice,@Famount,@FNote,Null,0,Null,@FDCStockID,@FDCSPID,
   @FSourceBillNo,71,@FSourceInterId,@FSourceEntryID,'',0,0,@FSourceBillNo,@FSourceInterId,@FSourceEntryID,14036,'',71,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',0,0 , @FEntrySelfP0377,@FEntrySelfP0378
 end
 set @detailqty=@detailqty+1

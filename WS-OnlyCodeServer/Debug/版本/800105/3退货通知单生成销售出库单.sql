@@ -331,7 +331,7 @@ declare
   update ICStockBill set FEmpID=@FEmpID where FInterID=@FInterID 
  select @FSaleStyle=FSalType,@FDeptID=FDeptID,@FEmpID=FEmpID from  SEOutStock where FInterID=@FSourceInterId
  select @FHeadSelfB0157 = t2.FName from t_Organization t1 left join t_SubMessage t2 on t1.FTypeID = t2.FInterID where FItemID=@FSupplyID
-update ICStockBill set  FHeadSelfB0157=@FHeadSelfB0157, @FDeptID=FDeptID,@FEmpID=FEmpID,FSManagerID=@FSManagerID  where FInterID=@FInterID
+update ICStockBill set  FSaleStyle = @FSaleStyle ,FHeadSelfB0157=@FHeadSelfB0157, @FDeptID=FDeptID,@FEmpID=FEmpID,FSManagerID=@FSManagerID  where FInterID=@FInterID
 
 if exists(select 1 from t_PDABarCodeType where FType=1)
 begin

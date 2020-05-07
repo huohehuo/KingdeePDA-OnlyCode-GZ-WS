@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fangzuo.assist.ABase.BaseActivity;
+import com.fangzuo.assist.Activity.Crash.App;
 import com.fangzuo.assist.Adapter.BatchNoSpAdapter;
 import com.fangzuo.assist.Adapter.EmployeeSpAdapter;
 import com.fangzuo.assist.Adapter.PayMethodSpAdapter;
@@ -46,6 +47,7 @@ import com.fangzuo.assist.Dao.Unit;
 import com.fangzuo.assist.Dao.Wanglaikemu;
 import com.fangzuo.assist.Dao.WaveHouse;
 import com.fangzuo.assist.R;
+import com.fangzuo.assist.RxSerivce.MySubscribe;
 import com.fangzuo.assist.Utils.Asynchttp;
 import com.fangzuo.assist.Utils.BasicShareUtil;
 import com.fangzuo.assist.Utils.CommonMethod;
@@ -1142,9 +1144,11 @@ public class ShouLiaoTongZhiActivity extends BaseActivity {
         PurchaseInStoreUploadBean pBean = new PurchaseInStoreUploadBean();
         pBean.list = data;
         Gson gson = new Gson();
-        Asynchttp.post(mContext, getBaseUrl() + WebApi.PUSHDOWNSLUPLOAD, gson.toJson(pBean), new Asynchttp.Response() {
+        App.getRService().doIOAction(WebApi.PUSHDOWNSLUPLOAD, gson.toJson(pBean), new MySubscribe<CommonResponse>() {
             @Override
-            public void onSucceed(CommonResponse cBean, AsyncHttpClient client) {
+            public void onNext(CommonResponse commonResponse) {
+                super.onNext(commonResponse);
+                if (!commonResponse.state)return;
                 MediaPlayer.getInstance(mContext).ok();
                 Toast.showText(mContext, "上传成功");
                 List<T_Detail> list = t_detailDao.queryBuilder().where(T_DetailDao.Properties.Activity.eq(activity)).build().list();
@@ -1175,8 +1179,9 @@ public class ShouLiaoTongZhiActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailed(String Msg, AsyncHttpClient client) {
-                Toast.showText(mContext, Msg);
+            public void onError(Throwable e) {
+                super.onError(e);
+                Toast.showText(mContext, e.getMessage());
                 btnBackorder.setClickable(true);
                 MediaPlayer.getInstance(mContext).error();
                 LoadingUtil.dismiss();

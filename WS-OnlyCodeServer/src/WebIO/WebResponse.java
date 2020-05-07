@@ -19,13 +19,68 @@ public class WebResponse {
 	public ArrayList<CheckLogBackBean> checkLogBackBeans;
 	public ArrayList<ProductType> productTypes;
 	public ArrayList<Storage> storages;
+	public ArrayList<wavehouse> wavehouses;
 	public ArrayList<MdUser> mdUsers;
 	public ArrayList<Client> clients;
 	public ArrayList<SoldOutSortBean> soldOutSortBeans;
 	public ArrayList<CqPdPlanBean> cqPdPlanBeans;
 	public ArrayList<PDSub> pdSubs;
 	public ArrayList<CodeCheckBackDataBean> codeCheckBackDataBeans;
+	public ArrayList<ScanStoreList> scanStoreLists;
+	public ArrayList<employee> employees;
+	public ArrayList<Unit> units;
+	public ArrayList<GProduct> gProducts;
+	public ArrayList<DbType> dbTypes;
 
+	public class DbType {
+		public String FInterID;
+		public String FID;
+		public String FName ;
+	}
+	public class GProduct {
+		public String FInterID;
+		public String FID;
+		public String FName ;
+	}
+	public class Unit {
+		public String FMeasureUnitID;
+		public String FUnitGroupID;
+		public String FNumber;
+		public String FName;
+		public String FCoefficient;
+	}
+	public class employee {
+		public String FItemID;
+		public String FNumber;
+		public String FName;
+		public String FDpartmentID;
+		public String FEmpGroup;
+		public String FEmpGroupID;
+	}
+	//扫一扫库存
+	public class ScanStoreList{
+		public String FNumber;
+		public String FName;
+		public String FStorage;
+		public String FInStoreState;
+		public String FOutStoreState;
+		public String FBillNo;
+		public String FBoxCode;
+
+	}
+	public class wavehouse {
+		public String FSPID;
+		public String FSPGroupID;
+		public String FNumber;
+		public String FName;
+		public String FFullName;
+		public String FLevel;
+		public String FDetail;
+		public String FParentID;
+		public String FClassTypeID;
+		public String FDefaultSPID;
+
+	}
 	//条码检测
 	public class CodeCheckBackDataBean {
 		public String FTip;
@@ -117,8 +172,25 @@ public class WebResponse {
 		public String FItemID;
 		public String FNumber;
 		public String FName;
+		public String FSPGroupID;
 	}
+
 	public class Product {
+		public String FIsSnManage;
+		public String FSecUnitID;
+		public String FSecCoefficient;
+		public String FISKFPeriod;
+		public String FFullName;
+		public String FUnitGroupID;
+		public String FDefaultLoc;
+		public String FProfitRate;
+		public String FTaxRate;
+		public String FOrderPrice;
+		public String FSalePrice;
+		public String FPlanPrice;
+		public String FSPID;
+		public String FBatchManager;
+
 		public String FBarcode;
 		public String FNumber;
 		public String FQty;
